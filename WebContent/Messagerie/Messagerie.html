@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Messagerie</title>
+
+    <link href="Messagerie.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="messagerie">
+        <ul id="correspondants">
+          <li class="onglet" value="1">Toto</li>
+          <li class="onglet" value="2">Tata</li>
+          <li class="onglet" value="3">Michel</li>
+          <li class="onglet" value="4">Jean</li>
+          <li class="onglet" value="5">Pierre</li>
+          <li class="onglet" value="6">Fred</li>
+          <li class="onglet" value="7">Thomas</li>
+          <li class="onglet" value="8">Mathieu</li>
+          <li class="onglet" value="9">Luc</li>
+          <li class="onglet" value="10">Lola</li>
+          <li class="onglet" value="11">Pauline</li>
+          <li class="onglet" value="12">Bernard</li>
+          <li class="onglet" value="13">Popeye</li>
+          <li class="onglet" value="14">Zorro</li>
+          <li class="onglet" value="15">Tintin</li>
+        </ul>
+      <div id="focusConversation">
+        <h1 id="titre">Bienvenue sur votre messagerie</h1>
+        <ul id="historiqueMessages">
+          <li class="autre">
+            <p class="corps">Salut</p>
+            <p class="horodatage">03/04/12 - 12h</p>
+          </li>
+          <li class="autre">
+            <p class="corps">Ça va ?</p>
+            <p class="horodatage">03/04/12 - 12h</p>
+          </li>
+          <li class="moi">
+            <p class="corps">
+              Salut, bien et toi ? XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            </p>
+            <p class="horodatage">03/04/12 - 12h</p>
+          </li>
+          <li class="autre">
+            <div class="corps">Bien, merci</p>
+            <div class="horodatage">03/04/12 - 12h</p>
+          </li>
+        </ul>
+        <form id="nouveauMessage">
+          <input
+            id="message"
+            type="text"
+            placeholder="Écrivez un message..."
+            required="true"
+          />
+          <button id="boutonEnvoi" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="Messagerie.js" type="text/javascript"></script>
+  </body>
+</html>
