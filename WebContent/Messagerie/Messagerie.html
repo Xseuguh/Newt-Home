@@ -10,53 +10,47 @@
   </head>
   <body>
     <div id="messagerie">
-        <ul id="correspondants">
-          <li class="onglet" value="1">Toto</li>
-          <li class="onglet" value="2">Tata</li>
-          <li class="onglet" value="3">Michel</li>
-          <li class="onglet" value="4">Jean</li>
-          <li class="onglet" value="5">Pierre</li>
-          <li class="onglet" value="6">Fred</li>
-          <li class="onglet" value="7">Thomas</li>
-          <li class="onglet" value="8">Mathieu</li>
-          <li class="onglet" value="9">Luc</li>
-          <li class="onglet" value="10">Lola</li>
-          <li class="onglet" value="11">Pauline</li>
-          <li class="onglet" value="12">Bernard</li>
-          <li class="onglet" value="13">Popeye</li>
-          <li class="onglet" value="14">Zorro</li>
-          <li class="onglet" value="15">Tintin</li>
-        </ul>
+      <ul id="correspondants">
+        <!-- 
+            Chaque li sera généré au rechargement de la page, en se basant sur les conversations en bdd
+            value = ID dans la bdd, dont on aura besoin pour faire des requêtes ajax si on ouvre la conversation
+            On affiche le nom du correspondant
+          -->
+        <li class="onglet" value="0">Titi</li>
+        <li class="onglet" value="1">Toto</li>
+        <li class="onglet" value="2">Tata</li>
+        <li class="onglet" value="3">Michel</li>
+        <li class="onglet" value="4">Jean</li>
+        <li class="onglet" value="5">Pierre</li>
+        <li class="onglet" value="6">Fred</li>
+        <li class="onglet" value="7">Thomas</li>
+        <li class="onglet" value="8">Mathieu</li>
+        <li class="onglet" value="9">Luc</li>
+        <li class="onglet" value="10">Lola</li>
+        <li class="onglet" value="11">Pauline</li>
+        <li class="onglet" value="12">Bernard</li>
+        <li class="onglet" value="13">Popeye</li>
+        <li class="onglet" value="14">Zorro</li>
+        <li class="onglet" value="15">Tintin</li>
+      </ul>
       <div id="focusConversation">
         <h1 id="titre">Bienvenue sur votre messagerie</h1>
         <ul id="historiqueMessages">
-          <li class="autre">
-            <p class="corps">Salut</p>
-            <p class="horodatage">03/04/12 - 12h</p>
-          </li>
-          <li class="autre">
-            <p class="corps">Ça va ?</p>
-            <p class="horodatage">03/04/12 - 12h</p>
-          </li>
-          <li class="moi">
-            <p class="corps">
-              Salut, bien et toi ? XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            </p>
-            <p class="horodatage">03/04/12 - 12h</p>
-          </li>
-          <li class="autre">
-            <div class="corps">Bien, merci</p>
-            <div class="horodatage">03/04/12 - 12h</p>
-          </li>
+          <!-- 
+            Cette partie sera chargée via une requête ajax, aprés qu'une conv ait été choisi
+           -->
         </ul>
-        <form id="nouveauMessage">
-          <input
+        <form id="nouveauMessageForm">
+          <textarea
             id="message"
-            type="text"
             placeholder="Écrivez un message..."
             required="true"
+          ></textarea>
+          <input
+            id="boutonEnvoi"
+            type="image"
+            src="../Ressources/Messagerie/envoiMessage.png"
           />
-          <button id="boutonEnvoi" type="submit">Send</button>
         </form>
       </div>
     </div>

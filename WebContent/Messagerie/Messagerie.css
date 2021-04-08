@@ -42,7 +42,7 @@ ul {
   cursor: pointer;
 }
 
-#selected {
+#selectionne {
   background-color: rgb(255, 0, 195);
 }
 
@@ -51,34 +51,90 @@ ul {
 */
 #focusConversation {
   background-color: blue;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr 1fr;
+}
+
+/*Au chargement, on a pas de conversation à afficher*/
+#historiqueMessages,
+#nouveauMessageForm {
+  display: none;
+}
+
+#historiqueMessages {
+  overflow-y: auto;
+  max-height: 80vh;
+  padding: 0 20px;
 }
 
 .moi,
 .autre {
-  padding: 5px 10px 0;
-  margin: 10px;
-  border-radius: 10px;
-  width: 50%;
+  width: 80%;
+  display: flex;
+  align-items: center;
 }
 
 .moi {
-  background-color: yellow;
+  /*On affiche les messages de l'utilisateur à droite*/
+  flex-direction: row-reverse;
   float: right;
 }
 
 .autre {
-  background-color: aqua;
+  /*On affiche les messages du destinataires à gauche*/
   float: left;
+  border-radius: 15px 15px 15px 0;
 }
 
-#nouveauMessage {
-  clear: both;
-  width: 100%;
-  position: relative;
+/*Disposition des éléments dans le message*/
+.corps {
+  max-width: 70%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.moi .corps {
+  background-color: yellow;
+  border-radius: 15px 15px 0;
+}
+
+.autre .corps {
+  background-color: aqua;
+  border-radius: 15px 15px 15px 0;
+}
+
+.moi :hover + .horodatage,
+.autre :hover + .horodatage {
+  display: block;
+}
+
+.horodatage {
+  color: grey;
+  white-space: nowrap;
+  display: none;
+}
+
+/*Input de saisie d'un nouveau message*/
+#nouveauMessageForm {
+  align-items: center;
 }
 
 #message {
   width: 80%;
   margin: 10px;
   padding: 10px;
+}
+
+#boutonEnvoi {
+  background: red;
+  width: 5em;
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+}
+
+#boutonEnvoi:hover {
+  background: green;
 }
