@@ -1,15 +1,23 @@
+const taillePetitEcran = 700;
+let isOnWelcomeScreen = true;
+
 //Gestion de l'affichage de la conversation sélectionnée
 $(".onglet").click((e) => {
-  Object.values($(".onglet")).forEach((conv) => (conv.id = ""));
+  isOnWelcomeScreen = false;
+  switchSiEcranPlusPetitQue(taillePetitEcran);
+  supprimeChampDestinataire();
+
+  retireIDSelectionne();
   e.target.id = "selectionne";
 
   const id = parseInt(e.target.value);
   afficheConversation(id);
 
   const expediteurName = e.target.textContent;
-  $("#titre").html(
-    `requête ajax pour l\'id ${id} afin d'avoir la conversation avec ${expediteurName}`
-  );
+  $("#titreConversation").html(expediteurName);
+
+  //Mettre le lien de l'image du profil de l'expéditeur
+  $("#imageTitreConversation").attr("src", "temp.png");
 
   scrollSurPlusRecent();
 });
@@ -23,7 +31,7 @@ function scrollSurPlusRecent() {
 function afficheConversation(conversationID) {
   const historiqueDesMessages = $("#historiqueMessages");
 
-  //on affiche les div
+  //on affiche les div pour l'historique des messages et le formulaire d'envoi de nouveau message
   historiqueDesMessages.css("display", "block");
   $("#nouveauMessageForm").css("display", "flex");
 
@@ -32,7 +40,6 @@ function afficheConversation(conversationID) {
 
   const messages = getMessages(conversationID);
   messages.forEach((message) => {
-    console.log(message.source);
     historiqueDesMessages.append(
       `<li class="${message.source}">
             <p class="corps">${message.valeur}</p>
@@ -42,6 +49,7 @@ function afficheConversation(conversationID) {
   });
 }
 
+//Fonctions qui récupére en ajax les messages d'une conversation
 function getMessages(conversationID) {
   const tempConversations = [
     [
@@ -135,6 +143,78 @@ function getMessages(conversationID) {
 }
 
 //Gestion de l'envoie d'un nouveau message dans la conversation affichée
-$("#boutonEnvoi").click(() => {
-  console.log("HEHEHE");
+$("#nouveauMessageForm").on("submit", (e) => {
+  e.preventDefault();
+
+  const input = $("#nouveauMessageInput");
+  const message = input.val();
+
+  if (message.length === 0) {
+    alert("Le message ne peut être vide !");
+    return;
+  }
+
+  const destinataire = $("#destinataireInput").val();
+  if (destinataire !== undefined && destinataire.length === 0) {
+    alert("Le destinataire ne peut être vide !");
+    return;
+  }
+  if (destinataire !== undefined) {
+    console.log("Destinataire : " + destinataire);
+  }
+  console.log("Message : " + message);
+  input.val("");
 });
+
+//Gestion de la création d'un nouveau message
+$("#nouvelleConversation").click(() => {
+  isOnWelcomeScreen = false;
+  retireIDSelectionne();
+  switchSiEcranPlusPetitQue(640);
+  //On retire le possible input déjà existant
+  supprimeChampDestinataire();
+
+  //On indique qu'on veut une nouvelle conversation
+  $("#titreConversation").html("Nouvelle conversation");
+
+  $(
+    '<input id="destinataireInput" type="text" placeholder="À qui souhaitez vous envoyer un message ?">'
+  ).insertBefore($("#nouveauMessage"));
+  $("#historiqueMessages").css("display", "none");
+  $("#nouveauMessageForm").css("display", "flex");
+});
+
+//Retour affichage menu
+$("#retourMenu").click(() => {
+  switchSiEcranPlusPetitQue(taillePetitEcran);
+});
+
+window.onresize = () => {
+  if ($(window).width() > taillePetitEcran) {
+    $("#conversations").css("display", "flex");
+    $("#focusConversation").css("display", "grid");
+  } else if (isOnWelcomeScreen) {
+    $("#focusConversation").css("display", "none");
+  } else {
+    $("#conversations").css("display", "none");
+  }
+};
+
+function switchSiEcranPlusPetitQue(sizeScreen) {
+  if ($(window).width() <= sizeScreen) {
+    $("#conversations").toggle();
+    const focusConversation = $("#focusConversation");
+    focusConversation.css("display") === "none" ||
+    $("#conversations").css("display") === "none"
+      ? focusConversation.css("display", "grid")
+      : focusConversation.css("display", "none");
+  }
+}
+
+function retireIDSelectionne() {
+  Object.values($(".onglet")).forEach((conv) => (conv.id = ""));
+}
+
+function supprimeChampDestinataire() {
+  $("#destinataireInput").remove();
+}

@@ -1,71 +1,107 @@
-body {
-  height: 100vh;
-  margin: 0;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 /*
 *   Style la mise en place des éléments
 */
 #messagerie {
-  background-color: red;
+  background-color: #d8c99b;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  height: 100%;
 }
 
 /*
 *   Style pour le menu de navigation des correspondants
 */
+
+/*Barre de menu*/
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.menu > * {
+  margin: 10px;
+  text-align: center;
+}
+
+/*Animation des divers boutons*/
+#nouvelleConversation:hover,
+#boutonEnvoi:hover,
+#retourMenu:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
+
 #conversations {
   padding: 0;
-  background-color: green;
+  /*TODO height a modifier une fois qu'on a le header et footer*/
+  height: 100vh;
+  background-color: #dec066;
+  display: flex;
+  flex-direction: column;
 }
 
 #correspondants {
-  background-color: cyan;
+  overflow-y: auto;
 }
 
 .onglet {
-  background-color: orange;
+  display: flex;
+  align-items: center;
+  /*/!\ une modif de la couleur ici doit également faire une modif dans l'autre fichier css (petit ecran) sur le selectionne*/
+  background-color: #c9b782;
   margin: 10px;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .onglet:hover {
-  background-color: rgb(162, 105, 0);
+  /*/!\ une modif de la couleur ici doit également faire une modif dans l'autre fichier css (petit ecran) sur le selectionne:hover*/
+  background-color: #d8c99b;
   cursor: pointer;
 }
 
+.onglet > img {
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
 #selectionne {
-  background-color: rgb(255, 0, 195);
+  background-color: #d8c99b;
 }
 
 /*
 *   Style pour la conversation en focus
 */
 #focusConversation {
-  background-color: blue;
-
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 8fr 1fr;
+  grid-template-rows: 5em 8fr 1fr;
+  /*TODO height a modifier une fois qu'on a le header et footer*/
+  height: 100vh;
 }
 
-/*Au chargement, on a pas de conversation à afficher*/
+#titreConversation {
+  margin: 0 10px;
+}
+
+#menuConversation {
+  display: flex;
+  align-items: center;
+}
+
+#menuConversation > img {
+  margin-left: 10px;
+  border-radius: 100%;
+}
+
+/*Au chargement, on a pas de conversation à afficher, pas besoin d'afficher la fléche de retour non plus*/
 #historiqueMessages,
-#nouveauMessageForm {
+#nouveauMessageForm,
+#retourMenu {
   display: none;
 }
 
 #historiqueMessages {
   overflow-y: auto;
-  max-height: 80vh;
   padding: 0 20px;
 }
 
@@ -95,46 +131,58 @@ ul {
   margin: 10px;
 }
 
+/*Style des messages envoyés*/
 .moi .corps {
-  background-color: yellow;
+  background-color: #ffda5f;
   border-radius: 15px 15px 0;
 }
 
+/*Style des messages reçus*/
 .autre .corps {
-  background-color: aqua;
+  background-color: #ffc400;
   border-radius: 15px 15px 15px 0;
 }
 
 .moi :hover + .horodatage,
 .autre :hover + .horodatage {
-  display: block;
+  display: inline;
 }
 
 .horodatage {
-  color: grey;
+  color: #b0b0b0;
   white-space: nowrap;
   display: none;
+  font-size: x-small;
 }
 
 /*Input de saisie d'un nouveau message*/
 #nouveauMessageForm {
+  flex-direction: column;
+  justify-content: center;
+}
+
+#nouveauMessage {
+  width: 100%;
+  display: flex;
   align-items: center;
 }
 
-#message {
-  width: 80%;
-  margin: 10px;
+#nouveauMessageInput,
+#destinataireInput {
   padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+#nouveauMessageInput {
+  width: 100%;
 }
 
 #boutonEnvoi {
-  background: red;
-  width: 5em;
+  margin: 10px;
+  width: 4em;
   border: none;
   border-radius: 10px;
   padding: 0;
-}
-
-#boutonEnvoi:hover {
-  background: green;
 }

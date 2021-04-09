@@ -2,55 +2,126 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <title>Messagerie</title>
 
+    <link href="../Ressources/generalCSS.css" rel="stylesheet" />
     <link href="Messagerie.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      media="screen and (max-width: 700px)"
+      href="MessageriePetitEcran.css"
+      type="text/css"
+    />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </head>
   <body>
     <div id="messagerie">
-      <ul id="correspondants">
-        <!-- 
-            Chaque li sera généré au rechargement de la page, en se basant sur les conversations en bdd
-            value = ID dans la bdd, dont on aura besoin pour faire des requêtes ajax si on ouvre la conversation
-            On affiche le nom du correspondant
-          -->
-        <li class="onglet" value="0">Titi</li>
-        <li class="onglet" value="1">Toto</li>
-        <li class="onglet" value="2">Tata</li>
-        <li class="onglet" value="3">Michel</li>
-        <li class="onglet" value="4">Jean</li>
-        <li class="onglet" value="5">Pierre</li>
-        <li class="onglet" value="6">Fred</li>
-        <li class="onglet" value="7">Thomas</li>
-        <li class="onglet" value="8">Mathieu</li>
-        <li class="onglet" value="9">Luc</li>
-        <li class="onglet" value="10">Lola</li>
-        <li class="onglet" value="11">Pauline</li>
-        <li class="onglet" value="12">Bernard</li>
-        <li class="onglet" value="13">Popeye</li>
-        <li class="onglet" value="14">Zorro</li>
-        <li class="onglet" value="15">Tintin</li>
-      </ul>
+      <div id="conversations">
+        <div class="menu">
+          <h1>Messagerie</h1>
+          <div id="nouvelleConversation">
+            <img
+              src="../Ressources/Messagerie/nouveauMessage.png"
+              width="50em"
+              height="50em"
+            />
+          </div>
+        </div>
+        <ul id="correspondants">
+          <!-- 
+              Chaque li sera généré au rechargement de la page, en se basant sur les conversations en bdd
+              value = ID dans la bdd, dont on aura besoin pour faire des requêtes ajax si on ouvre la conversation
+              On affiche le nom du correspondant
+            -->
+          <li class="onglet" value="0">
+            <img src="temp.png" width="50em" /> Titi
+          </li>
+          <li class="onglet" value="1">
+            <img src="temp.png" width="50em" />Toto
+          </li>
+          <li class="onglet" value="2">
+            <img src="temp.png" width="50em" />Tata
+          </li>
+          <li class="onglet" value="3">
+            <img src="temp.png" width="50em" />Michel
+          </li>
+          <li class="onglet" value="4">
+            <img src="temp.png" width="50em" />Jean
+          </li>
+          <li class="onglet" value="5">
+            <img src="temp.png" width="50em" />Pierre
+          </li>
+          <li class="onglet" value="6">
+            <img src="temp.png" width="50em" />Fred
+          </li>
+          <li class="onglet" value="7">
+            <img src="temp.png" width="50em" />Thomas
+          </li>
+          <li class="onglet" value="8">
+            <img src="temp.png" width="50em" />Mathieu
+          </li>
+          <li class="onglet" value="9">
+            <img src="temp.png" width="50em" />Luc
+          </li>
+          <li class="onglet" value="10">
+            <img src="temp.png" width="50em" />Lola
+          </li>
+          <li class="onglet" value="11">
+            <img src="temp.png" width="50em" />Pauline
+          </li>
+          <li class="onglet" value="12">
+            <img src="temp.png" width="50em" />Bernard
+          </li>
+          <li class="onglet" value="13">
+            <img src="temp.png" width="50em" />Popeye
+          </li>
+          <li class="onglet" value="14">
+            <img src="temp.png" width="50em" />Zorro
+          </li>
+          <li class="onglet" value="15">
+            <img src="temp.png" width="50em" />Tintin
+          </li>
+        </ul>
+      </div>
       <div id="focusConversation">
-        <h1 id="titre">Bienvenue sur votre messagerie</h1>
+        <div id="menuConversation">
+          <div id="retourMenu">
+            <img
+              src="../Ressources/Messagerie/flecheGauche.png"
+              width="40em"
+              height="40em"
+            />
+          </div>
+          <img
+            id="imageTitreConversation"
+            src="../Ressources/Messagerie/salutMain.png"
+            width="50em"
+          />
+          <h1 id="titreConversation">Bienvenue sur votre messagerie</h1>
+        </div>
+        <!-- <h1 id="titreConversation">Bienvenue sur votre messagerie</h1> -->
         <ul id="historiqueMessages">
           <!-- 
             Cette partie sera chargée via une requête ajax, aprés qu'une conv ait été choisi
            -->
         </ul>
         <form id="nouveauMessageForm">
-          <textarea
-            id="message"
-            placeholder="Écrivez un message..."
-            required="true"
-          ></textarea>
-          <input
-            id="boutonEnvoi"
-            type="image"
-            src="../Ressources/Messagerie/envoiMessage.png"
-          />
+          <div id="nouveauMessage">
+            <textarea
+              id="nouveauMessageInput"
+              placeholder="Écrivez un message..."
+            ></textarea>
+            <input
+              id="boutonEnvoi"
+              type="image"
+              src="../Ressources/Messagerie/envoiMessage.png"
+            />
+          </div>
         </form>
       </div>
     </div>
