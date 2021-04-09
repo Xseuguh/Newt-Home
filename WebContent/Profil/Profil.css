@@ -1,0 +1,64 @@
+#profil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#navbar {
+  margin: 20px;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#selectionne {
+  border-bottom: 2px solid #a4243b;
+}
+
+.options {
+  font-weight: bold;
+  background: none;
+  border: none;
+}
+
+.options:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
+
+#affichage {
+  width: 100%;
+  text-align: center;
+}
+
+/*Pour l'affichage des annonces/réservations*/
+.liste {
+  margin: 10px 10%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #d8973c;
+}
+
+/*Pour l'affichage des paramètres*/
+#informations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#informations img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+#modificationInfo {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
+}
+
+#modificationInfo input {
+  margin: 10px;
+}
