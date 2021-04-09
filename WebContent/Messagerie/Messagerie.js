@@ -176,6 +176,11 @@ $("#nouvelleConversation").click(() => {
 
   //On indique qu'on veut une nouvelle conversation
   $("#titreConversation").html("Nouvelle conversation");
+  //et on met l'icône correspondante
+  $("#imageTitreConversation").attr(
+    "src",
+    "../Ressources/Messagerie/nouveauMessage.png"
+  );
 
   $(
     '<input id="destinataireInput" type="text" placeholder="À qui souhaitez vous envoyer un message ?">'
