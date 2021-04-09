@@ -217,7 +217,7 @@ function switchSiEcranPlusPetitQue(sizeScreen) {
 }
 
 function retireIDSelectionne() {
-  Object.values($(".onglet")).forEach((conv) => (conv.id = ""));
+  $("#selectionne").attr("id", "");
 }
 
 function supprimeChampDestinataire() {
