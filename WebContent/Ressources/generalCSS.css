@@ -7,7 +7,8 @@ body {
 
 textarea,
 input,
-html {
+html,
+button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
 }
@@ -17,4 +18,10 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+input,
+textarea {
+  border: none;
+  border-radius: 0.4em;
+  padding: 0.4em;
 }
