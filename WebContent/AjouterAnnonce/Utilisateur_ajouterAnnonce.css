@@ -1,0 +1,87 @@
+#grey, h2{
+	background-color: #afae9d;
+}
+h1{
+	font-size:250%;
+	text-align:center;
+}
+h2{
+	width:70%;
+	text-align:center;
+}
+body{
+	background-color:#d8c99b;
+	height:100%;
+	width:100%;
+}
+a{
+	color:black;
+}
+a:hover{
+	color:red;
+	text-decoration:none
+}
+/**form **/
+form{
+	background-color:#8f5e1a;
+}
+label {
+  width: 110px;
+  display: inline-block;
+  vertical-align: top;
+  margin:6px;
+}
+input[type=text]{
+  width: 250px;
+}
+input[type=number]{
+  width: 250px;
+}
+input[type=submit]{
+	border-radius:2px;
+}
+input[type=checkbox] {
+  width: 10px;
+  margin-left:6px;
+}
+textarea{
+	margin-left:6px;
+}
+#boutonSubmit{
+	width:150px;
+	margin-left:15%;
+}
+header{
+	position:absolute;
+	top:0px;
+	height:10%;
+	width:100%;
+	background-color:#b35900;
+}
+footer{
+	height:10%;
+	position:fixed;
+	bottom:0%;
+	background-color:#b35900;
+	width:100%;
+}
+.tout{
+	position:absolute;
+	top:15%;
+	width:100%;
+	height:100%;
+}
+.row{
+	margin-left:5px;
+}
+.fleches{
+	height:50px;
+	width:50px;
+}
+#flecheG{
+	margin-left:300px;
+}
+#galerieImage{
+	height:500px;
+	width:720px;
+}

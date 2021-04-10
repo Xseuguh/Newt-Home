@@ -1,0 +1,50 @@
+#grey, h2{
+	background-color: #afae9d;
+}
+h1{
+	font-size:250%;
+	text-align:center;
+}
+h2{
+	width:100%;
+	text-align:center;
+}
+body{
+	background-color:#d8c99b;
+	height:100%;
+	width:100%;
+}
+a{
+	color:black;
+}
+a:hover{
+	color:red;
+	text-decoration:none
+}
+input[type=search]{
+	width:75%;
+}
+input[type=submit]{
+	border-radius:2px;
+}
+header,footer{
+	background-color:#b35900;
+	width:100%;
+}
+header{
+	position:absolute;
+	height:10%;
+}
+content{
+	position:absolute;
+	top:20%;
+	width:100%;
+}
+footer{
+	position:absolute;
+	height:10%;
+	bottom:0px;
+}
+.row{
+	margin-left:5px;
+}
