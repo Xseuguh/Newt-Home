@@ -1,4 +1,5 @@
-#messagerie {
+#messagerie,
+#retourMenu {
   display: block;
 }
 
@@ -8,14 +9,13 @@
 
 /* On affiche une fléche de retour sur petit écran */
 #retourMenu {
-  display: block;
   margin: 10px;
 }
 
 #selectionne {
-  background-color: #c9b782;
+  background-color: var(--beige);
 }
 
 #selectionne:hover {
-  background-color: #d8c99b;
+  opacity: 50%;
 }

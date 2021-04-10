@@ -19,7 +19,7 @@ input::placeholder {
 
 #boutonRecherche {
   background-color: #afae9d;
-  border-radius: 0.4em;
+  border-radius: var(--arrondi-normal);
   margin-top: 1em;
 }
 
