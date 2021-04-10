@@ -36,7 +36,6 @@
   padding: 0;
   /*TODO height a modifier une fois qu'on a le header et footer*/
   height: 100vh;
-  /* background-color: #dec066; */
   background-color: var(--beige-fonce);
   display: flex;
   flex-direction: column;
@@ -133,7 +132,6 @@
 
 /*Style des messages reçus*/
 .autre .corps {
-  /* background-color: #ffc400; */
   background-color: var(--orange-clair);
   border-radius: 15px 15px 15px 0;
 }
