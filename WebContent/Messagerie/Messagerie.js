@@ -1,9 +1,9 @@
 const taillePetitEcran = 700;
-let isOnWelcomeScreen = true;
+let isOnConversationMenu = true;
 
 //Gestion de l'affichage de la conversation sélectionnée
 $(".onglet").click((e) => {
-  isOnWelcomeScreen = false;
+  isOnConversationMenu = false;
   switchSiEcranPlusPetitQue(taillePetitEcran);
   supprimeChampDestinataire();
 
@@ -168,7 +168,7 @@ $("#nouveauMessageForm").on("submit", (e) => {
 
 //Gestion de la création d'un nouveau message
 $("#nouvelleConversation").click(() => {
-  isOnWelcomeScreen = false;
+  isOnConversationMenu = false;
   retireIDSelectionne();
   switchSiEcranPlusPetitQue(640);
   //On retire le possible input déjà existant
@@ -191,6 +191,7 @@ $("#nouvelleConversation").click(() => {
 
 //Retour affichage menu
 $("#retourMenu").click(() => {
+  isOnConversationMenu = true;
   switchSiEcranPlusPetitQue(taillePetitEcran);
 });
 
@@ -198,9 +199,11 @@ window.onresize = () => {
   if ($(window).width() > taillePetitEcran) {
     $("#conversations").css("display", "flex");
     $("#focusConversation").css("display", "grid");
-  } else if (isOnWelcomeScreen) {
+  } else if (isOnConversationMenu) {
+    $("#conversations").css("display", "flex");
     $("#focusConversation").css("display", "none");
   } else {
+    $("#focusConversation").css("display", "grid");
     $("#conversations").css("display", "none");
   }
 };
