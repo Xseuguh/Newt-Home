@@ -13,7 +13,7 @@
 }
 
 #selectionne {
-  border-bottom: 2px solid #a4243b;
+  border-bottom: 2px solid var(--rouge-fonce);
 }
 
 .options {
@@ -37,8 +37,8 @@
 .liste {
   margin: 10px 10%;
   padding: 10px;
-  border-radius: 10px;
-  background-color: #d8973c;
+  border-radius: var(--arrondi-normal);
+  background-color: var(--orange);
 }
 
 /*Pour l'affichage des paramètres*/
@@ -51,7 +51,7 @@
 
 #informations img {
   width: 200px;
-  border-radius: 10px;
+  border-radius: var(--arrondi-normal);
 }
 
 #modificationInfo {

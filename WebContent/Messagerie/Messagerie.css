@@ -2,7 +2,7 @@
 *   Style la mise en place des éléments
 */
 #messagerie {
-  background-color: #d8c99b;
+  background-color: var(--beige);
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
@@ -26,7 +26,8 @@
 /*Animation des divers boutons*/
 #nouvelleConversation:hover,
 #boutonEnvoi:hover,
-#retourMenu:hover {
+#retourMenu:hover,
+.onglet:hover {
   cursor: pointer;
   opacity: 50%;
 }
@@ -35,7 +36,8 @@
   padding: 0;
   /*TODO height a modifier une fois qu'on a le header et footer*/
   height: 100vh;
-  background-color: #dec066;
+  /* background-color: #dec066; */
+  background-color: var(--beige-fonce);
   display: flex;
   flex-direction: column;
 }
@@ -48,25 +50,19 @@
   display: flex;
   align-items: center;
   /*/!\ une modif de la couleur ici doit également faire une modif dans l'autre fichier css (petit ecran) sur le selectionne*/
-  background-color: #c9b782;
+  background-color: var(--beige);
   margin: 10px;
   padding: 10px;
-  border-radius: 10px;
-}
-
-.onglet:hover {
-  /*/!\ une modif de la couleur ici doit également faire une modif dans l'autre fichier css (petit ecran) sur le selectionne:hover*/
-  background-color: #d8c99b;
-  cursor: pointer;
+  border-radius: var(--arrondi-normal);
 }
 
 .onglet > img {
-  border-radius: 100%;
   margin-right: 20px;
 }
 
 #selectionne {
-  background-color: #d8c99b;
+  background-color: var(--orange);
+  opacity: 100%;
 }
 
 /*
@@ -90,7 +86,6 @@
 
 #menuConversation > img {
   margin-left: 10px;
-  border-radius: 100%;
 }
 
 /*Au chargement, on a pas de conversation à afficher, pas besoin d'afficher la fléche de retour non plus*/
@@ -121,7 +116,6 @@
 .autre {
   /*On affiche les messages du destinataires à gauche*/
   float: left;
-  border-radius: 15px 15px 15px 0;
 }
 
 /*Disposition des éléments dans le message*/
@@ -133,13 +127,14 @@
 
 /*Style des messages envoyés*/
 .moi .corps {
-  background-color: #ffda5f;
+  background-color: var(--orange);
   border-radius: 15px 15px 0;
 }
 
 /*Style des messages reçus*/
 .autre .corps {
-  background-color: #ffc400;
+  /* background-color: #ffc400; */
+  background-color: var(--orange-clair);
   border-radius: 15px 15px 15px 0;
 }
 
@@ -181,6 +176,5 @@
   margin: 10px;
   width: 4em;
   border: none;
-  border-radius: 10px;
   padding: 0;
 }
