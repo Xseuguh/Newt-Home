@@ -27,6 +27,9 @@
   cursor: pointer;
   opacity: 50%;
 }
+.options:focus {
+  outline: none;
+}
 
 #affichage {
   width: 100%;
