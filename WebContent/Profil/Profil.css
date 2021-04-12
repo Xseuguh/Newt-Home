@@ -32,13 +32,28 @@
 }
 
 #affichage {
-  width: 100%;
-  text-align: center;
+  width: 80%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Le bouton pour ajouter une annonce*/
+#ajouteAnnonce img:hover {
+  opacity: 50%;
+}
+#ajouteAnnonce {
+  align-self: end;
+  margin: 0 20px;
 }
 
 /*Pour l'affichage des annonces/réservations*/
-.liste {
-  margin: 10px 10%;
+#liste {
+  width: 100%;
+}
+
+.element {
+  margin: 10px 0;
   padding: 10px;
   border-radius: var(--arrondi-normal);
   background-color: var(--orange);
@@ -60,7 +75,8 @@
 #modificationInfo {
   display: flex;
   flex-direction: column;
-  margin: 0 10%;
+  width: 100%;
+  text-align: center;
 }
 
 #modificationInfo input {

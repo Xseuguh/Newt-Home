@@ -62,16 +62,24 @@ function affichageOption(choix) {
         />
     </form>`;
   } else if (choix === "annonces" || choix === "reservations") {
-    const elements = [
-      "<ul>",
-      ...fakeData.map(
-        (element) =>
-          `<li class="liste"><p>${element.nom}</p><p>${element.contenu}</p></li>`
-      ),
-      "</ul>",
-    ];
+    const elements = ['<ul id="liste">', ...generationHtml(fakeData), "</ul>"];
+    if (choix === "annonces") {
+      elements.splice(
+        0,
+        0,
+        `<a href=${"../AjouterAnnonce/Utilisateur_ajouterAnnonce.jsp"} id="ajouteAnnonce" ><img src="../Ressources/Profile/ajoutAnnonce.png" width="50em"/></a>`
+      );
+    }
     return elements.join("");
   } else {
     return "<h1>Bienvenue</h1>";
   }
+}
+
+//Fonction qui va générer l'html pour les annonces/reservations (sous forme de liste)
+function generationHtml(tableauElements) {
+  return tableauElements.map(
+    (element) =>
+      `<li class="element"><p>${element.nom}</p><p>${element.contenu}</p></li>`
+  );
 }
