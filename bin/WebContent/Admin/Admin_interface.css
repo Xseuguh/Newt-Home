@@ -10,7 +10,7 @@ h2{
 	text-align:center;
 }
 body{
-	background-color:#c5c5c5;
+	background-color:#d8c99b;
 	height:100%;
 	width:100%;
 }
@@ -28,7 +28,7 @@ input[type=submit]{
 	border-radius:2px;
 }
 header,footer{
-	background-color:#4c5b61;
+	background-color:#b35900;
 	width:100%;
 }
 header{

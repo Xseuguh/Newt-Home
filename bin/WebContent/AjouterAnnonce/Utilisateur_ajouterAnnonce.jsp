@@ -10,33 +10,24 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="Utilisateur_ajouterAnnonce.css">
-<link rel="stylesheet" href="href="../Ressources/generalCSS.css">
 </head>
 <body>
 	<header>
 		<h1>Newt'Home</h1>
 	</header>
-	<!-- a mettre dans le header des liens vers
-	*pour revenir sur la page d'accueil
-	*pour revenir vers la page de profil
-	 -->
 	<script src="Utilisateur_ajouterAnnonce.js"></script>
 	<div class="tout">
 		<content class="container">
 		<div class="row">
 			<div class="col">
-				<img id="galerieImage" src="Cheverny_Chateau_1.jpg"> <br><br>
-				<img src="flecheG.jpg" class="fleches" onclick="precedent()" id="flecheG"> 
-				<img src="flecheD.jpg" class="fleches" onclick="suivant()">
+				<img id="galerieImage" src="cheverny/Cheverny_Chateau_1.jpg"> <br><br>
+				<img src="flecheGetD/flecheG.jpg" class="fleches" onclick="precedent()" id="flecheG"> 
+				<img src="flecheGetD/flecheD.jpg" class="fleches" onclick="suivant()">
 				<br><br>
-				<form enctype="multipart/form-data">
-					Ajouter une image
-					<input type="submit">
-				</form>
 			</div>
 			<div class="col">
 				<h2>Mon annonce</h2>
-				<form id="form2">
+				<form>
 					<label for="titreAnnonce">Titre:</label>
 					<input type="text"	id="titreAnnonce" name="titreAnnonce"><br>
 					<label	for="prixLocation">Prix (€):</label><input type="number" id="prixLocation" name="prixLocation" min="0"><br>
