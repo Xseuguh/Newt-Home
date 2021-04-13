@@ -1,17 +1,13 @@
-#grey, h2{
-	background-color: #afae9d;
-}
+
 h1{
 	font-size:250%;
 	text-align:center;
 }
 h2{
-	width:70%;
+	background-color: var(--gris-pale);
 	text-align:center;
-	margin-left:20%;
 }
 body{
-	background-color:#c5c5c5;
 	height:100%;
 	width:100%;
 }
@@ -23,15 +19,17 @@ a:hover{
 	text-decoration:none
 }
 #form2{
-	background-color:#949896;
-	border:2px solid black;
-	border-radius: 4px;
+	background-color: var(--gris-pale);
+	border:2px solid var(--gris);
+	border-radius: var(--arrondi-normal);
+	padding: 0.6em;
 }
 label {
-  width: 110px;
+  width: 5em;
   display: inline-block;
   vertical-align: top;
   margin:6px;
+  
 }
 input[type=text]{
   width: 250px;
@@ -53,10 +51,7 @@ textarea{
 	margin-left:6px;
 }
 #boutonSubmit{
-	width: 400px;
-	height:50px;
-	margin-left:15%;
-	border-radius:10px;
+	border-radius:var(--arrondi-normal);
 }
 header{
 	position:absolute;
@@ -86,10 +81,12 @@ footer{
 	width:50px;
 }
 #flecheG{
-	margin-left:300px;
+	margin-left: 7em;
 }
 #galerieImage{
-	height:500px;
-	width:720px;
+	width:80%;
 }
 
+.descriptionAnnonce{
+	width: 100%; height: 100%;
+}
