@@ -1,8 +1,8 @@
 /*ceci est pour image slider**/
 var tableauImage=[
-	"cheverny/Cheverny_Chateau_1.jpg",
-	"cheverny/Cheverny_Chateau_2.jpg",
-	"cheverny/Cheverny_Chateau_3.jpg",
+	"Cheverny_Chateau_1.jpg",
+	"Cheverny_Chateau_2.jpg",
+	"Cheverny_Chateau_3.jpg",
 ];
 var num=0;
 function suivant(){
