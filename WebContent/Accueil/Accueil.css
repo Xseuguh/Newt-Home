@@ -7,7 +7,7 @@ input::placeholder {
 }
 #recherche {
   width: 80%;
-  background-color: #afae9d;
+  background-color: #c5c5c5;
   margin-right: 5em;
   margin-top: 1em;
 }
@@ -18,7 +18,7 @@ input::placeholder {
 }
 
 #boutonRecherche {
-  background-color: #afae9d;
+  background-color: #c5c5c5;
   border-radius: var(--arrondi-normal);
   margin-top: 1em;
 }
@@ -32,3 +32,22 @@ input::placeholder {
 .row {
   margin-bottom: 2em;
 }
+.annonce{
+  padding: 0.5em;
+  border : #c5c5c5  solid;
+  border-radius: var(--arrondi-normal);
+}
+
+.lienTitre{
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+  color:black;
+  }
+  
+ .lienTitre:hover{
+  outline: none;
+  text-decoration: none;
+  background:#9eadad ;
+  color:black
+ }

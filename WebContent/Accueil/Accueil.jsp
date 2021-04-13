@@ -26,7 +26,7 @@ ap.min.css"
     .min.js"></script>
     <header></header>
     <div class="container">
-      <div class="row" id="rechercheDiv">
+      <div class="row " id="rechercheDiv">
         <form class="form-inline">
           <input
             type="search"
@@ -37,17 +37,21 @@ ap.min.css"
           <button id="boutonRecherche">Rechercher</button>
         </form>
       </div>
-      <div class="row">
+      <div class="row annonce">
         <div class="col-sm-6">
+        <a href="" > <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
           <img
             id="thumbnail"
             class="center-block"
             src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1"
           />
+          </a>
         </div>
         <div class="col-sm-6">
           <div id="titre" class="text-center">
+           <a  href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
             Maison située dans le sud de la France près de Biarritz
+           </a>
           </div>
           <div id="description" class="text-justify">
             En plein centre de Biarritz, non loin de la plage du Port Vieux,
@@ -59,16 +63,22 @@ ap.min.css"
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row annonce">
         <div class="col-sm-6">
+         <a  href="" > <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
           <img
             id="thumbnail"
             class="center-block"
             src="https://www.tendanceouest.com/photos/maxi/47243.jpg"
           />
+          </a>
         </div>
         <div class="col-sm-6">
-          <div id="titre" class="text-center">Maison située à Rouen</div>
+          <div id="titre" class="text-center"> 
+          <a href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
+          Maison située à Rouen
+          </a>
+          </div>
           <div id="description" class="text-justify">
             Il s’agit de la demeure de Ferdinand Marrou, célèbre ferronnier
             d’art installé en Normandie en 1870, qui exerça son savoir-faire
