@@ -12,8 +12,23 @@
   justify-content: space-evenly;
 }
 
-#selectionne {
+/* #selectionne {
   border-bottom: 2px solid var(--rouge-fonce);
+} */
+
+#selectionne::after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid var(--rouge-fonce);
+  animation: etend 0.2s;
+}
+@keyframes etend {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .options {
@@ -23,7 +38,7 @@
   margin: 0 10px;
 }
 
-.options:hover {
+.options:not([id="selectionne"]):hover {
   cursor: pointer;
   opacity: 50%;
 }
