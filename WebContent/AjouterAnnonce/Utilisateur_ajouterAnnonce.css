@@ -1,16 +1,13 @@
-#grey, h2{
-	background-color: #afae9d;
-}
+
 h1{
 	font-size:250%;
 	text-align:center;
 }
 h2{
-	width:70%;
+	background-color: var(--gris-pale);
 	text-align:center;
 }
 body{
-	background-color:#d8c99b;
 	height:100%;
 	width:100%;
 }
@@ -21,15 +18,18 @@ a:hover{
 	color:red;
 	text-decoration:none
 }
-/**form **/
-form{
-	background-color:#8f5e1a;
+#form2{
+	background-color: var(--gris-pale);
+	border:2px solid var(--gris);
+	border-radius: var(--arrondi-normal);
+	padding: 0.6em;
 }
 label {
-  width: 110px;
+  width: 5em;
   display: inline-block;
   vertical-align: top;
   margin:6px;
+  
 }
 input[type=text]{
   width: 250px;
@@ -38,7 +38,10 @@ input[type=number]{
   width: 250px;
 }
 input[type=submit]{
-	border-radius:2px;
+}
+input[type=submit]:hover{
+	background-color:red;
+	color:white;
 }
 input[type=checkbox] {
   width: 10px;
@@ -48,21 +51,20 @@ textarea{
 	margin-left:6px;
 }
 #boutonSubmit{
-	width:150px;
-	margin-left:15%;
+	border-radius:var(--arrondi-normal);
 }
 header{
 	position:absolute;
 	top:0px;
 	height:10%;
 	width:100%;
-	background-color:#b35900;
+	background-color:#4c5b61;
 }
 footer{
 	height:10%;
 	position:fixed;
 	bottom:0%;
-	background-color:#b35900;
+	background-color:#4c5b61;
 	width:100%;
 }
 .tout{
@@ -79,9 +81,12 @@ footer{
 	width:50px;
 }
 #flecheG{
-	margin-left:300px;
+	margin-left: 7em;
 }
 #galerieImage{
-	height:500px;
-	width:720px;
+	width:80%;
+}
+
+.descriptionAnnonce{
+	width: 100%; height: 100%;
 }

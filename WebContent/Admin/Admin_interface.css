@@ -1,5 +1,5 @@
 #grey, h2{
-	background-color: #afae9d;
+	background-color: var(--gris);
 }
 h1{
 	font-size:250%;
@@ -10,7 +10,7 @@ h2{
 	text-align:center;
 }
 body{
-	background-color:#d8c99b;
+
 	height:100%;
 	width:100%;
 }
@@ -23,12 +23,14 @@ a:hover{
 }
 input[type=search]{
 	width:75%;
+	background-color: var(--gris-pale);
 }
 input[type=submit]{
 	border-radius:2px;
+	background-color: var(--gris-pale);
 }
 header,footer{
-	background-color:#b35900;
+	background-color:#4c5b61;
 	width:100%;
 }
 header{
