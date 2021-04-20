@@ -5,11 +5,11 @@ pageEncoding="utf-8"%>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Liste Message</title>
+<title>Liste conversations</title>
 </head>
 <body>
 <div>
-<form action="/messages/search" method="post">
+<form action="/conversations/search" method="post">
 <table>
 <tr>
 <td>Mot Clé:</td>
@@ -21,14 +21,15 @@ pageEncoding="utf-8"%>
 <table class="tabmessage">
 <tr>
 <th>ref</th>
-<th>Id de la conversation</th>
-<th>Message </th>
+<th>id expediteur</th>
+<th>id destinataire</th>
+
 </tr>
-<c:forEach items="${message}" var="m">
+<c:forEach items="${conversations}" var="cv">
 <tr>
-<td>${s.id_msg}</td>
-<td>${s.id_conversation}</td>
-<td>${s.msg}</td>
+<td>${cv.id_conversation}</td>
+<td>${cv.id_sender}</td>
+<td>${cv.id_receiver}</td>
 </tr>
 </c:forEach>
 </table>

@@ -7,24 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.wtg.dao.MessageRepository;
-import org.wtg.entities.Message;
+import org.wtg.dao.LiaisonOffreServiceRepository;
+import org.wtg.entities.LiaisonOffreService;
 
 @Controller
-
-public class MessageController {
+public class LiaisonOffreServiceController {
 	@Autowired
-	private MessageRepository messageDao;
-	@RequestMapping(value = "/messages/search")
+	private LiaisonOffreServiceRepository liaisonServiceDao;
+	@RequestMapping(value = "/liaisons_services/search")
 	public String search(Model model, @RequestParam(name = "motCle",
-	defaultValue = "") Long id) {
-	List<Message> message = messageDao.findByIdConversation(id);
-	model.addAttribute("message", message);
-	model.addAttribute("motC", id);
-	return "listMessage";
+	defaultValue = "") Long mc) {
+	List<LiaisonOffreService> liaisonService = liaisonServiceDao.findByIdLiaison(mc);
+	model.addAttribute("liaisonService", liaisonService);
+	model.addAttribute("motC", mc);
+	return "listLiaisonServices";
 	}
 	/*définir ici les différents méthodes (search, add, delete...) nécéssaires 
 	 lors de la manip de la table Contraintes
 */
-
 }
