@@ -1,0 +1,21 @@
+#messagerie,
+#retourMenu {
+  display: block;
+}
+
+#focusConversation {
+  display: none;
+}
+
+/* On affiche une fléche de retour sur petit écran */
+#retourMenu {
+  margin: 10px;
+}
+
+#selectionne {
+  background-color: var(--gris-bleu);
+}
+
+#selectionne:hover {
+  opacity: 50%;
+}
