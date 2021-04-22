@@ -16,8 +16,12 @@ $(".onglet").click((e) => {
   const expediteurName = e.target.textContent;
   $("#titreConversation").html(expediteurName);
 
+  const srcImg = e.target.children[0].src.split("/");
   //Mettre le lien de l'image du profil de l'expéditeur
-  $("#imageTitreConversation").attr("src", "temp.png");
+  $("#imageTitreConversation").attr(
+    "src",
+    `../images/user/${srcImg[srcImg.length - 1]}`
+  );
 
   scrollSurPlusRecent();
 });
@@ -179,7 +183,7 @@ $("#nouvelleConversation").click(() => {
   //et on met l'icône correspondante
   $("#imageTitreConversation").attr(
     "src",
-    "../Ressources/Messagerie/nouveauMessage.png"
+    "../images/messagerie/nouveauMessage.png"
   );
 
   $(
