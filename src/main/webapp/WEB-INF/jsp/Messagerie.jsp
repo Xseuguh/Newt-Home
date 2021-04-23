@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html ; charset=utf-8"
 pageEncoding="utf-8"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c"%>
+<%@page import  = "java.io.File"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,8 +12,14 @@ prefix="c"%>
     />
     <title>Messagerie</title>
 
-    <link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
-    <link href="<%=request.getContextPath()%>/css/Messagerie.css" rel="stylesheet" />
+    <link
+      href="<%=request.getContextPath()%>/css/generalCSS.css"
+      rel="stylesheet"
+    />
+    <link
+      href="<%=request.getContextPath()%>/css/Messagerie.css"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       media="screen and (max-width: 700px)"
@@ -41,8 +48,15 @@ prefix="c"%>
               On affiche le nom du correspondant
             -->
           <c:forEach items="${conversations}" var="conv">
-            <li class="onglet" value=${cv.id_conversation}>
-              <img class="rond" src="<%=request.getContextPath()%>/images/user/default.png" width="50em" /> ${conv.prenom}${conv.nom}
+            <li class="onglet" value="${conv.id_conversation}">	
+			 <img
+                class="rond"
+                src="<%=request.getContextPath()%>/images/user/${conv.receiverID}.png"
+                width="50em"
+                onerror='this.onerror = null; this.src="<%=request.getContextPath()%>/images/user/default.png"'
+              />
+              ${conv.prenom} ${conv.nom}
+            </li>
           </c:forEach>
         </ul>
       </div>
@@ -85,6 +99,9 @@ prefix="c"%>
       </div>
     </div>
 
-    <script src="<%=request.getContextPath()%>/js/Messagerie.js" type="text/javascript"></script>
+    <script
+      src="<%=request.getContextPath()%>/js/Messagerie.js"
+      type="text/javascript"
+    ></script>
   </body>
 </html>

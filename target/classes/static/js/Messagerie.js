@@ -1,17 +1,27 @@
-const taillePetitEcran = 700;
+const TAILLE_PETIT_ECRAN = 700;
 let isOnConversationMenu = true;
 
+let conversationID;
+
+//Partie de code pour refresh les messages de la conversation tous les 5s
+let isRunning = false;
+const refresh = setInterval(() => {
+  if (isRunning) {
+    afficheConversation(conversationID, false);
+  }
+}, 5000);
+
 //Gestion de l'affichage de la conversation sélectionnée
-$(".onglet").click((e) => {
+$(".onglet").click(async (e) => {
   isOnConversationMenu = false;
-  switchSiEcranPlusPetitQue(taillePetitEcran);
+  switchSiEcranPlusPetitQue(TAILLE_PETIT_ECRAN);
   supprimeChampDestinataire();
 
   retireIDSelectionne();
   e.target.id = "selectionne";
 
-  const id = parseInt(e.target.value);
-  afficheConversation(id);
+  conversationID = parseInt(e.target.value);
+  await afficheConversation(conversationID, true);
 
   const expediteurName = e.target.textContent;
   $("#titreConversation").html(expediteurName);
@@ -23,7 +33,7 @@ $(".onglet").click((e) => {
     `../images/user/${srcImg[srcImg.length - 1]}`
   );
 
-  scrollSurPlusRecent();
+  isRunning = true; //On actualise les messsages
 });
 
 function scrollSurPlusRecent() {
@@ -32,118 +42,68 @@ function scrollSurPlusRecent() {
 }
 
 //Gestion de la récupération de l'historique des messages pour la conversation sélectionnée
-function afficheConversation(conversationID) {
+async function afficheConversation(conversationID, isNewConversation) {
   const historiqueDesMessages = $("#historiqueMessages");
 
-  //on affiche les div pour l'historique des messages et le formulaire d'envoi de nouveau message
-  historiqueDesMessages.css("display", "block");
-  $("#nouveauMessageForm").css("display", "flex");
+  let shouldScroll = false;
+  const currentScroll = historiqueDesMessages.scrollTop();
 
-  //on efface l'historique précédent
-  historiqueDesMessages.children().remove();
+  const messages = await getMessages(conversationID);
 
-  const messages = getMessages(conversationID);
-  messages.forEach((message) => {
-    historiqueDesMessages.append(
-      `<li class="${message.source}">
-            <p class="corps">${message.valeur}</p>
-            <p class="horodatage">${message.horodatage}</p>
-        </li>`
-    );
-  });
+  if (isNewConversation) {
+    shouldScroll = true;
+    //on affiche les div pour l'historique des messages et le formulaire d'envoi de nouveau message
+    historiqueDesMessages.css("display", "block");
+    $("#nouveauMessageForm").css("display", "flex");
+
+    //on efface l'historique précédent
+    historiqueDesMessages.children().remove();
+
+    //et on ajoute les nouveaux éléments
+    messages.forEach((message) => {
+      historiqueDesMessages.append(generateMessage(message));
+    });
+  } else {
+    //Sinon, on voit si on a un nouveau message à ajouter, si oui, on l'ajoute
+    const currentSize = historiqueDesMessages.children().length;
+    if (currentSize < messages.length) {
+      shouldScroll = true;
+      for (let i = currentSize; i < messages.length; i++) {
+        historiqueDesMessages.append(generateMessage(messages[i]));
+      }
+    }
+  }
+
+  //détermine si on doit scroll sur l'élément le plus récent, ou rester au scroll actuel
+  if (shouldScroll) {
+    scrollSurPlusRecent();
+  } else {
+    historiqueDesMessages.scrollTop(currentScroll);
+  }
 }
 
-//Fonctions qui récupére en ajax les messages d'une conversation
-function getMessages(conversationID) {
-  const tempConversations = [
-    [
-      { source: "autre", valeur: "Salut", horodatage: "03/04/21 - 13h02" },
-      {
-        source: "autre",
-        valeur: "Comment ça va ?",
-        horodatage: "03/04/21 - 13h03",
+//Fonction qui génére le nouvel élément de la conversation
+function generateMessage(message) {
+  return `<li class="${message.origine}">
+    <p class="corps">${message.message}</p>
+    <p class="horodatage">${message.date_message}</p>
+  </li>`;
+}
+
+//Fonction qui récupére en ajax les messages d'une conversation
+async function getMessages(conversationID) {
+  const rawMessages = await fetch(
+    `/messagerie/getMessages?conversationID=${conversationID}`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      {
-        source: "moi",
-        valeur: "Salut Titi, bien et toi ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-      {
-        source: "autre",
-        valeur: "Bien, merci. <br/>Tu fais quoi de beau ?",
-        horodatage: "03/04/21 - 13h05",
-      },
-    ],
-    [
-      { source: "autre", valeur: "Salut", horodatage: "03/04/21 - 13h02" },
-      {
-        source: "autre",
-        valeur: "Comment ça va ?",
-        horodatage: "03/04/21 - 13h03",
-      },
-      {
-        source: "moi",
-        valeur: "Salut Toto, bien et toi ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-      {
-        source: "autre",
-        valeur: "Bien, merci. <br/>Tu fais quoi de beau ?",
-        horodatage: "03/04/21 - 13h05",
-      },
-      {
-        source: "moi",
-        valeur:
-          "J'écris un texte long, d'une longueur inégalé et inégalable, sans aucun retour à la ligne (que j'aurais pu utiliser grâce à la balise br) et j'en profite également pour revoir les fonctions de css. C'est sympa non ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-      { source: "autre", valeur: "Salut", horodatage: "03/04/21 - 13h02" },
-      {
-        source: "autre",
-        valeur: "Comment ça va ?",
-        horodatage: "03/04/21 - 13h03",
-      },
-      {
-        source: "moi",
-        valeur: "Salut Toto, bien et toi ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-      {
-        source: "autre",
-        valeur: "Bien, merci. <br/>Tu fais quoi de beau ?",
-        horodatage: "03/04/21 - 13h05",
-      },
-      {
-        source: "moi",
-        valeur:
-          "J'écris un texte long, d'une longueur inégalé et inégalable, sans aucun retour à la ligne (que j'aurais pu utiliser grâce à la balise br) et j'en profite également pour revoir les fonctions de css. C'est sympa non ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-      { source: "autre", valeur: "Salut", horodatage: "03/04/21 - 13h02" },
-      {
-        source: "autre",
-        valeur: "Comment ça va ?",
-        horodatage: "03/04/21 - 13h03",
-      },
-      {
-        source: "moi",
-        valeur: "Salut Toto, bien et toi ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-      {
-        source: "autre",
-        valeur: "Bien, merci. <br/>Tu fais quoi de beau ?",
-        horodatage: "03/04/21 - 13h05",
-      },
-      {
-        source: "moi",
-        valeur:
-          "J'écris un texte long, d'une longueur inégalé et inégalable, sans aucun retour à la ligne (que j'aurais pu utiliser grâce à la balise br) et j'en profite également pour revoir les fonctions de css. C'est sympa non ?",
-        horodatage: "03/04/21 - 13h04",
-      },
-    ],
-  ];
-  return tempConversations[conversationID] || [];
+      method: "GET",
+    }
+  );
+
+  return rawMessages.json() || [];
 }
 
 //Gestion de l'envoie d'un nouveau message dans la conversation affichée
@@ -153,20 +113,37 @@ $("#nouveauMessageForm").on("submit", (e) => {
   const input = $("#nouveauMessageInput");
   const message = input.val();
 
-  if (message.length === 0) {
+  if (message.length <= 0) {
     alert("Le message ne peut être vide !");
     return;
   }
 
+  const data = { message: message, receiverID: 2 };
+
   const destinataire = $("#destinataireInput").val();
-  if (destinataire !== undefined && destinataire.length === 0) {
-    alert("Le destinataire ne peut être vide !");
-    return;
-  }
   if (destinataire !== undefined) {
+    if (destinataire.length <= 0) {
+      alert("Le destinataire ne peut être vide !");
+      return;
+    }
     console.log("Destinataire : " + destinataire);
+
+    data["receiverID"] = destinataire;
   }
-  console.log("Message : " + message);
+
+  fetch("/messagerie/add", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then(() => {
+      afficheConversation(conversationID);
+    })
+    .catch(() => alert("Oops..."));
+
   input.val("");
 });
 
@@ -196,16 +173,17 @@ $("#nouvelleConversation").click(() => {
 //Retour affichage menu
 $("#retourMenu").click(() => {
   isOnConversationMenu = true;
-  switchSiEcranPlusPetitQue(taillePetitEcran);
+  switchSiEcranPlusPetitQue(TAILLE_PETIT_ECRAN);
 });
 
 window.onresize = () => {
-  if ($(window).width() > taillePetitEcran) {
+  if ($(window).width() > TAILLE_PETIT_ECRAN) {
     $("#conversations").css("display", "flex");
     $("#focusConversation").css("display", "grid");
   } else if (isOnConversationMenu) {
     $("#conversations").css("display", "flex");
     $("#focusConversation").css("display", "none");
+    isRunning = false; //On arréte l'update si on affiche pas la conversation
   } else {
     $("#focusConversation").css("display", "grid");
     $("#conversations").css("display", "none");
