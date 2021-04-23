@@ -11,7 +11,7 @@ import org.wtg.entities.Conversation;
 import org.wtg.entities.ConversationInfo;
 
 public interface ConversationRepository extends JpaRepository<Conversation, Long> {
-	@Query(value = "SELECT id_conversation,nom,prenom FROM conversation AS c INNER JOIN user_info AS u ON c.id_sender = u.id_user OR c.id_receiver = u.id_user WHERE (c.id_sender = :id_user OR c.id_receiver = :id_user) AND NOT u.id_user = :id_user ", nativeQuery = true)
+	@Query(value = "SELECT id_conversation, id_user ,nom,prenom FROM conversation AS c INNER JOIN user_info AS u ON c.id_sender = u.id_user OR c.id_receiver = u.id_user WHERE (c.id_sender = :id_user OR c.id_receiver = :id_user) AND NOT u.id_user = :id_user ", nativeQuery = true)
 	public List<ConversationInfo> findConversationsByUserID(@Param("id_user") Integer userID);
 
 	@Transactional
