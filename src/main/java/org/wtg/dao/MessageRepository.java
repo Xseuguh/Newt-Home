@@ -11,12 +11,12 @@ import org.wtg.entities.Message;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 	@Query(value = "SELECT * FROM Message AS m WHERE m.id_conversation = :id_conversation", nativeQuery = true)
-	public List<Message> findMessagesByConversationID(@Param("id_conversation") Integer conversationID);
+	public List<Message> findMessagesByConversationID(@Param("id_conversation") Long conversationID);
 
 	@Transactional
 	@Modifying
 	@Query(value = "INSERT INTO Message (id_conversation, msg, id_origine) VALUES (:id_conversation,:msg,:id_origine)", nativeQuery = true)
-	public void addMessage(@Param("id_conversation") Integer conversationID, @Param("msg") String message,
-			@Param("id_origine") Integer origineID);
+	public void addMessage(@Param("id_conversation") Long conversationID, @Param("msg") String message,
+			@Param("id_origine") Long origineID);
 
 }

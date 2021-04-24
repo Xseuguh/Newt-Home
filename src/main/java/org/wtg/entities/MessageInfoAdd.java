@@ -6,29 +6,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MessageInfoAdd {
 
-	@JsonProperty(value = "conversationID", required = false)
-	private Integer conversationID;
+	@JsonProperty(value = "conversationID", required = true)
+	private Long conversationID;
 
-	@JsonProperty(value = "receiverID", required = false)
-	private Integer receiverID;
 
 	@JsonProperty(value = "message", required = true)
 	private String message;
 
-	public Integer getConversationID() {
+	public Long getConversationID() {
 		return conversationID;
 	}
 
-	public void setConversationID(Integer conversationID) {
+	public void setConversationID(Long conversationID) {
 		this.conversationID = conversationID;
-	}
-
-	public Integer getReceiverID() {
-		return receiverID;
-	}
-
-	public void setReceiverID(Integer receiverID) {
-		this.receiverID = receiverID;
 	}
 
 	public String getMessage() {
@@ -38,7 +28,5 @@ public class MessageInfoAdd {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-
 
 }

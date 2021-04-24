@@ -1,15 +1,43 @@
 const TAILLE_PETIT_ECRAN = 700;
+const TAILLE_MINIMAL_POUR_AUTOCOMPLETER = 3;
 let isOnConversationMenu = true;
 
 let conversationID;
 
 //Partie de code pour refresh les messages de la conversation tous les 5s
 let isRunning = false;
-const refresh = setInterval(() => {
+const refreshMessages = setInterval(() => {
   if (isRunning) {
     afficheConversation(conversationID, false);
   }
 }, 5000);
+
+const refreshConversations = setInterval(() => {
+  const conversationsList = $("#correspondants");
+  const currentNumberOfConversations = conversationsList.children().length;
+  $.getJSON("/messagerie/getConversations", (conversations) => {
+    for (let i = currentNumberOfConversations; i < conversations.length; i++) {
+      const conversation = conversations[i];
+      conversationsList.prepend(`
+          <li class="onglet" value="${conversation.id_conversation}">
+            <img
+              class="rond"
+              src="../images/user/${conversation.receiverID}.png"
+              width="50em"
+              onerror='this.onerror = null; this.src="../images/user/default.png"'
+            /> 
+            ${conversation.prenom} ${conversation.nom}
+          </li>
+          `);
+    }
+  });
+}, 5000);
+
+function openOnConversation(defaultConversationID) {
+  if (defaultConversationID) {
+    $(`.onglet[value=${defaultConversationID}]`).click();
+  }
+}
 
 //Gestion de l'affichage de la conversation sélectionnée
 $(".onglet").click(async (e) => {
@@ -109,27 +137,14 @@ async function getMessages(conversationID) {
 //Gestion de l'envoie d'un nouveau message dans la conversation affichée
 $("#nouveauMessageForm").on("submit", (e) => {
   e.preventDefault();
-
-  const input = $("#nouveauMessageInput");
-  const message = input.val();
+  const message = $("#nouveauMessageInput").val();
 
   if (message.length <= 0) {
     alert("Le message ne peut être vide !");
     return;
   }
 
-  const data = { message: message, receiverID: 2 };
-
-  const destinataire = $("#destinataireInput").val();
-  if (destinataire !== undefined) {
-    if (destinataire.length <= 0) {
-      alert("Le destinataire ne peut être vide !");
-      return;
-    }
-    console.log("Destinataire : " + destinataire);
-
-    data["receiverID"] = destinataire;
-  }
+  const data = { message: message, conversationID: conversationID };
 
   fetch("/messagerie/add", {
     headers: {
@@ -141,33 +156,10 @@ $("#nouveauMessageForm").on("submit", (e) => {
   })
     .then(() => {
       afficheConversation(conversationID);
+      isRunning = true;
+      $("#nouveauMessageInput").val("");
     })
     .catch(() => alert("Oops..."));
-
-  input.val("");
-});
-
-//Gestion de la création d'un nouveau message
-$("#nouvelleConversation").click(() => {
-  isOnConversationMenu = false;
-  retireIDSelectionne();
-  switchSiEcranPlusPetitQue(640);
-  //On retire le possible input déjà existant
-  supprimeChampDestinataire();
-
-  //On indique qu'on veut une nouvelle conversation
-  $("#titreConversation").html("Nouvelle conversation");
-  //et on met l'icône correspondante
-  $("#imageTitreConversation").attr(
-    "src",
-    "../images/messagerie/nouveauMessage.png"
-  );
-
-  $(
-    '<input id="destinataireInput" type="text" placeholder="À qui souhaitez vous envoyer un message ?">'
-  ).insertBefore($("#nouveauMessage"));
-  $("#historiqueMessages").css("display", "none");
-  $("#nouveauMessageForm").css("display", "flex");
 });
 
 //Retour affichage menu
@@ -206,5 +198,5 @@ function retireIDSelectionne() {
 }
 
 function supprimeChampDestinataire() {
-  $("#destinataireInput").remove();
+  $("#destinataireInfo").remove();
 }

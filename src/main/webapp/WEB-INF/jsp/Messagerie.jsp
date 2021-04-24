@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html ; charset=utf-8"
 pageEncoding="utf-8"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c"%>
-<%@page import  = "java.io.File"%>
+prefix="c"%> <%@page import = "java.io.File"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,19 +26,13 @@ prefix="c"%>
     />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <div id="messagerie">
       <div id="conversations">
         <div class="menu">
           <h1>Messagerie</h1>
-          <div id="nouvelleConversation">
-            <img
-              src="<%=request.getContextPath()%>/images/messagerie/nouveauMessage.png"
-              width="50em"
-              height="50em"
-            />
-          </div>
         </div>
         <ul id="correspondants">
           <!-- 
@@ -48,8 +41,8 @@ prefix="c"%>
               On affiche le nom du correspondant
             -->
           <c:forEach items="${conversations}" var="conv">
-            <li class="onglet" value="${conv.id_conversation}">	
-			 <img
+            <li class="onglet" value="${conv.id_conversation}">
+              <img
                 class="rond"
                 src="<%=request.getContextPath()%>/images/user/${conv.receiverID}.png"
                 width="50em"
@@ -103,5 +96,8 @@ prefix="c"%>
       src="<%=request.getContextPath()%>/js/Messagerie.js"
       type="text/javascript"
     ></script>
+    <script>
+      openOnConversation("${openConversationID}");
+    </script>
   </body>
 </html>

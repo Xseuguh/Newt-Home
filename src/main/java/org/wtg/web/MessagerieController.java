@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.wtg.dao.ConversationRepository;
 import org.wtg.dao.MessageRepository;
 import org.wtg.entities.ConversationInfo;
+import org.wtg.entities.ConversationInfoAdd;
 import org.wtg.entities.Message;
 import org.wtg.entities.MessageInfoAdd;
 import org.wtg.entities.MessageInfoGet;
@@ -24,7 +25,7 @@ import org.wtg.entities.MessageInfoGet;
 @Controller
 @RequestMapping(path = "/messagerie")
 public class MessagerieController {
-	private int USER_ID = 1; // A MODIFIER UNE FOIS QUE LES SESSIONS DES UTILISATEURS SERONT EN PLACE: ON
+	private Long USER_ID = 1l; // A MODIFIER UNE FOIS QUE LES SESSIONS DES UTILISATEURS SERONT EN PLACE: ON
 								// DOIT RÉCUPÉRER L'ID DE L'USER
 	@Autowired
 	private ConversationRepository conversationDao;
@@ -35,14 +36,42 @@ public class MessagerieController {
 	public String search(Model model) {
 		List<ConversationInfo> conversations = conversationDao.findConversationsByUserID(USER_ID);
 		model.addAttribute("conversations", conversations);
+
 		return "Messagerie";
+	}
+
+	@PostMapping(path = "/")
+	public String search(Model model, @RequestBody ConversationInfoAdd conversationInfo) {
+		List<ConversationInfo> conversations = conversationDao.findConversationsByUserID(USER_ID);
+		model.addAttribute("conversations", conversations);
+
+		Long receiverID = conversationInfo.getReceiverID();
+		if (receiverID != null) {
+			Long conversationID = conversationDao.getConversationByIdCouple(USER_ID, receiverID);
+			// on vérifie qu'une conversation n'existe pas déjà entre les deux utilisateurs
+			if (conversationID == null) {
+				conversationDao.addConversation(USER_ID, receiverID);
+				conversationID = conversationDao.getIDLastInsert();
+			}
+			model.addAttribute("openConversationID", conversationID);
+		}
+
+		return "Messagerie";
+	}
+
+	/*
+	 * Récupére les conversations via l'id d'user (en GET)
+	 */
+	@GetMapping(path = "/getConversations")
+	public @ResponseBody List<ConversationInfo> getConversations() {
+		return conversationDao.findConversationsByUserID(USER_ID);
 	}
 
 	/*
 	 * Récupére les messages d'une conversation via son id (en GET)
 	 */
 	@GetMapping(path = "/getMessages")
-	public @ResponseBody List<MessageInfoGet> getMessages(@RequestParam Integer conversationID) {
+	public @ResponseBody List<MessageInfoGet> getMessages(@RequestParam Long conversationID) {
 		List<Message> rawMessages = messageDao.findMessagesByConversationID(conversationID);
 		List<MessageInfoGet> messages = new ArrayList<>();
 		for (Message message : rawMessages) {
@@ -53,38 +82,19 @@ public class MessagerieController {
 	}
 
 	/*
-	 * Ajoute un message à une conversation existante ou en crée une nouvelle (en
-	 * POST)
+	 * Ajoute un message à une conversation existante (en POST)
 	 */
 	@PostMapping(path = "/add")
-	public ResponseEntity<Object> addMessage(
-			@RequestBody MessageInfoAdd messageInfo
-//			Integer conversationID, Integer receiverID, String message
-			) {
-				Integer conversationID = messageInfo.getConversationID();
-				Integer receiverID = messageInfo.getReceiverID();
-				String message = messageInfo.getMessage();
+	public ResponseEntity<Object> addMessage(@RequestBody MessageInfoAdd messageInfo) {
+		Long conversationID = messageInfo.getConversationID();
+		String message = messageInfo.getMessage();
 
-		if (message.length() > 0) {
-			if (conversationID == null) { // Si la conversation n'est pas passé en requête, on en crée une nouvelle
-				if (receiverID == null) {
-					System.out.println("TOTOTOTOOTO");
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-							.body("Oups, le destinataire du message n'est pas défini...");
-				}
-				// On vérifie quand même que le couple (user, receiver) n'existe pas dans la bdd
-				Integer convPossibleID = conversationDao.getConversationByIdCouple(USER_ID, receiverID);
-				if (convPossibleID == null) {
-					conversationDao.addConversation(USER_ID, receiverID);
-					conversationID = conversationDao.getIDLastInsert();
-				}
-				else {
-					conversationID = convPossibleID;
-				}
-			}
-			messageDao.addMessage(conversationID, message, USER_ID);
-			return ResponseEntity.ok(true);
+		if (message.length() <= 0) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("C'est honteux, le message est vide !");
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("C'est honteux, le message est vide !");
+
+		messageDao.addMessage(conversationID, message, USER_ID);
+		return ResponseEntity.ok(true);
+
 	}
 }

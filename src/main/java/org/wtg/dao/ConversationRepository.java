@@ -12,17 +12,16 @@ import org.wtg.entities.ConversationInfo;
 
 public interface ConversationRepository extends JpaRepository<Conversation, Long> {
 	@Query(value = "SELECT id_conversation, id_user ,nom,prenom FROM conversation AS c INNER JOIN user_info AS u ON c.id_sender = u.id_user OR c.id_receiver = u.id_user WHERE (c.id_sender = :id_user OR c.id_receiver = :id_user) AND NOT u.id_user = :id_user ", nativeQuery = true)
-	public List<ConversationInfo> findConversationsByUserID(@Param("id_user") Integer userID);
+	public List<ConversationInfo> findConversationsByUserID(@Param("id_user") Long userID);
 
 	@Transactional
 	@Modifying
 	@Query(value = "INSERT INTO Conversation (id_sender, id_receiver) VALUES (:id_sender,:id_receiver)", nativeQuery = true)
-	public void addConversation(@Param("id_sender") Integer senderID, @Param("id_receiver") Integer receiverID);
+	public void addConversation(@Param("id_sender") Long senderID, @Param("id_receiver") Long receiverID);
 
 	@Query(value = "SELECT LAST_INSERT_ID()", nativeQuery = true)
-	public int getIDLastInsert();
+	public Long getIDLastInsert();
 
 	@Query(value = "SELECT id_conversation FROM conversation AS c WHERE (c.id_sender = :id_user AND c.id_receiver = :id_receiver) OR (c.id_sender = :id_receiver AND c.id_receiver = :id_user)", nativeQuery = true)
-	public Integer getConversationByIdCouple(@Param("id_user") Integer userID,
-			@Param("id_receiver") Integer receiverID);
+	public Long getConversationByIdCouple(@Param("id_user") Long userID, @Param("id_receiver") Long receiverID);
 }
