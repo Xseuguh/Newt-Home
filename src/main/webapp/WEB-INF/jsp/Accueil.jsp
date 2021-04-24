@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -16,9 +16,8 @@ pageEncoding="UTF-8"%>
 ap.min.css"
       rel="stylesheet"
     />
-
-    <link href="../generalCSS.css" rel="stylesheet" />
-    <link href="../Accueil.css" rel="stylesheet" />
+    <link type="text/css" href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
+    <link type="text/css" href="<%=request.getContextPath()%>/css/Accueil.css" rel="stylesheet" />
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -37,59 +36,55 @@ ap.min.css"
           <button id="boutonRecherche">Rechercher</button>
         </form>
       </div>
+       <c:forEach items="${offres}" var="o">
       <div class="row annonce">
         <div class="col-sm-6">
         <a href="" > <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
           <img
             id="thumbnail"
             class="center-block"
-            src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1"
-          />
+            src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" 
+          /> <!--ne pas oublier de changer les images-->
           </a>
         </div>
         <div class="col-sm-6">
           <div id="titre" class="text-center">
            <a  href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-            Maison située dans le sud de la France près de Biarritz
+            ${o.titre}
            </a>
           </div>
           <div id="description" class="text-justify">
-            En plein centre de Biarritz, non loin de la plage du Port Vieux,
-            somptueux appartement de 220m2 avec une belle vue océan. Idéalement
-            située, pour tout faire à pied, l'appartement dispose aussi d' un
-            parking. Séjour très lumineux avec une belle hauteur de plafond.
-            Belle vue sur le Port des Pêcheurs, l'Eglise Sainte Eugénie et
-            l'océan. Cuisine américaine très bien équipée,
+            ${o.description}
           </div>
-        </div>
+          <br>
+          <div class="titreCS" >
+          Liste des services à rendre : 
+          </div>
+ 
+          <c:forEach items="${services}" var="s">
+          <c:if test = "${s.id_offre.equals(o.id_offre)}">
+          <div id="listeServices" class="text-justify">
+           <ul class="listeCS"><li>${s.nom_service}</li>
+           </ul>
+          </div>
+          </c:if>
+          </c:forEach>
+          <br>
+          <div class="titreCS" >
+          Liste des contraintes à respecter :
+          </div>
+          <c:forEach items="${contraintes}" var="c">
+          <c:if test="${c.id_offre.equals(o.id_offre)}" >
+          <div id="listeContraintes" class="text-justify">
+            <ul class="listeCS"> <li>${c.nom_contrainte}</li></ul>
+         </div>
+         </c:if>
+         </c:forEach>
       </div>
-      <div class="row annonce">
-        <div class="col-sm-6">
-         <a  href="" > <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-          <img
-            id="thumbnail"
-            class="center-block"
-            src="https://www.tendanceouest.com/photos/maxi/47243.jpg"
-          />
-          </a>
-        </div>
-        <div class="col-sm-6">
-          <div id="titre" class="text-center"> 
-          <a href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-          Maison située à Rouen
-          </a>
-          </div>
-          <div id="description" class="text-justify">
-            Il s’agit de la demeure de Ferdinand Marrou, célèbre ferronnier
-            d’art installé en Normandie en 1870, qui exerça son savoir-faire
-            dans de nombreux chantiers d’envergure à Fécamp ou à Rouen. En 1890,
-            les Rouennais découvre sa nouvelle maison : une effusion de bois
-            sculpté et de fer forgé reprenant le style des maisons bourgeoises
-            du XVIe siècle.
-          </div>
-        </div>
       </div>
+          </c:forEach>
     </div>
+   
     <footer></footer>
   </body>
 </html>

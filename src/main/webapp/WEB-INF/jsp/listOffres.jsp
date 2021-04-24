@@ -24,8 +24,6 @@ pageEncoding="utf-8"%>
 <th>id utilisateur</th>
 <th>titre de l'offre</th>
 <th>description de l'offre </th>
-<th>id de la contrainte</th>
-<th>id du service</th>
 <th>date du debut</th>
 <th>date limite</th>
 <th> pourvu </th>
@@ -37,8 +35,6 @@ pageEncoding="utf-8"%>
 <td>${o.id_user}</td>
 <td>${o.titre}</td>
 <td>${o.description}</td>
-<td>${o.id_contrainte}</td>
-<td>${o.id_service}</td>
 <td>${o.date_debut}</td>
 <td>${o.date_limite}</td>
 <td>${o.pourvu}</td>

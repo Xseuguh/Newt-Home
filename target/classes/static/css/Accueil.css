@@ -2,6 +2,8 @@ input::placeholder {
   color: #434544;
 }
 
+
+
 #thumbnail {
   width: 80%;
 }
@@ -29,6 +31,7 @@ input::placeholder {
   font-size: large;
 }
 
+
 .row {
   margin-bottom: 2em;
 }
@@ -51,3 +54,12 @@ input::placeholder {
   background:#9eadad ;
   color:black
  }
+ 
+ .listeCS{
+	list-style: disc inside;
+ }
+
+.titreCS{
+	font-weight: bold;
+	
+}

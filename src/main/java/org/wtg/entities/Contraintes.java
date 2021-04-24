@@ -1,12 +1,18 @@
 package org.wtg.entities;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.ElementCollection;
 //import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
 @Entity
-
-
 public class Contraintes implements Serializable {
 
 	/**
@@ -22,8 +28,6 @@ public class Contraintes implements Serializable {
 	public void setNom_contrainte(String nom_contrainte) {
 		this.nom_contrainte = nom_contrainte;
 	}
-	
-	
 	public Contraintes(String nom_contrainte) {
 		super();
 		this.nom_contrainte = nom_contrainte;
@@ -38,7 +42,6 @@ public class Contraintes implements Serializable {
 	public void setId_contrainte(Long id_contrainte) {
 		this.id_contrainte = id_contrainte;
 	}
-	
 	
 
 }
