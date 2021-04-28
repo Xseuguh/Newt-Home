@@ -72,8 +72,6 @@
   grid-template-rows: 5em 8fr 1fr;
   /*TODO height a modifier une fois qu'on a le header et footer*/
   height: 100vh;
-  
-  
 }
 
 #titreConversation {
@@ -154,7 +152,6 @@
 /*Input de saisie d'un nouveau message*/
 #nouveauMessageForm {
   flex-direction: column;
-  justify-content: center;
 }
 
 #nouveauMessage {
@@ -163,13 +160,9 @@
   align-items: center;
 }
 
-#nouveauMessageInput,
-#destinataireInput {
+#nouveauMessageInput {
   padding: 10px;
   margin: 10px;
-}
-
-#nouveauMessageInput {
   width: 100%;
 }
 
