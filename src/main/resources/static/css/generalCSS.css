@@ -4,16 +4,16 @@
 :root {
   /*Couleurs*/
   --rouge-fonce: #a4243b;
-  --gris-bleu:#829191;
+  --gris-bleu: #829191;
   --beige-fonce: #b6aa84;
   --orange-clair: #eeab4c;
   --orange: #d8973c;
   --marron: #bd632f;
   --noir: #273e47;
-  --vert-sapin: #2c423F;
+  --vert-sapin: #2c423f;
   --gris-pale: #c5c5c5;
   --gris: #a6a6a6;
-  --gris-vert: #4C5B61;
+  --gris-vert: #4c5b61;
   --bg_conv: #687878;
 
   /*Arrondi*/
