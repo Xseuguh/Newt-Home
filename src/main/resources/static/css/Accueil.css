@@ -31,6 +31,15 @@ input::placeholder {
   font-size: large;
 }
 
+#openButton{
+	background: #c5c5c5;
+    border: 1px black solid;
+}
+
+#formRedirectionMessage{
+	width: 3em;
+}
+
 
 .row {
   margin-bottom: 2em;
@@ -59,7 +68,7 @@ input::placeholder {
 	list-style: disc inside;
  }
 
-.titreCS{
+.titreCat{
 	font-weight: bold;
-	
 }
+

@@ -18,6 +18,7 @@ import org.wtg.dao.LiaisonOffreContrainteRepository;
 import org.wtg.dao.LiaisonOffreServiceRepository;
 import org.wtg.dao.OffresRepository;
 import org.wtg.entities.Annonce;
+import org.wtg.entities.JoinOffresUsers;
 import org.wtg.entities.Offres;
 
 @Controller
@@ -36,17 +37,22 @@ public class AnnonceController {
 	List<Offres> offres = offresDao.findAll();
 	List<Annonce> contraintes = new ArrayList<Annonce>();
 	List<Annonce> services = new ArrayList<Annonce>();
+	List<JoinOffresUsers> infosProprio = new ArrayList<JoinOffresUsers>();
 	
 	for(Offres value : offres){
 		 contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
 		 services.addAll(serviceDao.findServicesByIdOffre(value.getId_offre()));
+		 infosProprio.addAll(offresDao.findUserByIdOffre(value.getId_offre()));
 		
 	}
 	
+	Boolean connected = true;
 	model.addAttribute("offres", offres);
 	model.addAttribute("contraintes", contraintes);
 	model.addAttribute("services", services);
+	model.addAttribute("infosProprio", infosProprio);
 	model.addAttribute("motC", mc);
+	model.addAttribute("connected", connected);
 	
 	return "Accueil";
 	}
