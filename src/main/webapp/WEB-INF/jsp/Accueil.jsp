@@ -31,13 +31,13 @@ ap.min.css"
 			</form>
 		</div>
 		<c:forEach items="${offres}" var="o">
+		<div class="nonModale">
 			<div class="row annonce">
 				<div class="col-sm-6">
 					<a href="#offre_${o.id_offre}" data-toggle="modal"
 					data-target="#offre_${o.id_offre}"> 
 						<img id="thumbnail" class="center-block"
-						src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" /> <!--TODO : creer un dossier avec les images pour les annonces -->
-						
+						src="<%=request.getContextPath()%>/images/photosAnnonces/annonce_${o.id_offre}/principale.png " /> <!-- TODO : Faire une fonction ou mettre une condition pour verifier si le fichier existe (et verifier l'extension de l'image)  --> 
 					</a>
 				</div>
 				<div class="col-sm-6">
@@ -75,6 +75,8 @@ ap.min.css"
 				<button type="button" data-toggle="modal"
 					data-target="#offre_${o.id_offre}" class="btn btn-sm pull-right"
 					id="openButton">En savoir plus</button>
+				</div>
+				</div>
 				<div class="modal fade" id="offre_${o.id_offre}" role="dialog"
 					aria-labelledby="label" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
@@ -147,7 +149,7 @@ ap.min.css"
 						</div>
 					</div>
 				</div>
-			</div>
+			
 		</c:forEach>
 	</div>
 	<footer></footer>

@@ -72,3 +72,11 @@ input::placeholder {
 	font-weight: bold;
 }
 
+body.modal-open .nonModale, body.modal-open #rechercheDiv{
+    -webkit-filter: blur(0.3em);
+    -moz-filter: blur(0.3em);
+    -o-filter: blur(0.3em);
+    -ms-filter: blur(0.3em);
+    filter: blur(0.3em);
+}
+
