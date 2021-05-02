@@ -46,7 +46,7 @@ public class AnnonceController {
 		
 	}
 	
-	Boolean connected = true;
+	Boolean connected = true; //TODO : changer la valeur de "connected" une fois qu'on aura géré la connexion (session et/ou cookie)
 	model.addAttribute("offres", offres);
 	model.addAttribute("contraintes", contraintes);
 	model.addAttribute("services", services);

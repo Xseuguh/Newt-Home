@@ -33,15 +33,17 @@ ap.min.css"
 		<c:forEach items="${offres}" var="o">
 			<div class="row annonce">
 				<div class="col-sm-6">
-					<a href=""> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
+					<a href="#offre_${o.id_offre}" data-toggle="modal"
+					data-target="#offre_${o.id_offre}"> 
 						<img id="thumbnail" class="center-block"
-						src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" />
-						<!--ne pas oublier de changer les images-->
+						src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" /> <!--TODO : creer un dossier avec les images pour les annonces -->
+						
 					</a>
 				</div>
 				<div class="col-sm-6">
 					<div id="titre" class="text-center">
-						<a href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
+						<a href="#offre_${o.id_offre}" data-toggle="modal"
+					data-target="#offre_${o.id_offre}" class="lienTitre"> 
 							${o.titre}
 						</a>
 					</div>
@@ -86,12 +88,12 @@ ap.min.css"
 							</div>
 							<div class="modal-body">
 								<div id="titre" class="text-center">
-									<a href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
+									<a href="" class="lienTitre">
 										${o.titre}
-									</a> <a href=""> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
+									</a> <a href=""> 
 										<img id="thumbnail" class="center-block"
-										src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" />
-										<!--ne pas oublier de changer les images-->
+										src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" /><!--TODO : creer un dossier avec les images pour les annonces -->
+										
 									</a>
 								</div>
 								<div id="description" class="text-justify">${o.description}</div>
