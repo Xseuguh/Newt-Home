@@ -14,34 +14,41 @@ public class Conversation implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
-	private Long id_conversation;
-	private Long id_sender;
-	private Long id_receiver;
-	public Long getId_conversation() {
+	private int id_conversation;
+	private int id_sender;
+	private int id_receiver;
+
+	public int getId_conversation() {
 		return id_conversation;
 	}
-	public void setId_conversation(Long id_conversation) {
+
+	public void setId_conversation(int id_conversation) {
 		this.id_conversation = id_conversation;
 	}
-	public Long getId_sender() {
+
+	public int getId_sender() {
 		return id_sender;
 	}
 	public Conversation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Conversation(Long id_sender, Long id_receiver) {
+
+	public Conversation(int id_sender, int id_receiver) {
 		super();
 		this.id_sender = id_sender;
 		this.id_receiver = id_receiver;
 	}
-	public void setId_sender(Long id_sender) {
+
+	public void setId_sender(int id_sender) {
 		this.id_sender = id_sender;
 	}
-	public Long getId_receiver() {
+
+	public int getId_receiver() {
 		return id_receiver;
 	}
-	public void setId_receiver(Long id_receiver) {
+
+	public void setId_receiver(int id_receiver) {
 		this.id_receiver = id_receiver;
 	}
 }

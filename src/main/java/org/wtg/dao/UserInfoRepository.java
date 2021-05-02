@@ -9,6 +9,5 @@ import org.wtg.entities.UserInfo;
 
 public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 	@Query("select u from UserInfo u  where u.nom like :x")
-	public List<UserInfo> findByName(@Param("x")String mc);
-
+	public List<UserInfo> findByName(@Param("x") String mc);
 }

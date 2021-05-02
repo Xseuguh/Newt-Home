@@ -12,18 +12,20 @@ import org.wtg.entities.UserInfo;
 
 @Controller
 
+@RequestMapping(path = "/user")
 public class UserInfoController {
 	@Autowired
 	private UserInfoRepository usersDao;
-	@RequestMapping(value = "/users/search")
-	public String search(Model model, @RequestParam(name = "motCle",
-	defaultValue = "") String mc) {
-	List<UserInfo> users = usersDao.findByName("%" + mc + "%");
-	model.addAttribute("users", users);
-	model.addAttribute("motC", mc);
-	return "listUsers";
+
+	@RequestMapping(value = "/search")
+	public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc) {
+		List<UserInfo> users = usersDao.findByName("%" + mc + "%");
+		model.addAttribute("users", users);
+		model.addAttribute("motC", mc);
+		return "listUsers";
 	}
-	/*définir ici les différents méthodes (search, add, delete...) nécéssaires 
-	 lors de la manip de la table Contraintes
-*/
+	/*
+	 * définir ici les différents méthodes (search, add, delete...) nécéssaires lors
+	 * de la manip de la table Contraintes
+	 */
 }
