@@ -2,6 +2,8 @@ input::placeholder {
   color: #434544;
 }
 
+
+
 #thumbnail {
   width: 80%;
 }
@@ -29,6 +31,16 @@ input::placeholder {
   font-size: large;
 }
 
+#openButton{
+	background: #c5c5c5;
+    border: 1px black solid;
+}
+
+#formRedirectionMessage{
+	width: 3em;
+}
+
+
 .row {
   margin-bottom: 2em;
 }
@@ -51,3 +63,20 @@ input::placeholder {
   background:#9eadad ;
   color:black
  }
+ 
+ .listeCS{
+	list-style: disc inside;
+ }
+
+.titreCat{
+	font-weight: bold;
+}
+
+body.modal-open .nonModale, body.modal-open #rechercheDiv{
+    -webkit-filter: blur(0.3em);
+    -moz-filter: blur(0.3em);
+    -o-filter: blur(0.3em);
+    -ms-filter: blur(0.3em);
+    filter: blur(0.3em);
+}
+
