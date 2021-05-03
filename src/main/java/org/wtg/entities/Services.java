@@ -1,12 +1,17 @@
 package org.wtg.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-@Entity
+import javax.persistence.OneToMany;
 
+@Entity
 public class Services implements Serializable{
 
 	/**

@@ -3,8 +3,11 @@ package org.wtg.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class LiaisonOffreService implements Serializable{
@@ -17,6 +20,7 @@ public class LiaisonOffreService implements Serializable{
 	private Long id_liaison;
 	private Long id_offre;
 	private Long id_service;
+	
 	public Long getId_liaison() {
 		return id_liaison;
 	}

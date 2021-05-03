@@ -2,10 +2,16 @@ package org.wtg.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 public class Offres implements Serializable{
@@ -19,8 +25,10 @@ public class Offres implements Serializable{
 	private Long id_user;
 	private String titre;
 	private String description;
-	private Long id_contrainte;
-	private Long id_service;
+	private String pays;
+	private String ville;
+	private int code_postal;
+	private String adresse;
 	private Date date_debut;
 	private Date date_limite;
 	private Boolean pourvu;
@@ -48,18 +56,6 @@ public class Offres implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Long getId_contrainte() {
-		return id_contrainte;
-	}
-	public void setId_contrainte(Long id_contrainte) {
-		this.id_contrainte = id_contrainte;
-	}
-	public Long getId_service() {
-		return id_service;
-	}
-	public void setId_service(Long id_service) {
-		this.id_service = id_service;
-	}
 	public Date getDate_debut() {
 		return date_debut;
 	}
@@ -78,14 +74,42 @@ public class Offres implements Serializable{
 	public void setPourvu(Boolean pourvu) {
 		this.pourvu = pourvu;
 	}
-	public Offres(Long id_user, String titre, String description, Long id_contrainte, Long id_service, Date date_debut,
-			Date date_limite, Boolean pourvu) {
+	
+	public String getPays() {
+		return pays;
+	}
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+	public String getVille() {
+		return ville;
+	}
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+	public int getCode_postal() {
+		return code_postal;
+	}
+	public void setCode_postal(int code_postal) {
+		this.code_postal = code_postal;
+	}
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	
+	public Offres(Long id_user, String titre, String description, String pays, String ville, int code_postal,
+			String adresse, Date date_debut, Date date_limite, Boolean pourvu) {
 		super();
 		this.id_user = id_user;
 		this.titre = titre;
 		this.description = description;
-		this.id_contrainte = id_contrainte;
-		this.id_service = id_service;
+		this.pays = pays;
+		this.ville = ville;
+		this.code_postal = code_postal;
+		this.adresse = adresse;
 		this.date_debut = date_debut;
 		this.date_limite = date_limite;
 		this.pourvu = pourvu;

@@ -1,95 +1,160 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Bienvenue chez Newt'Home</title>
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-    <title>Bienvenue chez Newt'Home</title>
-
-    <link
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
 ap.min.css"
-      rel="stylesheet"
-    />
+	rel="stylesheet" />
+<link type="text/css"
+	href="<%=request.getContextPath()%>/css/generalCSS.css"
+	rel="stylesheet" />
+<link type="text/css"
+	href="<%=request.getContextPath()%>/css/Accueil.css" rel="stylesheet" />
+</head>
+<body>
 
-    <link href="../generalCSS.css" rel="stylesheet" />
-    <link href="../Accueil.css" rel="stylesheet" />
-  </head>
-  <body>
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap
-    .min.js"></script>
-    <header></header>
-    <div class="container">
-      <div class="row " id="rechercheDiv">
-        <form class="form-inline">
-          <input
-            type="search"
-            id="recherche"
-            name="q"
-            placeholder="Rechercher sur le site…"
-          />
-          <button id="boutonRecherche">Rechercher</button>
-        </form>
-      </div>
-      <div class="row annonce">
-        <div class="col-sm-6">
-        <a href="" > <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-          <img
-            id="thumbnail"
-            class="center-block"
-            src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1"
-          />
-          </a>
-        </div>
-        <div class="col-sm-6">
-          <div id="titre" class="text-center">
-           <a  href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-            Maison située dans le sud de la France près de Biarritz
-           </a>
-          </div>
-          <div id="description" class="text-justify">
-            En plein centre de Biarritz, non loin de la plage du Port Vieux,
-            somptueux appartement de 220m2 avec une belle vue océan. Idéalement
-            située, pour tout faire à pied, l'appartement dispose aussi d' un
-            parking. Séjour très lumineux avec une belle hauteur de plafond.
-            Belle vue sur le Port des Pêcheurs, l'Eglise Sainte Eugénie et
-            l'océan. Cuisine américaine très bien équipée,
-          </div>
-        </div>
-      </div>
-      <div class="row annonce">
-        <div class="col-sm-6">
-         <a  href="" > <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-          <img
-            id="thumbnail"
-            class="center-block"
-            src="https://www.tendanceouest.com/photos/maxi/47243.jpg"
-          />
-          </a>
-        </div>
-        <div class="col-sm-6">
-          <div id="titre" class="text-center"> 
-          <a href="" class="lienTitre"> <!--ne pas oublier de mettre le lien vers la page "Annonce" plus tard-->
-          Maison située à Rouen
-          </a>
-          </div>
-          <div id="description" class="text-justify">
-            Il s’agit de la demeure de Ferdinand Marrou, célèbre ferronnier
-            d’art installé en Normandie en 1870, qui exerça son savoir-faire
-            dans de nombreux chantiers d’envergure à Fécamp ou à Rouen. En 1890,
-            les Rouennais découvre sa nouvelle maison : une effusion de bois
-            sculpté et de fer forgé reprenant le style des maisons bourgeoises
-            du XVIe siècle.
-          </div>
-        </div>
-      </div>
-    </div>
-    <footer></footer>
-  </body>
+	<header></header>
+	<div class="container">
+		<div class="row " id="rechercheDiv">
+			<form class="form-inline">
+				<input type="search" id="recherche" name="q"
+					placeholder="Rechercher sur le site…" />
+				<button id="boutonRecherche">Rechercher</button>
+			</form>
+		</div>
+		<c:forEach items="${offres}" var="o">
+		<div class="nonModale">
+			<div class="row annonce">
+				<div class="col-sm-6">
+					<a href="#offre_${o.id_offre}" data-toggle="modal"
+					data-target="#offre_${o.id_offre}"> 
+						<img id="thumbnail" class="center-block"
+						src="<%=request.getContextPath()%>/images/photosAnnonces/annonce_${o.id_offre}/principale.png " /> <!-- TODO : Faire une fonction ou mettre une condition pour verifier si le fichier existe (et verifier l'extension de l'image)  --> 
+					</a>
+				</div>
+				<div class="col-sm-6">
+					<div id="titre" class="text-center">
+						<a href="#offre_${o.id_offre}" data-toggle="modal"
+					data-target="#offre_${o.id_offre}" class="lienTitre"> 
+							${o.titre}
+						</a>
+					</div>
+					<div id="description" class="text-justify">${o.description}</div>
+					<br>
+					<div class="titreCS">Liste des services à rendre :</div>
+
+					<c:forEach items="${services}" var="s">
+						<c:if test="${s.id_offre.equals(o.id_offre)}">
+							<div id="listeServices" class="text-justify">
+								<ul class="listeCS">
+									<li>${s.nom_service}</li>
+								</ul>
+							</div>
+						</c:if>
+					</c:forEach>
+					<br>
+					<div class="titreCS">Liste des contraintes à respecter :</div>
+					<c:forEach items="${contraintes}" var="c">
+						<c:if test="${c.id_offre.equals(o.id_offre)}">
+							<div id="listeContraintes" class="text-justify">
+								<ul class="listeCS">
+									<li>${c.nom_contrainte}</li>
+								</ul>
+							</div>
+						</c:if>
+					</c:forEach>
+				</div>
+				<button type="button" data-toggle="modal"
+					data-target="#offre_${o.id_offre}" class="btn btn-sm pull-right"
+					id="openButton">En savoir plus</button>
+				</div>
+				</div>
+				<div class="modal fade" id="offre_${o.id_offre}" role="dialog"
+					aria-labelledby="label" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="label">Annonce complète</h4>
+							</div>
+							<div class="modal-body">
+								<div id="titre" class="text-center">
+									<a href="" class="lienTitre">
+										${o.titre}
+									</a> <a href=""> 
+										<img id="thumbnail" class="center-block"
+										src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" /><!--TODO : creer un dossier avec les images pour les annonces -->
+										
+									</a>
+								</div>
+								<div id="description" class="text-justify">${o.description}</div>
+								<br>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="titreCS">Services à rendre:</div>
+
+										<c:forEach items="${services}" var="s">
+											<c:if test="${s.id_offre.equals(o.id_offre)}">
+												<div id="listeServices" class="text-justify">
+													<ul class="listeCS">
+														<li>${s.nom_service}</li>
+													</ul>
+												</div>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="col-md-6">
+										<div class="titreCS">Contraintes à respecter:</div>
+										<c:forEach items="${contraintes}" var="c">
+											<c:if test="${c.id_offre.equals(o.id_offre)}">
+												<div id="listeContraintes" class="text-justify">
+													<ul class="listeCS">
+														<li>${c.nom_contrainte}</li>
+													</ul>
+												</div>
+											</c:if>
+										</c:forEach>
+									</div>
+								</div>
+
+								<div id="infosPropriétaire">
+									<c:forEach items="${infosProprio}" var="i">
+										<c:if test="${i.id_offre.equals(o.id_offre)}">
+									Logement proposé par ${i.prenom} ${i.nom}
+										<c:if test="${connected}">
+												<form action="/messagerie" method="post" class="text-right">
+													<input type="hidden" id="idProprio" value="${i.id_user}">
+													<input type="image" id="formRedirectionMessage"
+														src="<%=request.getContextPath()%>/images/nouveauMessage.png"
+														alt="Envoyer un message au propriétaire">
+												</form>
+											</c:if>
+										</c:if>
+									</c:forEach>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			
+		</c:forEach>
+	</div>
+	<footer></footer>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>

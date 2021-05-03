@@ -3,7 +3,7 @@ package org.wtg;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-//import org.wtg.dao.OffresRepository;
+import org.wtg.dao.OffresRepository;
 //import org.wtg.dao.MessageRepository;
 //import org.wtg.dao.ContraintesRepository;
 //import org.wtg.dao.ServicesRepository;
