@@ -133,8 +133,8 @@ ap.min.css"
 										<c:if test="${i.id_offre.equals(o.id_offre)}">
 									Logement proposé par ${i.prenom} ${i.nom}
 										<c:if test="${connected}">
-												<form action="/messagerie" method="post" class="text-right">
-													<input type="hidden" id="idProprio" value="${i.id_user}">
+												<form action="/messagerie/" method="post" class="text-right">
+													<input type="hidden" id="idProprio" value="${i.id_user}" name="receiverID">
 													<input type="image" id="formRedirectionMessage"
 														src="<%=request.getContextPath()%>/images/nouveauMessage.png"
 														alt="Envoyer un message au propriétaire">

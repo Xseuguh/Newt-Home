@@ -41,7 +41,7 @@ public class MessagerieController {
 	}
 
 	@PostMapping(path = "/")
-	public String search(Model model, @RequestBody ConversationInfoAdd conversationInfo) {
+	public String search(Model model, ConversationInfoAdd conversationInfo) {
 		List<ConversationInfo> conversations = conversationDao.findConversationsByUserID(USER_ID);
 		model.addAttribute("conversations", conversations);
 
