@@ -13,8 +13,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="Utilisateur_ajouterAnnonce.css">
-<link href="../Ressources/generalCSS.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/Utilisateur_ajouterAnnonce.css">
+<link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 </head>
 <body>
 	<header>
@@ -24,28 +24,45 @@
 	*pour revenir sur la page d'accueil
 	*pour revenir vers la page de profil
 	 -->
-	<script src="Utilisateur_ajouterAnnonce.js"></script>
+	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
 	<div class="tout">
 		<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
-				<img class="center-block" id="galerieImage" src="Cheverny_Chateau_1.jpg"> <br><br>
+				<img class="center-block" id="galerieImage" src="<%=request.getContextPath()%>/images/Cheverny_Chateau_1.jpg"> <br><br>
 				<img src="flecheG.jpg" class="fleches" onclick="precedent()" id="flecheG"> 
 				<img src="flecheD.jpg" class="fleches" onclick="suivant()">
 				<br><br>
-				<form enctype="multipart/form-data">
+				<!-- <form enctype="multipart/form-data">
 					Ajouter une image
 					<input type="submit">
-				</form>
+				</form>-->
 			</div>
 			<div class="col-sm-6">
 				<h2>Mon annonce</h2>
-				<form id="form2">
+				<form action="/annonce/ajout" method="post">
 					<label for="titreAnnonce">Titre:</label>
 					<input type="text"	id="titreAnnonce" name="titreAnnonce"><br>
 					<label	for="descriptionAnnonce">Description:</label><br>
 					<textarea id="descriptionAnnonce" name="descriptionAnnonce" ></textarea>
 					<br>
+					<label for="adresseAnnonce">Adresse:</label>
+					<input type="text" id="adresseAnnonce" name="adresseAnnonce">
+					<br>
+					<label for="codePostalAnnonce">Code Postal:</label>
+					<input type="text" id="codePostalAnnonce" name="codePostalAnnonce">
+					<br>
+					<label for="villeAnnonce">Ville:<label>
+					<input type="text" id="villeAnnonce" name="villeAnnonce">
+					<br>
+					<br>
+					<label for=date_debut_string>Date debut:<label>
+					<input type="date" name="date_debut_string">
+					<br>
+					<br>
+					<label for="date_limite_string">Date de fin:<label>
+					<input type="date" id="date_limite_string" name="date_limite_string">
+					<!-- 
 					<p id="servicesInclus">
 						Inclus:<br>
 						<input type="checkbox" name="wifi" id="wifi"/>
@@ -59,21 +76,43 @@
 						<label for="animauxAdmis">Animaux admis</label>
 						<input	type="checkbox" name="golf" id="golf" />
 						<label for="golf">Golf</label>
-					</p>
+					</p>-->
+					<br>
+					<br>
 					<p id="contraintes">
-						Contraintes à respecter:<br>
-						<input type="checkbox" name="fumer" id="fumer"/>
-						<label	for="fumer">Non-fumeur</label>
+						Contraintes:<br>
+						<input type="checkbox" name="deuxEnfantsMax" id="deuxEnfantsMax"/>
+						<label for="deuxEnfantsMax">2 enfants maximum par logements</label>
+						<br>
 						<input type="checkbox" name="animaux" id="animaux" />
-						<label for="animaux">S'occuper des animaux </label>
-						<input type="checkbox" name="plante" id="plante" />
-						<label for="plante">Arroser les plantes</label>
+						<label for="animaux">Pas d animaux </label>
+						<br>
+						<input type="checkbox" name="enfants" id="enfants" />
+						<label for="enfants">Pas d enfants autorises</label>
+						<br>
+						<input type="checkbox" name="bruitVingtTrois" id="bruitVingtTrois" />
+						<label for="bruitVingtTrois">Pas de bruits apres 23heures</label>
+						<br>
+						<input type="checkbox" name="cigarette" id="cigarette"/>
+						<label for="cigarette">Pas de cigarettes</label>
+						<br>
 						<br>
 					</p>
+					<p id="services">
+						Services:<br>
+						<input type="checkbox" name="arroserPlante" id="arroserPlante"/>
+						<label>Arroser les plantes</label>
+						<input type="checkbox" name="garderLesAnimaux" id="garderLesAnimaux"/>
+						<label>Garder les animaux</label>
+						<input type="checkbox" name="nettoyerLaMaison" id="nettoyerLaMaison"/>
+						<label>Nettoyer la maison</label>
+					</p>
+					<!-- Anciennement
 					<label for="campagneOuVille">Environnement:</label> <br> 
 					<input type="checkbox" name="campagne" id="campagne" />
 					<label for="campagne">Campagne</label><br> 
 					<input type="checkbox" name="ville" id="ville" /><label for="ville">Ville</label>
+					-->
 					<br>
 					<div class="text-center" >
 					<input type="submit" value="Valider" id="boutonSubmit">
