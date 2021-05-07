@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +32,7 @@ public class MessagerieController {
 	private MessageRepository messageDao;
 
 	@GetMapping(path = "/")
-	public String search(Model model) {
+	public String messagerie(Model model) {
 		List<ConversationInfo> conversations = conversationDao.findConversationsByUserID(USER_ID);
 		model.addAttribute("conversations", conversations);
 
@@ -41,7 +40,7 @@ public class MessagerieController {
 	}
 
 	@PostMapping(path = "/")
-	public String search(Model model, ConversationInfoAdd conversationInfo) {
+	public String messagerieWithDefaultOpenConversation(Model model, ConversationInfoAdd conversationInfo) {
 		List<ConversationInfo> conversations = conversationDao.findConversationsByUserID(USER_ID);
 		model.addAttribute("conversations", conversations);
 
@@ -85,7 +84,7 @@ public class MessagerieController {
 	 * Ajoute un message à une conversation existante (en POST)
 	 */
 	@PostMapping(path = "/add")
-	public ResponseEntity<Object> addMessage(@RequestBody MessageInfoAdd messageInfo) {
+	public ResponseEntity<Object> addMessage(MessageInfoAdd messageInfo) {
 		Long conversationID = messageInfo.getConversationID();
 		String message = messageInfo.getMessage();
 
