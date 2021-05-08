@@ -2,24 +2,22 @@ input::placeholder {
   color: #434544;
 }
 
-
-
 #thumbnail {
   width: 80%;
 }
-#recherche {
+.recherche {
   width: 80%;
   background-color: #c5c5c5;
   margin-right: 5em;
   margin-top: 1em;
 }
 
-#rechercheDiv {
+#rechercheDiv, #rechercheAvanceeDiv{
   margin-bottom: 3em;
   margin-top: 3em;
 }
 
-#boutonRecherche {
+.boutonRecherche {
   background-color: #c5c5c5;
   border-radius: var(--arrondi-normal);
   margin-top: 1em;
@@ -40,6 +38,10 @@ input::placeholder {
 	width: 3em;
 }
 
+.icones{
+	width: 2em;
+}
+
 
 .row {
   margin-bottom: 2em;
@@ -50,20 +52,6 @@ input::placeholder {
   border-radius: var(--arrondi-normal);
 }
 
-.lienTitre{
-  outline: none;
-  text-decoration: none;
-  padding: 2px 1px 0;
-  color:black;
-  }
-  
- .lienTitre:hover{
-  outline: none;
-  text-decoration: none;
-  background:#9eadad ;
-  color:black
- }
- 
  .listeCS{
 	list-style: disc inside;
  }
@@ -72,6 +60,9 @@ input::placeholder {
 	font-weight: bold;
 }
 
+.rechercheAvancee{
+	display:none;
+}
 body.modal-open .nonModale, body.modal-open #rechercheDiv{
     -webkit-filter: blur(0.3em);
     -moz-filter: blur(0.3em);
