@@ -46,6 +46,9 @@
 					<label	for="descriptionAnnonce">Description:</label><br>
 					<textarea id="descriptionAnnonce" name="descriptionAnnonce" ></textarea>
 					<br>
+					<label for="paysAnnonce">Pays:</label>
+					<input type="text" id="paysAnnonce" name="paysAnnonce">
+					<br>
 					<label for="adresseAnnonce">Adresse:</label>
 					<input type="text" id="adresseAnnonce" name="adresseAnnonce">
 					<br>
@@ -62,21 +65,6 @@
 					<br>
 					<label for="date_limite_string">Date de fin:<label>
 					<input type="date" id="date_limite_string" name="date_limite_string">
-					<!-- 
-					<p id="servicesInclus">
-						Inclus:<br>
-						<input type="checkbox" name="wifi" id="wifi"/>
-						<label	for="wifi">Wi-Fi</label>
-						<input type="checkbox" name="piscine" id="piscine" />
-						<label for="piscine">Piscine</label>
-						<input type="checkbox" name="parking" id="parking" />
-						<label for="parking">Parking</label>
-						<br>
-						<input type="checkbox" name="animauxAdmis" id="animauxAdmis" />
-						<label for="animauxAdmis">Animaux admis</label>
-						<input	type="checkbox" name="golf" id="golf" />
-						<label for="golf">Golf</label>
-					</p>-->
 					<br>
 					<br>
 					<p id="contraintes">
@@ -107,12 +95,6 @@
 						<input type="checkbox" name="nettoyerLaMaison" id="nettoyerLaMaison"/>
 						<label>Nettoyer la maison</label>
 					</p>
-					<!-- Anciennement
-					<label for="campagneOuVille">Environnement:</label> <br> 
-					<input type="checkbox" name="campagne" id="campagne" />
-					<label for="campagne">Campagne</label><br> 
-					<input type="checkbox" name="ville" id="ville" /><label for="ville">Ville</label>
-					-->
 					<br>
 					<div class="text-center" >
 					<input type="submit" value="Valider" id="boutonSubmit">
