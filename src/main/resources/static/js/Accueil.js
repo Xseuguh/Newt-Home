@@ -19,20 +19,16 @@ $(function() {
 		$.ajax({
 			type : frm.attr('method'),
 			url : frm.attr('action'),
-			data : frm.serialize(),
+			data : frm.serializeArray(),
 
 			success : function(html) {
-				 var jqObj = jQuery(html);
-				 jqObj.find("#rechercheDiv").remove();
-				 jqObj.find("#rechercheAvanceeDiv").remove();
-				 jqObj.find("#rechercheDiv").remove();
-				 jqObj.find("script:last").remove();
-				 $('#offres').empty().append(jqObj);
-				
+				$("#offres").load("/Accueil/Recherche_Avancee #offres", {
+				    motCle : $("#motCle").val(),
+				    lieu : $("#lieu").val(),
+				    listeContraintes : $("input[name='listeContraintes']:checked").val(),
+				    listeServices : $("input[name='listeServices']:checked").val() });
 			}
 		});
 		
 	});
 });
-
-function myModalShow(){ $('.mod').modal('show');}.

@@ -19,6 +19,14 @@ ap.min.css"
 	rel="stylesheet" />
 <link type="text/css"
 	href="<%=request.getContextPath()%>/css/Accueil.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
+
+<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header></header>
@@ -35,11 +43,11 @@ ap.min.css"
 				Plus de choix de recherche</button>
 		</div>
 		<div class="row rechercheAvancee" id="rechercheAvanceeDiv">
-			<form action="/Accueil/Recherche_Avancee" method="post"
+			<form action="/Accueil/Recherche_Avancee" method="get"
 				class="form-inline" id="formAvancee">
-				<input type="search" class="recherche" name="motCle" value="${motC}"
+				<input type="search" class="recherche" id="motCle" name="motCle" value="${motC}"
 					placeholder="Rechercher sur le site…" /> <br> <input
-					type="search" class="recherche" name="lieu" value="${lieu}"
+					type="search" class="recherche" name="lieu"  id="lieu" value="${lieu}"
 					placeholder="Entrer le nom d'une ville, d'un pays..." /> <br>
 				<!--  <label for="start">Sélectionner une date de départ :</label> <input
 					type="date" class="recherche" name="date" value="${date}" />-->
@@ -57,7 +65,7 @@ ap.min.css"
 					<c:forEach items="${listeServiceRecherche}" var="lsr">
 						<div class="col-sm-6">
 							<input type="checkbox" id="service_${lsr.id_service}"
-								name="listeServices" value="${lsr.id_service}"> <label
+								name="listeServices"  value="${lsr.id_service}"> <label
 								for="service_${lsr.id_service}">${lsr.nom_service}</label>
 						</div>
 					</c:forEach>
@@ -119,7 +127,7 @@ ap.min.css"
 					</div>
 				</div>
 				<div class="modal fade" id="offre_${o.id_offre}" role="dialog"
-					aria-labelledby="label" aria-hidden="true" >
+					aria-labelledby="label" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -216,13 +224,6 @@ ap.min.css"
 		</div>
 	</div>
 	<footer></footer>
-		
-		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-		
-
-	<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
-		<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
