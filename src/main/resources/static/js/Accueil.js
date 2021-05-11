@@ -15,20 +15,24 @@ function hideRechercheAvancee() {
 $(function() {
 	var frm = $('#formAvancee');
 	frm.submit(function(ev) {
+		ev.preventDefault();
 		$.ajax({
 			type : frm.attr('method'),
 			url : frm.attr('action'),
 			data : frm.serialize(),
 
-			success : function(data) {
-				var result = $(data);
-				var jqObj = jQuery(data);
-				jqObj.find("#rechercheDiv").remove();
-				jqObj.find("#rechercheAvanceeDiv").remove();
-				$('#offres').empty().append(jqObj);
-
+			success : function(html) {
+				 var jqObj = jQuery(html);
+				 jqObj.find("#rechercheDiv").remove();
+				 jqObj.find("#rechercheAvanceeDiv").remove();
+				 jqObj.find("#rechercheDiv").remove();
+				 jqObj.find("script:last").remove();
+				 $('#offres').empty().append(jqObj);
+				
 			}
 		});
-		ev.preventDefault();
+		
 	});
 });
+
+function myModalShow(){ $('.mod').modal('show');}.

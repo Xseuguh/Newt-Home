@@ -119,7 +119,7 @@ ap.min.css"
 					</div>
 				</div>
 				<div class="modal fade" id="offre_${o.id_offre}" role="dialog"
-					aria-labelledby="label" aria-hidden="true">
+					aria-labelledby="label" aria-hidden="true" >
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -216,9 +216,12 @@ ap.min.css"
 		</div>
 	</div>
 	<footer></footer>
-	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+		
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+		
+
 	<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
-	<script
+		<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </body>
