@@ -78,44 +78,45 @@ public class AnnonceController {
 		List<Services> listeServiceRecherche = listeServiceRechercheDao.findAll();
 		List<Offres> offresAvancees = new ArrayList<Offres>();
 
-		if ((listeContraintes.length>0) && (listeServices.length>0) && !mc.equals("") && !lieu.equals("")) {
-			offresAvancees.addAll(offresDao.findAvanceeTousChamps("%" + mc + "%", listeContraintes, listeServices, "%" + lieu + "%"));
+		if ((listeContraintes.length > 0) && (listeServices.length > 0) && !mc.equals("") && !lieu.equals("")) {
+			offresAvancees.addAll(
+					offresDao.findAvanceeTousChamps("%" + mc + "%", listeContraintes, listeServices, "%" + lieu + "%"));
 		}
 
-		else if (listeContraintes.length>0 && listeServices.length == 0 && mc.equals("") && lieu.equals("")) {
+		else if (listeContraintes.length > 0 && listeServices.length == 0 && mc.equals("") && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByContrainte(listeContraintes));
 		}
 
-		else if (listeContraintes.length == 0  && listeServices.length >0 && mc.equals("") && lieu.equals("")) {
+		else if (listeContraintes.length == 0 && listeServices.length > 0 && mc.equals("") && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByService(listeServices));
 		}
 
 		else if (listeContraintes.length == 0 && listeServices.length == 0 && mc.equals("") && !(lieu.equals(""))) {
 			offresAvancees.addAll(offresDao.findOffreByLocation("%" + lieu + "%"));
 		}
-		
-		else if(listeContraintes.length == 0 && listeServices.length == 0 && !(mc.equals("")) && lieu.equals("")) {
+
+		else if (listeContraintes.length == 0 && listeServices.length == 0 && !(mc.equals("")) && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findOffreByNameOrDescription("%" + mc + "%"));
-		
+
 		}
 
-		else if (listeContraintes.length>0 && listeServices.length>0 && mc.equals("") && lieu.equals("")) {
+		else if (listeContraintes.length > 0 && listeServices.length > 0 && mc.equals("") && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByContrainteService(listeContraintes, listeServices));
 		}
 
-		if (listeContraintes.length>0 && listeServices.length == 0 && !mc.equals("") && lieu.equals("")) {
+		if (listeContraintes.length > 0 && listeServices.length == 0 && !mc.equals("") && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByContrainteMC("%" + mc + "%", listeContraintes));
 		}
 
-		else if (listeContraintes.length>0 && listeServices.length == 0 && mc.equals("") && !lieu.equals("")) {
+		else if (listeContraintes.length > 0 && listeServices.length == 0 && mc.equals("") && !lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByContrainteLocation(listeContraintes, "%" + lieu + "%"));
 		}
 
-		else if (listeContraintes.length == 0 && listeServices.length>0 && !mc.equals("") && lieu.equals("")) {
+		else if (listeContraintes.length == 0 && listeServices.length > 0 && !mc.equals("") && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByServiceMC("%" + mc + "%", listeServices));
 		}
 
-		else if (listeContraintes.length == 0 && listeServices.length>0 && mc.equals("") && !lieu.equals("")) {
+		else if (listeContraintes.length == 0 && listeServices.length > 0 && mc.equals("") && !lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByServiceLocation("%" + lieu + "%", listeServices));
 		}
 
@@ -123,22 +124,23 @@ public class AnnonceController {
 			offresAvancees.addAll(offresDao.findByMCLocation("%" + mc + "%", "%" + lieu + "%"));
 		}
 
-		else if (listeContraintes.length == 0 && listeServices.length>0 && !mc.equals("") && !lieu.equals("")) {
+		else if (listeContraintes.length == 0 && listeServices.length > 0 && !mc.equals("") && !lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByServiceMcLocation("%" + mc + "%", listeServices, "%" + lieu + "%"));
 		}
 
-		else if (listeContraintes.length>0 && listeServices.length == 0 && !mc.equals("") && !lieu.equals("")) {
+		else if (listeContraintes.length > 0 && listeServices.length == 0 && !mc.equals("") && !lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByContrainteMcLocation("%" + mc + "%", listeContraintes, "%" + lieu + "%"));
 		}
 
-		else if (listeContraintes.length>0 && listeServices.length>0 && mc.equals("") && !lieu.equals("")) {
-			offresAvancees.addAll(offresDao.findByContrainteServiceLocation(listeContraintes, listeServices, "%" + lieu + "%"));
+		else if (listeContraintes.length > 0 && listeServices.length > 0 && mc.equals("") && !lieu.equals("")) {
+			offresAvancees.addAll(
+					offresDao.findByContrainteServiceLocation(listeContraintes, listeServices, "%" + lieu + "%"));
 		}
 
-		else if (listeContraintes.length>0 && listeServices.length>0 && !mc.equals("") && lieu.equals("")) {
+		else if (listeContraintes.length > 0 && listeServices.length > 0 && !mc.equals("") && lieu.equals("")) {
 			offresAvancees.addAll(offresDao.findByContrainteServiceMC(listeContraintes, listeServices, "%" + mc + "%"));
 		}
-		
+
 		List<Annonce> contraintes = new ArrayList<Annonce>();
 		List<Annonce> services = new ArrayList<Annonce>();
 
