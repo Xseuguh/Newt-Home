@@ -1,6 +1,13 @@
 package org.wtg.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.wtg.dao.ContraintesRepository;
 import org.wtg.dao.LiaisonOffreContrainteRepository;
 import org.wtg.dao.LiaisonOffreServiceRepository;
@@ -20,6 +28,7 @@ import org.wtg.entities.Offres;
 /****Partie 1 afficher les utilisateurs: lie aux administrateurs***/
 @Controller
 public class OffresController {
+	
 	@Autowired
 	private OffresRepository offresDao;
 	@Autowired
@@ -56,23 +65,13 @@ public class OffresController {
 			@RequestParam(name="arroserPlante",defaultValue="") String arroserPlante,
 			@RequestParam(name="garderLesAnimaux",defaultValue="") String garderLesAnimaux,
 			@RequestParam(name="nettoyerLaMaison",defaultValue="") String nettoyerLaMaison){
+		
 
 		//-----Condition importante pour eviter de remplir la table en ayant des null----
 		if (!titreAnnonce.equals("")) {
 
 			Date date_debut = Date.valueOf(date_debut_string);
 			Date date_limite = Date.valueOf(date_limite_string);
-
-			model.addAttribute("titre", titreAnnonce);
-			model.addAttribute("description", descriptionAnnonce);
-			model.addAttribute("adresse", adresseAnnonce);
-			model.addAttribute("code_postal", codePostalAnnonce);
-			model.addAttribute("ville", villeAnnonce);
-			model.addAttribute("pays", paysAnnonce);
-			model.addAttribute("date_debut", date_debut);
-			model.addAttribute("date_limite", date_limite);
-			model.addAttribute("pourvu", false);
-			model.addAttribute("id_user", (long) 118218);
 
 			Offres offresAjoutee = new Offres((long) 118218, titreAnnonce, descriptionAnnonce, paysAnnonce,
 					villeAnnonce, codePostalAnnonce, adresseAnnonce, date_debut, date_limite, false);
@@ -118,18 +117,25 @@ public class OffresController {
 				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)nombreElement,(long) 3);
 				liaisonOffreServiceDao.save(liaisonOffreService);
 			}
+			/////////IMAGE UPLOAD/////////////
+	        File repertoire = new File("C:\\Users\\mathi\\eclipse-workspace\\newthome-2\\src\\main\\resources\\static\\images\\photosAnnonces\\annonce"+nombreElement);
+	        boolean res=repertoire.mkdir();
+			File repertoireImageRecu = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
+	        String liste[] = repertoireImageRecu.list();
+
+			for(String element:liste) {
+				Path source=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+element);
+				Path destination=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\annonce"+nombreElement+"\\"+element);
+
+				try {
+					Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
+					Files.delete(source);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return "Utilisateur_ajouterAnnonce";
 	}
-	/*
-	@RequestMapping(value = "/test")
-	public String test(Model model) {
-		return "Utilisateur_AjouterAnnonce";
-	}
-	*/
-	/**************FOR admin****************************/
-	/*@RequestMapping(value = "/admin/pannel/user")
-	public String search2(Model model) {
-		return "Admin_interface.jsp";
-	}*/
 }
