@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 @Entity
-public class OffresPostulées implements Serializable{
+public class OffresPostulees implements Serializable{
 
 	/**
 	 * 
@@ -41,13 +41,13 @@ public class OffresPostulées implements Serializable{
 	public void setAccepte(Boolean accepte) {
 		this.accepte = accepte;
 	}
-	public OffresPostulées(Long id_offre, Long id_user, Boolean accepte) {
+	public OffresPostulees(Long id_offre, Long id_user, Boolean accepte) {
 		super();
 		this.id_offre = id_offre;
 		this.id_user = id_user;
 		this.accepte = accepte;
 	}
-	public OffresPostulées() {
+	public OffresPostulees() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
