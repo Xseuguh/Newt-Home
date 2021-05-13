@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.io.File" %>
+<%@page import="java.util.List" %>
+<%@page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,27 +24,32 @@
 	<header>
 		<h1>Newt'Home</h1>
 	</header>
-	<!-- a mettre dans le header des liens vers
-	*pour revenir sur la page d'accueil
-	*pour revenir vers la page de profil
-	 -->
 	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
 	<div class="tout">
+		<h2>Mon annonce 2/2</h2>
+		
 		<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
-				<img class="center-block" id="galerieImage" src="<%=request.getContextPath()%>/images/Cheverny_Chateau_1.jpg"> <br><br>
-				<img src="flecheG.jpg" class="fleches" onclick="precedent()" id="flecheG"> 
-				<img src="flecheD.jpg" class="fleches" onclick="suivant()">
-				<br><br>
-				<!-- <form enctype="multipart/form-data">
-					Ajouter une image
-					<input type="submit">
-				</form>-->
-			</div>
+			<!-- UPLOAD D IMAGE -->
+				<%
+				String where=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\";
+				File repertoire = new File(where);
+		        String liste[] = repertoire.list();
+		        ArrayList<String> myList=new ArrayList<String>();
+		        for(String elt:liste){
+			        myList.add(elt);
+		        }
+				if(!(myList.isEmpty())){
+			       for(String elt:myList){
+			    	   out.println(elt);
+			    	   out.println("<br>");
+			        }
+				}
+				%>
+			  </div>
 			<div class="col-sm-6">
-				<h2>Mon annonce</h2>
-				<form action="/annonce/ajout" method="post">
+					<form action="/annonce/ajout" method="post">
 					<label for="titreAnnonce">Titre:</label>
 					<input type="text"	id="titreAnnonce" name="titreAnnonce"><br>
 					<label	for="descriptionAnnonce">Description:</label><br>
@@ -99,21 +108,10 @@
 					<div class="text-center" >
 					<input type="submit" value="Valider" id="boutonSubmit">
 					</div>
-				</form>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
 			</div>
+			</form>
 		</div>
 		</div>
-		<!--  <footer>
-			<a href="">CGU</a> 
-			<a href="">A propos de nous</a>
-		</footer>-->
 	</div>
 </body>
 </html>

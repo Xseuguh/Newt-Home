@@ -8,11 +8,15 @@ import org.wtg.dao.OffresRepository;
 //import org.wtg.dao.ContraintesRepository;
 //import org.wtg.dao.ServicesRepository;
 //import org.wtg.dao.UserInfoRepository;
+import org.wtg.web.FileUploadController;
+
 
 @SpringBootApplication
 public class NewtHomeApplication{
 	public static void main(String[] args)
 	{
+		new File(FileUploadController.uploadDirectory).mkdir();
+
 	    SpringApplication.run(NewtHomeApplication.class, args);
 	    //ContraintesRepository contrainteDao = ctx.getBean(ContraintesRepository.class);
 		//contrainteDao.findAll().forEach(c->System.out.println(c.getNom_contrainte()));
