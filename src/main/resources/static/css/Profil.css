@@ -67,11 +67,20 @@
   width: 100%;
 }
 
-.element {
+.annonces,
+.reservations {
   margin: 10px 0;
   padding: 10px;
   border-radius: var(--arrondi-normal);
   background-color: var(--gris);
+}
+
+.annonces:hover {
+  cursor: pointer;
+}
+
+.listUserApplying td {
+  width: 20%;
 }
 
 /*Pour l'affichage des paramètres*/

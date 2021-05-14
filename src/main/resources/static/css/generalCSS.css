@@ -55,3 +55,7 @@ textarea {
 .rond {
   border-radius: 100%;
 }
+
+.error {
+  color: var(--rouge-fonce);
+}
