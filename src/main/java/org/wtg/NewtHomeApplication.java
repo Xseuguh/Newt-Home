@@ -8,13 +8,16 @@ import org.wtg.dao.OffresRepository;
 //import org.wtg.dao.ContraintesRepository;
 //import org.wtg.dao.ServicesRepository;
 //import org.wtg.dao.UserInfoRepository;
-import org.wtg.dao.OffresPostuléesRepository;
+import org.wtg.web.FileUploadController;
+
 
 @SpringBootApplication
 public class NewtHomeApplication{
 	public static void main(String[] args)
 	{
-	    ApplicationContext ctx = SpringApplication.run(NewtHomeApplication.class, args);
+		new File(FileUploadController.uploadDirectory).mkdir();
+
+	    SpringApplication.run(NewtHomeApplication.class, args);
 	    //ContraintesRepository contrainteDao = ctx.getBean(ContraintesRepository.class);
 		//contrainteDao.findAll().forEach(c->System.out.println(c.getNom_contrainte()));
 		//ServicesRepository serviceDao = ctx.getBean(ServicesRepository.class);
@@ -24,9 +27,7 @@ public class NewtHomeApplication{
 	    //UserInfoRepository userInfoDao = ctx.getBean(UserInfoRepository.class);
 	    //userInfoDao.findAll().forEach(c->System.out.println(c.getNom()));
 	    //OffresRepository offresDao = ctx.getBean(OffresRepository.class);
-	    //offresDao.findAll().forEach(c->System.out.println(c.getTitre()));
-	    OffresPostuléesRepository offresPostuléesDao = ctx.getBean(OffresPostuléesRepository.class);
-	    offresPostuléesDao.findAll().forEach(c->System.out.println(c.getId_offre()));	
+	    //offresDao.findAll().forEach(c->System.out.println(c.getTitre()));	
 	}
 
 }

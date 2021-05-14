@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.wtg.dao.OffresPostuléesRepository;
+import org.wtg.dao.OffresPostuleesRepository;
 import org.wtg.dao.OffresRepository;
 import org.wtg.dao.UserInfoRepository;
 import org.wtg.entities.JoinOffresOffresPostulees;
@@ -31,7 +31,7 @@ public class ProfilController {
 	@Autowired
 	private OffresRepository offreDao;
 	@Autowired
-	private OffresPostuléesRepository postulaDAO;
+	private OffresPostuleesRepository postulaDAO;
 
 	@GetMapping(path = "/")
 	public String profil() {

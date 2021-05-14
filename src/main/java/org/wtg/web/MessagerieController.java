@@ -17,9 +17,9 @@ import org.wtg.dao.ConversationRepository;
 import org.wtg.dao.MessageRepository;
 import org.wtg.entities.ConversationInfo;
 import org.wtg.entities.ConversationInfoAdd;
-import org.wtg.entities.Message;
 import org.wtg.entities.MessageInfoAdd;
 import org.wtg.entities.MessageInfoGet;
+import org.wtg.entities.Message;
 
 @Controller
 @RequestMapping(path = "/messagerie")

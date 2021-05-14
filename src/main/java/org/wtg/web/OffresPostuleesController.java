@@ -7,17 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.wtg.dao.OffresPostuléesRepository;
-import org.wtg.entities.OffresPostulées;
+import org.wtg.dao.OffresPostuleesRepository;
+import org.wtg.entities.OffresPostulees;
 
 @Controller
-public class OffresPostuléesController {
+public class OffresPostuleesController {
 	@Autowired
-	private OffresPostuléesRepository offresPostuléesDao;
+	private OffresPostuleesRepository offresPostuléesDao;
 	@RequestMapping(value = "/offres_postulées/search")
 	public String search(Model model, @RequestParam(name = "motCle",
 	defaultValue = "") Long mc) {
-	List<OffresPostulées> offresPostulées = offresPostuléesDao.findByIdOffre(mc);
+	List<OffresPostulees> offresPostulées = offresPostuléesDao.findByIdOffre(mc);
 	model.addAttribute("offresPostulées", offresPostulées);
 	model.addAttribute("motC", mc);
 	return "listOffresPostulées";

@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import org.wtg.entities.JoinOffresOffresPostulees;
-import org.wtg.entities.OffresPostulées;
+import org.wtg.entities.OffresPostulees;
 import org.wtg.entities.UserInfoLight;
 
-public interface OffresPostuléesRepository extends JpaRepository<OffresPostulées, Long> {
+public interface OffresPostuleesRepository extends JpaRepository<OffresPostulees, Long> {
+
 	@Query("select op from OffresPostulées op where op.id_offre = :x")
-	public List<OffresPostulées> findByIdOffre(@Param("x") Long id);
+	public List<OffresPostulees> findByIdOffre(@Param("x") Long id);
 
 	@Query(value = "SELECT o.*, op.id_postula, op.accepte from offres AS o INNER JOIN offres_postulées AS op ON o.id_offre = op.id_offre WHERE op.id_user = :userID", nativeQuery = true)
 	public List<JoinOffresOffresPostulees> findByUserId(@Param("userID") Long userID);
@@ -30,5 +31,4 @@ public interface OffresPostuléesRepository extends JpaRepository<OffresPostulé
 	@Modifying
 	@Query("DELETE FROM OffresPostulées op WHERE op.id_user = :userID AND op.id_offre = :offreID")
 	public void removeUserFromOffer(@Param("offreID") long offreID, @Param("userID") long userID);
-
 }
