@@ -1,5 +1,4 @@
 const TAILLE_PETIT_ECRAN = 700;
-const TAILLE_MINIMAL_POUR_AUTOCOMPLETER = 3;
 let isOnConversationMenu = true;
 
 let conversationID;
@@ -120,22 +119,15 @@ function generateMessage(message) {
 
 //Fonction qui récupére en ajax les messages d'une conversation
 async function getMessages(conversationID) {
-  const rawMessages = await fetch(
-    `/messagerie/getMessages?conversationID=${conversationID}`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-    }
+  return (
+    (await $.getJSON(
+      `/messagerie/getMessages?conversationID=${conversationID}`
+    )) || []
   );
-
-  return rawMessages.json() || [];
 }
 
 //Gestion de l'envoie d'un nouveau message dans la conversation affichée
-$("#nouveauMessageForm").on("submit", (e) => {
+$("#nouveauMessageForm").submit((e) => {
   e.preventDefault();
   const message = $("#nouveauMessageInput").val();
 
@@ -145,21 +137,15 @@ $("#nouveauMessageForm").on("submit", (e) => {
   }
 
   const data = { message: message, conversationID: conversationID };
-
-  fetch("/messagerie/add", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify(data),
-  })
-    .then(() => {
+  $.post("/messagerie/add", data, "json")
+    .done(() => {
       afficheConversation(conversationID);
       isRunning = true;
       $("#nouveauMessageInput").val("");
     })
-    .catch(() => alert("Oops..."));
+    .fail(function () {
+      alert("Ooops...");
+    });
 });
 
 //Retour affichage menu

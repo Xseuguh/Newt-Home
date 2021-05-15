@@ -91,7 +91,6 @@ prefix="c"%> <%@page import = "java.io.File"%>
         </form>
       </div>
     </div>
-
     <script
       src="<%=request.getContextPath()%>/js/Messagerie.js"
       type="text/javascript"
