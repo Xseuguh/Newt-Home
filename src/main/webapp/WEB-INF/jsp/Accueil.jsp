@@ -202,7 +202,7 @@ ap.min.css"
 													<div class=" col-md-6">
 														<form action="/messagerie/" method="post"
 															class="text-right">
-															<input type="hidden" id="idProprio" value="${i.id_user}">
+															<input type="hidden" id="idProprio" name="receiverID" value="${i.id_user}">
 															<input type="image" id="formRedirectionMessage"
 																src="<%=request.getContextPath()%>/images/Messagerie/envoiMessage.png"
 																alt="Envoyer un message au propriétaire">

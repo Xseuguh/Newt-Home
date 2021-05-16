@@ -96,7 +96,7 @@ prefix="c"%> <%@page import = "java.io.File"%>
       type="text/javascript"
     ></script>
     <script>
-      openOnConversation("${openConversationID}");
+      setDefaultConversationID("${openConversationID}");
     </script>
   </body>
 </html>
