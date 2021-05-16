@@ -69,7 +69,7 @@ async function affichageOption(choix) {
   if (choix === "annonces") {
     //TODO CHANGER L'URL PAR LA BONNE
     elements.unshift(
-      `<a href=${"../AjouterAnnonce/Utilisateur_ajouterAnnonce.jsp"} id="ajouteAnnonce" ><img src="../images/profil/ajoutAnnonce.png" width="50em"/></a>`
+      `<a href=${"/posterUneAnnonce"} id="ajouteAnnonce" ><img src="../images/profil/ajoutAnnonce.png" width="50em"/></a>`
     );
   }
   return elements.join("");
@@ -87,7 +87,7 @@ function generationHtml(tableauElements, choix) {
           ${element.titre}
           <span>
             ${
-              element.pourvu
+              element.pourvu || element.accepte
                 ? "L'offre est pourvue"
                 : "L'offre n'est pas pourvue"
             }
