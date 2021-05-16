@@ -17,9 +17,9 @@ import org.wtg.dao.ConversationRepository;
 import org.wtg.dao.MessageRepository;
 import org.wtg.entities.ConversationInfo;
 import org.wtg.entities.ConversationInfoAdd;
+import org.wtg.entities.Message;
 import org.wtg.entities.MessageInfoAdd;
 import org.wtg.entities.MessageInfoGet;
-import org.wtg.entities.Message;
 
 @Controller
 @RequestMapping(path = "/messagerie")
@@ -45,12 +45,15 @@ public class MessagerieController {
 		model.addAttribute("conversations", conversations);
 
 		Long receiverID = conversationInfo.getReceiverID();
-		if (receiverID != null) {
+		System.out.println("REC ID = " + receiverID);
+		if (receiverID != null && !receiverID.equals(USER_ID)) {
 			Long conversationID = conversationDao.getConversationByIdCouple(USER_ID, receiverID);
+			System.out.println("CONV ID = " + conversationID);
 			// on vérifie qu'une conversation n'existe pas déjà entre les deux utilisateurs
 			if (conversationID == null) {
 				conversationDao.addConversation(USER_ID, receiverID);
 				conversationID = conversationDao.getIDLastInsert();
+				System.out.println("Nouvelle conv");
 			}
 			model.addAttribute("openConversationID", conversationID);
 		}

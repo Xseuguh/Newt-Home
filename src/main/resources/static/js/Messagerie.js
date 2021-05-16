@@ -3,6 +3,19 @@ let isOnConversationMenu = true;
 
 let conversationID;
 
+//Gestion de l'ouverture par défaut d'une conversation
+let defaultConversationID = undefined;
+function setDefaultConversationID(defaultConvID) {
+  defaultConversationID = defaultConvID;
+}
+window.onload = async () => {
+  await updateConversations();
+  if (defaultConversationID) {
+    $(`.onglet[value=${defaultConversationID}]`).click();
+    setDefaultConversationID(undefined);
+  }
+};
+
 //Partie de code pour refresh les messages de la conversation tous les 5s
 let isRunning = false;
 const refreshMessages = setInterval(() => {
@@ -11,10 +24,13 @@ const refreshMessages = setInterval(() => {
   }
 }, 5000);
 
-const refreshConversations = setInterval(() => {
+const refreshConversations = setInterval(() => updateConversations(), 5000);
+
+//Gestion de l'affichage de la conversation sélectionnée
+async function updateConversations() {
   const conversationsList = $("#correspondants");
   const currentNumberOfConversations = conversationsList.children().length;
-  $.getJSON("/messagerie/getConversations", (conversations) => {
+  await $.getJSON("/messagerie/getConversations", (conversations) => {
     for (let i = currentNumberOfConversations; i < conversations.length; i++) {
       const conversation = conversations[i];
       conversationsList.prepend(`
@@ -30,38 +46,31 @@ const refreshConversations = setInterval(() => {
           `);
     }
   });
-}, 5000);
 
-function openOnConversation(defaultConversationID) {
-  if (defaultConversationID) {
-    $(`.onglet[value=${defaultConversationID}]`).click();
-  }
+  $(".onglet").click(async (e) => {
+    isOnConversationMenu = false;
+    switchSiEcranPlusPetitQue(TAILLE_PETIT_ECRAN);
+    supprimeChampDestinataire();
+
+    retireIDSelectionne();
+    e.target.id = "selectionne";
+
+    conversationID = parseInt(e.target.value);
+    await afficheConversation(conversationID, true);
+
+    const expediteurName = e.target.textContent;
+    $("#titreConversation").html(expediteurName);
+
+    const srcImg = e.target.children[0].src.split("/");
+    //Mettre le lien de l'image du profil de l'expéditeur
+    $("#imageTitreConversation").attr({
+      src: `../images/user/${srcImg[srcImg.length - 1]}`,
+      onerror: 'this.onerror = null; this.src="../images/user/default.png"',
+    });
+
+    isRunning = true; //On actualise les messsages
+  });
 }
-
-//Gestion de l'affichage de la conversation sélectionnée
-$(".onglet").click(async (e) => {
-  isOnConversationMenu = false;
-  switchSiEcranPlusPetitQue(TAILLE_PETIT_ECRAN);
-  supprimeChampDestinataire();
-
-  retireIDSelectionne();
-  e.target.id = "selectionne";
-
-  conversationID = parseInt(e.target.value);
-  await afficheConversation(conversationID, true);
-
-  const expediteurName = e.target.textContent;
-  $("#titreConversation").html(expediteurName);
-
-  const srcImg = e.target.children[0].src.split("/");
-  //Mettre le lien de l'image du profil de l'expéditeur
-  $("#imageTitreConversation").attr(
-    "src",
-    `../images/user/${srcImg[srcImg.length - 1]}`
-  );
-
-  isRunning = true; //On actualise les messsages
-});
 
 function scrollSurPlusRecent() {
   const listeDesMessages = $("#historiqueMessages");
