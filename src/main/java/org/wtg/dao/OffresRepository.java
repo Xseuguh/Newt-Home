@@ -1,7 +1,5 @@
 package org.wtg.dao;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +11,9 @@ import org.wtg.entities.JoinOffresUsers;
 import org.wtg.entities.Offres;
 
 public interface OffresRepository extends JpaRepository<Offres, Long> {
+	@Query("select o from Offres o  where o.id_offre like :x")
+	public List<Offres> findByIdOffre(@Param("x") Long id);
+
 	@Query("select o from Offres o  where o.titre like :x")
 	public List<Offres> findByName(@Param("x") String mc);
 
