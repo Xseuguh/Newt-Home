@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <%@page import="java.io.File"%>
 <title>Bienvenue chez Newt'Home</title>
 
@@ -19,14 +18,15 @@ ap.min.css"
 	rel="stylesheet" />
 <link type="text/css"
 	href="<%=request.getContextPath()%>/css/Accueil.css" rel="stylesheet" />
-
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-
-
-<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
-
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
 <script id="scriptBTS"
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
 </head>
 <body>
 	<header></header>
@@ -45,9 +45,10 @@ ap.min.css"
 		<div class="row rechercheAvancee" id="rechercheAvanceeDiv">
 			<form action="/Accueil/Recherche_Avancee" method="get"
 				class="form-inline" id="formAvancee">
-				<input type="search" class="recherche" id="motCle" name="motCle" value="${motC}"
-					placeholder="Rechercher sur le site…" /> <br> <input
-					type="search" class="recherche" name="lieu"  id="lieu" value="${lieu}"
+				<input type="search" class="recherche" id="motCle" name="motCle"
+					value="${motC}" placeholder="Rechercher sur le site…" /> <br>
+				<input type="search" class="recherche" name="lieu" id="lieu"
+					value="${lieu}"
 					placeholder="Entrer le nom d'une ville, d'un pays..." /> <br>
 				<!--  <label for="start">Sélectionner une date de départ :</label> <input
 					type="date" class="recherche" name="date" value="${date}" />-->
@@ -65,7 +66,7 @@ ap.min.css"
 					<c:forEach items="${listeServiceRecherche}" var="lsr">
 						<div class="col-sm-6">
 							<input type="checkbox" id="service_${lsr.id_service}"
-								name="listeServices"  value="${lsr.id_service}"> <label
+								name="listeServices" value="${lsr.id_service}"> <label
 								for="service_${lsr.id_service}">${lsr.nom_service}</label>
 						</div>
 					</c:forEach>
@@ -89,9 +90,34 @@ ap.min.css"
 					data-target="#offre_${o.id_offre}">
 					<div class="row annonce">
 						<div class="col-sm-6">
-							<img id="thumbnail" class="center-block"
-								src="<%=request.getContextPath()%>/images/photosAnnonces/annonce_${o.id_offre}/principale.png " />
-							<!-- TODO : Faire une fonction ou mettre une condition pour verifier si le fichier existe (et verifier l'extension de l'image)  -->
+							<div id="carouselSlides" class="carousel slide"
+								data-ride="carousel" data-interval="4500">
+								<div class="carousel-inner">
+									<c:forEach items="${imagesPaths.keySet()}" var="key">
+										<c:if test="${key.equals(o.id_offre)}">
+											<c:forEach var="i" begin="1"
+												end="${imagesPaths.values().size()}">
+												<c:if test="${i==1}">
+													<div class="item active imageDiv">
+
+														<img id="thumbnail"
+															class="d-block w-100 center-block img-responsive"
+															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${imagesPaths.get(key).get(i-1)}" />
+													</div>
+												</c:if>
+
+												<c:if test="${i>1}">
+													<div class="item imageDiv">
+														<img id="thumbnail"
+															class="d-block w-100 center-block img-responsive"
+															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${imagesPaths.get(key).get(i-1)}" />
+													</div>
+												</c:if>
+											</c:forEach>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-6">
 							<div id="titre" class="text-center">
@@ -140,13 +166,63 @@ ap.min.css"
 							<div class="modal-body">
 								<div id="titre" class="text-center">
 									<div class="lienTitre">${o.titre}</div>
-									<img id="thumbnail" class="center-block"
-										src="https://www.maisonsudouest.com/wp-content/uploads/2020/08/vue.jpg?resolution=1920,1" />
-								</div>
-								<br>
-								<div class="infosSupp text-justify">
-									<img class="icones"
-										src="<%=request.getContextPath()%>/images/locationIcon.png" />
+									<div id="carouselSlides" class="carousel slide"
+										data-ride="carousel">
+										<div class="carousel-inner">
+											<c:forEach var="i" begin="1" end="${listPaths.size()}">
+												<c:if test="${imagesPaths.size()==1}">
+													<c:if test="${i==1}">
+														<div class="item active imageDiv">
+
+															<img id="thumbnail"
+																class="d-block w-100 center-block img-responsive"
+																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
+														</div>
+													</c:if>
+
+
+													<c:if test="${i>1}">
+														<div class="item imageDiv">
+															<img id="thumbnail"
+																class="d-block w-100 center-block img-responsive"
+																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
+														</div>
+													</c:if>
+												</c:if>
+											</c:forEach>
+											<c:if test="${imagesPaths.size()>1}">
+												<c:forEach items="${listPaths.keySet()}" var="key">
+													<c:if test="${key.equals(o.id_offre)}">
+														<c:forEach var="i" begin="1" end="${listPaths.size()}">
+
+															<c:if test="${i==1}">
+																<div class="item active imageDiv">
+
+																	<img id="thumbnail"
+																		class="d-block w-100 center-block img-responsive"
+																		src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
+																</div>
+															</c:if>
+
+
+															<c:if test="${i>1}">
+																<div class="item imageDiv">
+																	<img id="thumbnail"
+																		class="d-block w-100 center-block img-responsive"
+																		src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
+																</div>
+															</c:if>
+
+														</c:forEach>
+													</c:if>
+												</c:forEach>
+											</c:if>
+
+										</div>
+
+									</div>
+									<br>
+									<div class="infosSupp text-justify"></div>
 									${o.ville}, ${o.pays}
 								</div>
 								<br>
@@ -224,6 +300,5 @@ ap.min.css"
 		</div>
 	</div>
 	<footer></footer>
-
 </body>
 </html>
