@@ -1,8 +1,15 @@
 package org.wtg.web;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.persistence.criteria.Selection;
 
@@ -38,6 +45,14 @@ public class AnnonceController {
 	@Autowired
 	ServicesRepository listeServiceRechercheDao;
 
+	private List<String> getImagesPath(File[] repertoires, List<String> listOfImages) {
+
+		for (File imagePaths : repertoires) {
+
+			listOfImages.add(imagePaths.getName());
+		}
+		return listOfImages;
+	}
 	@RequestMapping(value = "/Accueil")
 	public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc) {
 
@@ -47,11 +62,24 @@ public class AnnonceController {
 		List<Annonce> contraintes = new ArrayList<Annonce>();
 		List<Annonce> services = new ArrayList<Annonce>();
 		List<JoinOffresUsers> infosProprio = new ArrayList<JoinOffresUsers>();
+		
+		List<File> repertoires = new ArrayList<File>();
+
+		Map<Long, List<String>> imagesPaths = new HashMap<Long, List<String>>();
 
 		for (Offres value : offres) {
 			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
 			services.addAll(serviceDao.findServicesByIdOffre(value.getId_offre()));
 			infosProprio.addAll(offresDao.findUserByIdOffre(value.getId_offre()));
+
+			repertoires.add(new File(System.getProperty("user.dir")
+					+ "\\src\\main\\resources\\static\\images\\photosAnnonces\\" + value.getId_offre()));
+
+			for (File repertoire : repertoires) {
+
+				imagesPaths.put(value.getId_offre(), getImagesPath(repertoire.listFiles(), new ArrayList<String>()));
+				
+			}
 
 		}
 
@@ -60,6 +88,7 @@ public class AnnonceController {
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offres);
+		model.addAttribute("imagesPaths", imagesPaths);
 		model.addAttribute("contraintes", contraintes);
 		model.addAttribute("services", services);
 		model.addAttribute("infosProprio", infosProprio);
@@ -67,6 +96,8 @@ public class AnnonceController {
 		model.addAttribute("connected", connected);
 		return "Accueil";
 	}
+
+	
 
 	@RequestMapping(value = "/Accueil/Recherche_Avancee")
 	public String rechercheAvancee(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc,
@@ -77,7 +108,11 @@ public class AnnonceController {
 		List<Contraintes> listeContrainteRecherche = listeContrainteRechercheDao.findAll();
 		List<Services> listeServiceRecherche = listeServiceRechercheDao.findAll();
 		List<Offres> offresAvancees = new ArrayList<Offres>();
-
+		
+		List<File> repertoires = new ArrayList<File>();
+		
+		Map<Long, List<String>> imagesPaths = new HashMap<Long, List<String>>();
+		
 		if ((listeContraintes.length > 0) && (listeServices.length > 0) && !mc.equals("") && !lieu.equals("")) {
 			offresAvancees.addAll(
 					offresDao.findAvanceeTousChamps("%" + mc + "%", listeContraintes, listeServices, "%" + lieu + "%"));
@@ -129,7 +164,8 @@ public class AnnonceController {
 		}
 
 		else if (listeContraintes.length > 0 && listeServices.length == 0 && !mc.equals("") && !lieu.equals("")) {
-			offresAvancees.addAll(offresDao.findByContrainteMcLocation("%" + mc + "%", listeContraintes, "%" + lieu + "%"));
+			offresAvancees
+					.addAll(offresDao.findByContrainteMcLocation("%" + mc + "%", listeContraintes, "%" + lieu + "%"));
 		}
 
 		else if (listeContraintes.length > 0 && listeServices.length > 0 && mc.equals("") && !lieu.equals("")) {
@@ -150,14 +186,43 @@ public class AnnonceController {
 			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
 			services.addAll(serviceDao.findServicesByIdOffre(value.getId_offre()));
 			infosProprio.addAll(offresDao.findUserByIdOffre(value.getId_offre()));
+			
+			repertoires.add(new File(System.getProperty("user.dir")
+					+ "\\src\\main\\resources\\static\\images\\photosAnnonces\\" + value.getId_offre()));
+
+			for (File repertoire : repertoires) {
+
+				imagesPaths.put(value.getId_offre(), getImagesPath(repertoire.listFiles(), new ArrayList<String>()));
+
+			}
 
 		}
-
+		
+		Object listPaths;
+		
+		
+		if(imagesPaths.values().size() == 1) {
+		
+		listPaths = imagesPaths.values().stream()
+		        .flatMap(List::stream)
+		        .collect(Collectors.toList());
+		
+		}
+		
+		else {
+			listPaths = imagesPaths;
+		}
+		
+		
+		
+		
 		Boolean connected = true; // TODO : changer la valeur de "connected" une fois qu'on aura géré la connexion
 		// (session et/ou cookie)
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offresAvancees);
+		model.addAttribute("listPaths", listPaths);
+		model.addAttribute("imagesPaths", imagesPaths);
 		model.addAttribute("contraintes", contraintes);
 		model.addAttribute("services", services);
 		model.addAttribute("infosProprio", infosProprio);

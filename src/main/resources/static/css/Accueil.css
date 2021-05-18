@@ -1,9 +1,20 @@
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px){
+	.imageDiv {
+		height: 35vw !important;
+	}
+}
+
 input::placeholder {
 	color: #434544;
 }
 
 #thumbnail {
 	width: 80%;
+}
+
+img.resize {
+	width: 80%;
+	height: auto;
 }
 
 .recherche {
@@ -88,6 +99,10 @@ input::placeholder {
 	background-position: right center;
 	color: #fff;
 	text-decoration: none;
+}
+
+.imageDiv {
+	height: 20vw;
 }
 
 body.modal-open .nonModale, body.modal-open #rechercheDiv {
