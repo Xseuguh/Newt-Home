@@ -93,29 +93,54 @@ ap.min.css"
 							<div id="carouselSlides" class="carousel slide"
 								data-ride="carousel" data-interval="4500">
 								<div class="carousel-inner">
-									<c:forEach items="${imagesPaths.keySet()}" var="key">
-										<c:if test="${key.equals(o.id_offre)}">
-											<c:forEach var="i" begin="1"
-												end="${imagesPaths.values().size()}">
-												<c:if test="${i==1}">
-													<div class="item active imageDiv">
+									<c:forEach var="i" begin="1" end="${listPaths.size()}">
+										<c:if test="${imagesPaths.size()==1}">
+											<c:if test="${i==1}">
+												<div class="item active imageDiv">
 
-														<img id="thumbnail"
-															class="d-block w-100 center-block img-responsive"
-															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${imagesPaths.get(key).get(i-1)}" />
-													</div>
-												</c:if>
+													<img id="thumbnail"
+														class="d-block w-100 center-block img-responsive"
+														src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
+												</div>
+											</c:if>
 
-												<c:if test="${i>1}">
-													<div class="item imageDiv">
-														<img id="thumbnail"
-															class="d-block w-100 center-block img-responsive"
-															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${imagesPaths.get(key).get(i-1)}" />
-													</div>
-												</c:if>
-											</c:forEach>
+
+											<c:if test="${i>1}">
+												<div class="item imageDiv">
+													<img id="thumbnail"
+														class="d-block w-100 center-block img-responsive"
+														src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
+												</div>
+											</c:if>
 										</c:if>
 									</c:forEach>
+									<c:if test="${imagesPaths.size()>1}">
+										<c:forEach items="${listPaths.keySet()}" var="key">
+											<c:if test="${key.equals(o.id_offre)}">
+												<c:forEach var="i" begin="1" end="${listPaths.size()}">
+
+													<c:if test="${i==1}">
+														<div class="item active imageDiv">
+
+															<img id="thumbnail"
+																class="d-block w-100 center-block img-responsive"
+																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
+														</div>
+													</c:if>
+
+
+													<c:if test="${i>1}">
+														<div class="item imageDiv">
+															<img id="thumbnail"
+																class="d-block w-100 center-block img-responsive"
+																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
+														</div>
+													</c:if>
+
+												</c:forEach>
+											</c:if>
+										</c:forEach>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -278,8 +303,9 @@ ap.min.css"
 													<div class=" col-md-6">
 														<form action="/messagerie/" method="post"
 															class="text-right">
-															<input type="hidden" id="idProprio" name="receiverID" value="${i.id_user}">
-															<input type="image" id="formRedirectionMessage"
+															<input type="hidden" id="idProprio" name="receiverID"
+																value="${i.id_user}"> <input type="image"
+																id="formRedirectionMessage"
 																src="<%=request.getContextPath()%>/images/Messagerie/envoiMessage.png"
 																alt="Envoyer un message au propriétaire">
 														</form>

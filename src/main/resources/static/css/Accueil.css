@@ -61,7 +61,8 @@ img.resize {
 .annonce {
 	padding: 0.5em;
 	border: #c5c5c5 solid;
-	border-radius: var(- -arrondi-normal);
+	border-radius: 1em;
+    margin: 2em;
 }
 
 .listeCS {

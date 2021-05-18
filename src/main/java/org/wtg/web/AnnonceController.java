@@ -82,12 +82,28 @@ public class AnnonceController {
 			}
 
 		}
+		
+		Object listPaths;
+		
+		if(imagesPaths.values().size() == 1) {
+			
+			listPaths = imagesPaths.values().stream()
+			        .flatMap(List::stream)
+			        .collect(Collectors.toList());
+			
+			}
+			
+			else {
+				listPaths = imagesPaths;
+			}
+			
 
 		Boolean connected = true; // TODO : changer la valeur de "connected" une fois qu'on aura géré la connexion
 									// (session et/ou cookie)
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offres);
+		model.addAttribute("listPaths", listPaths);
 		model.addAttribute("imagesPaths", imagesPaths);
 		model.addAttribute("contraintes", contraintes);
 		model.addAttribute("services", services);
