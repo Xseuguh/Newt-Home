@@ -19,14 +19,11 @@ ap.min.css"
 <link type="text/css"
 	href="<%=request.getContextPath()%>/css/Accueil.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
+<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
 <script id="scriptBTS"
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-<script src="<%=request.getContextPath()%>/js/Accueil.js"></script>
+
 </head>
 <body>
 	<header></header>
@@ -291,12 +288,14 @@ ap.min.css"
 											<c:if test="${connected}">
 												<div class="row">
 													<div class=" col-md-6">
-														<form action="/" method="post" class="text-left">
-															<!--  TODO : mettre le bon chemin et faire la partie controller -->
-															<input type="hidden" id="idOffre" value="${o.id_offre}">
-															<input type="hidden" id="idUserConnecte" value="">
-															<!--  TODO : mettre la valeur correspondant à l'id du user connecté, afin de rajouter son id dans la table "offres_postulees" -->
-															<input type="button" id="formPostuler" value="Postuler">
+														<form action="/Accueil/Postuler" method="post"
+															class="text-left">
+															<input type="hidden" id="idOffre" name="idOffre"
+																value="${o.id_offre}"> <input type="hidden"
+																id="idUserConnecte" name="idUserConnecte" value="">
+															<!--  TODO: changer la valeur de idUserConnecte une fois qu'on aura établi les connexions -->
+															<input type="submit" id="formPostuler" name="action"
+																value="Postuler">
 														</form>
 													</div>
 													<div class=" col-md-6">

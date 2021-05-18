@@ -31,4 +31,9 @@ public interface OffresPostuleesRepository extends JpaRepository<OffresPostulees
 	@Modifying
 	@Query("DELETE FROM OffresPostulees op WHERE op.id_user = :userID AND op.id_offre = :offreID")
 	public void removeUserFromOffer(@Param("offreID") long offreID, @Param("userID") long userID);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "INSERT INTO offres_postulees (id_offre, id_user) VALUES ( :idOffre , :idUserConnecte)", nativeQuery = true)
+	public void applyToAnOffer(@Param("idOffre") Long idOffre, @Param("idUserConnecte") Long idUserConnecte);
 }

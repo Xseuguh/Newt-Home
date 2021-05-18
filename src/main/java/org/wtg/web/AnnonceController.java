@@ -17,13 +17,16 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wtg.dao.ContraintesRepository;
 import org.wtg.dao.LiaisonOffreContrainteRepository;
 import org.wtg.dao.LiaisonOffreServiceRepository;
+import org.wtg.dao.OffresPostuleesRepository;
 import org.wtg.dao.OffresRepository;
 import org.wtg.dao.ServicesRepository;
 import org.wtg.entities.Annonce;
@@ -44,6 +47,9 @@ public class AnnonceController {
 	ContraintesRepository listeContrainteRechercheDao;
 	@Autowired
 	ServicesRepository listeServiceRechercheDao;
+	@Autowired
+	OffresPostuleesRepository offresPostuleesDao;
+	private long USER_ID = 1l;
 
 	private List<String> getImagesPath(File[] repertoires, List<String> listOfImages) {
 
@@ -248,6 +254,15 @@ public class AnnonceController {
 		model.addAttribute("listeS", listeServices);
 		model.addAttribute("connected", connected);
 		return "Accueil";
+	}
+	
+	@RequestMapping(value="/Accueil/Postuler")
+	public String postulerAnnonce(Model model, @RequestParam(name = "idUserConnecte", defaultValue = "") Long idUserConnecte, @RequestParam(name = "idOffre", defaultValue = "") Long idOffre) {
+		
+		offresPostuleesDao.applyToAnOffer(idOffre, USER_ID); //TODO: modifier l'id du user connecté une fois la connexon faite
+		
+		return "Accueil";
+		
 	}
 
 }
