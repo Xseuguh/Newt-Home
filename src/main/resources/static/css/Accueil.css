@@ -1,7 +1,17 @@
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px){
+@media only screen and (min-device-width : 320px) and (max-device-width
+	: 480px) {
 	.imageDiv {
 		height: 35vw !important;
 	}
+	.display-flex-center {
+		display: block !important;
+	}
+	#rechercheDiv {
+		margin-left: 2em;
+	}
+	
+	#carouselSlides{
+	margin-bottom: 8vw;}
 }
 
 input::placeholder {
@@ -59,10 +69,10 @@ img.resize {
 }
 
 .annonce {
-	padding: 0.5em;
+	padding: 3em 0.5em;
 	border: #c5c5c5 solid;
 	border-radius: 1em;
-    margin: 2em;
+	margin: 2em;
 }
 
 .listeCS {
@@ -96,6 +106,11 @@ img.resize {
 	font-size: 1.2 em;
 }
 
+.display-flex-center {
+	display: flex;
+	align-items: center;
+}
+
 #formPostuler:hover {
 	background-position: right center;
 	color: #fff;
@@ -104,6 +119,7 @@ img.resize {
 
 .imageDiv {
 	height: 20vw;
+	width: auto;
 }
 
 body.modal-open .nonModale, body.modal-open #rechercheDiv {

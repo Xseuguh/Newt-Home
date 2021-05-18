@@ -88,90 +88,92 @@ ap.min.css"
 			<c:forEach items="${offres}" var="o">
 				<div class="nonModale" data-toggle="modal"
 					data-target="#offre_${o.id_offre}">
-					<div class="row annonce">
-						<div class="col-sm-6">
-							<div id="carouselSlides" class="carousel slide"
-								data-ride="carousel" data-interval="4500">
-								<div class="carousel-inner">
-									<c:forEach var="i" begin="1" end="${listPaths.size()}">
-										<c:if test="${imagesPaths.size()==1}">
-											<c:if test="${i==1}">
-												<div class="item active imageDiv">
+					<div class="annonce">
+						<div class="row display-flex-center">
+							<div class="col-sm-6">
+								<div id="carouselSlides" class="carousel slide"
+									data-ride="carousel" data-interval="4500">
+									<div class="carousel-inner">
+										<c:forEach var="i" begin="1" end="${listPaths.size()}">
+											<c:if test="${imagesPaths.size()==1}">
+												<c:if test="${i==1}">
+													<div class="item active imageDiv">
 
-													<img id="thumbnail"
-														class="d-block w-100 center-block img-responsive"
-														src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
-												</div>
-											</c:if>
-
-
-											<c:if test="${i>1}">
-												<div class="item imageDiv">
-													<img id="thumbnail"
-														class="d-block w-100 center-block img-responsive"
-														src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
-												</div>
-											</c:if>
-										</c:if>
-									</c:forEach>
-									<c:if test="${imagesPaths.size()>1}">
-										<c:forEach items="${listPaths.keySet()}" var="key">
-											<c:if test="${key.equals(o.id_offre)}">
-												<c:forEach var="i" begin="1" end="${listPaths.size()}">
-
-													<c:if test="${i==1}">
-														<div class="item active imageDiv">
-
-															<img id="thumbnail"
-																class="d-block w-100 center-block img-responsive"
-																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
-														</div>
-													</c:if>
+														<img id="thumbnail"
+															class="d-block w-100 center-block img-responsive"
+															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
+													</div>
+												</c:if>
 
 
-													<c:if test="${i>1}">
-														<div class="item imageDiv">
-															<img id="thumbnail"
-																class="d-block w-100 center-block img-responsive"
-																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
-														</div>
-													</c:if>
-
-												</c:forEach>
+												<c:if test="${i>1}">
+													<div class="item imageDiv">
+														<img id="thumbnail"
+															class="d-block w-100 center-block img-responsive"
+															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
+													</div>
+												</c:if>
 											</c:if>
 										</c:forEach>
-									</c:if>
+										<c:if test="${imagesPaths.size()>1}">
+											<c:forEach items="${listPaths.keySet()}" var="key">
+												<c:if test="${key.equals(o.id_offre)}">
+													<c:forEach var="i" begin="1" end="${listPaths.size()}">
+
+														<c:if test="${i==1}">
+															<div class="item active imageDiv">
+
+																<img id="thumbnail"
+																	class="d-block w-100 center-block img-responsive"
+																	src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
+															</div>
+														</c:if>
+
+
+														<c:if test="${i>1}">
+															<div class="item imageDiv">
+																<img id="thumbnail"
+																	class="d-block w-100 center-block img-responsive"
+																	src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
+															</div>
+														</c:if>
+
+													</c:forEach>
+												</c:if>
+											</c:forEach>
+										</c:if>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-sm-6">
-							<div id="titre" class="text-center">
-								<div>${o.titre}</div>
-							</div>
-							<div id="description" class="text-justify">${o.description}</div>
-							<br>
-							<div class="titreCS">Liste des services à rendre :</div>
+							<div class="col-sm-6">
+								<div id="titre" class="text-center">
+									<div>${o.titre}</div>
+								</div>
+								<div id="description" class="text-justify">${o.description}</div>
+								<br>
+								<div class="titreCS">Liste des services à rendre :</div>
 
-							<c:forEach items="${services}" var="s">
-								<c:if test="${s.id_offre.equals(o.id_offre)}">
-									<div id="listeServices" class="text-justify">
-										<ul class="listeCS">
-											<li>${s.nom_service}</li>
-										</ul>
-									</div>
-								</c:if>
-							</c:forEach>
-							<br>
-							<div class="titreCS">Liste des contraintes à respecter :</div>
-							<c:forEach items="${contraintes}" var="c">
-								<c:if test="${c.id_offre.equals(o.id_offre)}">
-									<div id="listeContraintes" class="text-justify">
-										<ul class="listeCS">
-											<li>${c.nom_contrainte}</li>
-										</ul>
-									</div>
-								</c:if>
-							</c:forEach>
+								<c:forEach items="${services}" var="s">
+									<c:if test="${s.id_offre.equals(o.id_offre)}">
+										<div id="listeServices" class="text-justify">
+											<ul class="listeCS">
+												<li>${s.nom_service}</li>
+											</ul>
+										</div>
+									</c:if>
+								</c:forEach>
+								<br>
+								<div class="titreCS">Liste des contraintes à respecter :</div>
+								<c:forEach items="${contraintes}" var="c">
+									<c:if test="${c.id_offre.equals(o.id_offre)}">
+										<div id="listeContraintes" class="text-justify">
+											<ul class="listeCS">
+												<li>${c.nom_contrainte}</li>
+											</ul>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</div>
 						<button type="button" class="btn btn-sm pull-right"
 							id="openButton">En savoir plus</button>
@@ -191,6 +193,7 @@ ap.min.css"
 							<div class="modal-body">
 								<div id="titre" class="text-center">
 									<div class="lienTitre">${o.titre}</div>
+									<br>
 									<div id="carouselSlides" class="carousel slide"
 										data-ride="carousel">
 										<div class="carousel-inner">
@@ -228,8 +231,6 @@ ap.min.css"
 																		src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
 																</div>
 															</c:if>
-
-
 															<c:if test="${i>1}">
 																<div class="item imageDiv">
 																	<img id="thumbnail"
@@ -242,9 +243,7 @@ ap.min.css"
 													</c:if>
 												</c:forEach>
 											</c:if>
-
 										</div>
-
 									</div>
 									<br>
 									<div class="infosSupp text-justify"></div>
