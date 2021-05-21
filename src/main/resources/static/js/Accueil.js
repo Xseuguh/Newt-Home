@@ -13,6 +13,22 @@ function hideRechercheAvancee() {
 }
 
 $(function() {
+	var frm = $('.modal form');
+	frm.submit(function(ev) {
+		ev.preventDefault();
+		$.ajax({
+			type : frm.attr('method'),
+			url : frm.attr('action'),
+			data : frm.serializeArray(),
+			success : function(data) {
+				alert("Votre demande a bien été envoyée.");
+			}
+		});
+
+	});
+});
+
+$(function() {
 	var frm = $('#formAvancee');
 	frm.submit(function(ev) {
 		ev.preventDefault();
@@ -22,13 +38,20 @@ $(function() {
 			data : frm.serializeArray(),
 
 			success : function(html) {
-				$("#offres").load("/Accueil/Recherche_Avancee #offres", {
-				    motCle : $("#motCle").val(),
-				    lieu : $("#lieu").val(),
-				    listeContraintes : $("input[name='listeContraintes']:checked").val(),
-				    listeServices : $("input[name='listeServices']:checked").val() });
+				$("#offres").load(
+						"/Accueil/Recherche_Avancee #offres",
+						{
+							motCle : $("#motCle").val(),
+							lieu : $("#lieu").val(),
+							listeContraintes : $(
+									"input[name='listeContraintes']:checked")
+									.val(),
+							listeServices : $(
+									"input[name='listeServices']:checked")
+									.val()
+						});
 			}
 		});
-		
+
 	});
 });
