@@ -59,3 +59,7 @@ textarea {
 .error {
   color: var(--rouge-fonce);
 }
+
+.clickable:hover {
+  cursor: pointer;
+}

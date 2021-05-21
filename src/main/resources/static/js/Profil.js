@@ -24,10 +24,39 @@ async function affichageOption(choix) {
   if (choix === "parametres") {
     return `
     <div id="informations">
-		<img src="../images/user/${data.id_user}.png"
-    onerror='this.onerror = null; this.src="../images/user/default.png"'/>
-		<p>${data.nom} ${data.prenom}</p>
-	</div>
+      <img 
+      class="clickable"
+      id="avatarImage" 
+      src="../images/user/${data.id_user}.png"
+      onerror='this.onerror = null; this.src="../images/user/default.png"'
+      data-toggle="modal" 
+      data-target="#modalUpdateAvatar"/>
+      <p>${data.nom} ${data.prenom}</p>
+	  </div>
+
+    <div class="modal" id="modalUpdateAvatar" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Choisissez votre avatar :</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="updateAvatar">
+                <label for="avatar">
+                	Veuillez sélectionner l'image d'avatar que vous souhaitez utiliser <br/> 
+                	(image au format png, et de taille inférieur à 1 Mo))
+                </label>
+                <span class="error"></span>
+                <input type="file" required="true" name="avatar" id="avatar" accept="image/png"/>
+                <input type="submit" value="Mettre à jour mon avatar" />
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <form id="modificationInfo">
         <legend>Paramètres du compte</legend>
         <br />
@@ -111,6 +140,46 @@ function generationHtml(tableauElements, choix) {
 function attachActionTo(choix) {
   switch (choix) {
     case "parametres":
+      $("#updateAvatar").submit((e) => {
+        e.preventDefault();
+        const selectedImage = $("#avatar").get(0).files[0];
+
+        const errors = [];
+
+        if (!selectedImage) {
+          errors.push("Pas de fichier sélectionné !");
+        }
+        if (selectedImage.size > 1000000) {
+          errors.push("Le fichier est trop lourd !");
+        }
+
+        if (errors.length > 0) {
+          displayError(errors, "avatar");
+          return;
+        }
+
+        const toBase64 = (file) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+          });
+
+        toBase64(selectedImage).then((imageBase64) => {
+          $.post("/profil/updateAvatar", { avatar: imageBase64 }, "json")
+            .done(() => {
+              alert(
+                "Le changement d'avatar a été pris en compte, il sera effectif sous peu !"
+              );
+              $(`.options[value="parametres"]`).click();
+            })
+            .fail(function (error) {
+              alert(error.responseText);
+            });
+        });
+      });
+
       $("#modificationInfo").submit((e) => {
         e.preventDefault();
 
