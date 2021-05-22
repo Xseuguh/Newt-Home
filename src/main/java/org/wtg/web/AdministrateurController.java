@@ -27,13 +27,16 @@ public class AdministrateurController {
 	@Autowired
 	private LiaisonOffreServiceRepository liaisonOffreServiceDao;
 
+	@Autowired
+	private UserInfoRepository utilisateurDao;
+	
 	@RequestMapping(value = "/Admin/Gestion")
 	public String lienAdminGestion() {
 		return "Admin_interface";
 	}
 	
 	
-
+	/*************ANNONCES****************/
 	@RequestMapping(value = "/Admin/Gestion/Annonce")
 	public String lienAdminGestionAnnonce(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc) {
 		List<Offres> offres = offresDao.findByName("%" + mc + "%");
@@ -256,4 +259,19 @@ public class AdministrateurController {
 		return "redirect:/Admin/Gestion/Annonce";
 	}
 	
+	/*************UTILISATEURS****************/
+	@RequestMapping(value = "/Admin/Gestion/Utilisateur")
+	public String lienAdminGestionUtilisateur(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc) {
+		List<UserInfo> listeUtilisateurs = utilisateurDao.findByName("%" + mc + "%");
+		model.addAttribute("listeUtilisateurs", listeUtilisateurs);
+		model.addAttribute("motC", mc);
+		return "Admin_interfaceUtilisateur";
+	}
+	
+	@RequestMapping(value = "/Admin/Supprimer/Utilisateur")
+	public String deleteUser(Model model, @RequestParam(name = "ref", defaultValue = "") Long id_user,
+			@RequestParam(name = "mc", defaultValue = "") String mc) {
+		utilisateurDao.deleteById(id_user);
+		return "redirect:/Admin/Gestion/Utilisateur?motCle=" + mc;
+	}
 }
