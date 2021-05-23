@@ -1,5 +1,11 @@
 package org.wtg.web;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -126,9 +132,28 @@ public class ProfilController {
 	}
 
 	@PostMapping(path = "/updateAvatar")
-	public ResponseEntity<String> updateAvatar(@RequestBody MessageInfoAdd messageInfo) {
+	public ResponseEntity<String> updateAvatar(String avatar) {
+		String partSeparator = ",";
+		System.out.println(avatar);
 
-		return ResponseEntity.ok("Tout s'est bien passé");
+		if (!avatar.contains(partSeparator)) {
+			return ResponseEntity.status(500).body("Oops quelque chose s'est mal passé !");
+		}
+
+			String encodedImg = avatar.split(partSeparator)[1];
+			byte[] decodedImg = Base64.getDecoder().decode(encodedImg.getBytes(StandardCharsets.UTF_8));
+			if (decodedImg.length > 1000000) {
+				return ResponseEntity.status(500).body("L'image est trop grande !");
+			}
+			Path destinationFile = Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/images/user",
+					USER_ID + ".png");
+			try {
+				Files.write(destinationFile, decodedImg);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return ResponseEntity.ok("Tout s'est bien passé");
+
 	}
 
 }
