@@ -17,6 +17,7 @@
 	</header>
 	<content>
 		<button onclick="window.location.href='/Admin/Gestion/Annonce'">Annonce</button>
+		<button onclick="window.location.href='/Admin/Gestion/Utilisateur'">Utilisateur</button>
 	</content>
 	<br>
 	<br>
