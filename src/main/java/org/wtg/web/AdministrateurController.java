@@ -48,6 +48,8 @@ public class AdministrateurController {
 	@RequestMapping(value = "/Admin/Supprimer/Annonce")
 	public String delete(Model model, @RequestParam(name = "ref", defaultValue = "") Long id_offre,
 			@RequestParam(name = "mc", defaultValue = "") String mc) {
+		liaisonOffreServiceDao.deleteByIdOffre(id_offre);
+		liaisonOffreContrainteDao.deleteByIdOffre(id_offre);
 		offresDao.deleteById(id_offre);
 		return "redirect:/Admin/Gestion/Annonce?motCle=" + mc;
 	}	
@@ -55,8 +57,6 @@ public class AdministrateurController {
 	@RequestMapping(value = "/Admin/Zoom/Annonce")
 	public String zoom(Model model, @RequestParam(name = "ref", defaultValue = "") Long id_offre,
 			@RequestParam(name = "mc", defaultValue = "") String mc) {
-		//Integer integerIdValue=Integer.parseInt(id_offre);
-		//Long longIdValue=(long)integerIdValue;
 		List<Offres> offresZoom = offresDao.findByIdOffre(id_offre);
 		model.addAttribute("offresZoom", offresZoom);
 		return "Admin_interfaceZoomAnnonce";

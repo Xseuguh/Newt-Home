@@ -78,8 +78,9 @@ public class OffresController {
 			offresDao.save(offresAjoutee);
 			
 			////////////////Liaison Contraintes////////////////
-			List<Offres> maListeOffre=offresDao.findAll();
-			int nombreElement=maListeOffre.size();
+			List<Offres> listeLastIdOffre=offresDao.findByIdLastOffre("");
+			
+			Long nombreElement=listeLastIdOffre.get(0).getId_offre();
 			//2 enfants max par logements
 			if(!deuxEnfantsMax.equals("")) {
 				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)nombreElement,(long)3);
@@ -118,14 +119,14 @@ public class OffresController {
 				liaisonOffreServiceDao.save(liaisonOffreService);
 			}
 			/////////IMAGE UPLOAD/////////////
-	        File repertoire = new File("C:\\Users\\mathi\\eclipse-workspace\\newthome-2\\src\\main\\resources\\static\\images\\photosAnnonces\\annonce"+nombreElement);
+	        File repertoire = new File("C:\\Users\\mathi\\eclipse-workspace\\newthome-3\\src\\main\\resources\\static\\images\\photosAnnonces\\"+nombreElement);
 	        boolean res=repertoire.mkdir();
 			File repertoireImageRecu = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
 	        String liste[] = repertoireImageRecu.list();
 
 			for(String element:liste) {
 				Path source=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+element);
-				Path destination=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\annonce"+nombreElement+"\\"+element);
+				Path destination=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+nombreElement+"\\"+element);
 
 				try {
 					Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);

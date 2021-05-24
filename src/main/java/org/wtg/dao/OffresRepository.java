@@ -14,6 +14,9 @@ public interface OffresRepository extends JpaRepository<Offres, Long> {
 	@Query("select o from Offres o  where o.id_offre like :x")
 	public List<Offres> findByIdOffre(@Param("x") Long id);
 
+	@Query(value="SELECT * FROM Offres order by id_offre DESC limit 1",nativeQuery = true)
+	public List<Offres> findByIdLastOffre(@Param("x") String mc);
+
 	@Query("select o from Offres o  where o.titre like :x")
 	public List<Offres> findByName(@Param("x") String mc);
 
