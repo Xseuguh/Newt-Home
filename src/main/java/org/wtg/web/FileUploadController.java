@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-	public static String uploadDirectory=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier";
 	//----
 	@RequestMapping("/annonce/posterUneAnnonce")
 	public String uploadPage(Model model) {
@@ -41,16 +40,45 @@ public class FileUploadController {
 	
 	@RequestMapping("/annonce/modifierImage")
 	public String update() {
-        File repertoire = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
-        String liste[] = repertoire.list();
-        for(String fileToDelete:liste) {
-    		Path path=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+fileToDelete);
-    		try {
-				Files.delete(path);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-        }
+	    String OS = System.getProperty("os.name").toLowerCase();
+		if(OS.equals("windows 10")) {
+	        File repertoire = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
+	        String liste[] = repertoire.list();
+	        for(String fileToDelete:liste) {
+	    		Path path=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+fileToDelete);
+	    		try {
+					Files.delete(path);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
+		}
+		else if(OS.equals("linux")) {
+	        File repertoire = new File(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/");
+	        String liste[] = repertoire.list();
+	        for(String fileToDelete:liste) {
+	    		Path path=Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/"+fileToDelete);
+	    		try {
+					Files.delete(path);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
+		}
+		else if(OS.equals("mac os x")) {
+	        File repertoire = new File(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/");
+	        String liste[] = repertoire.list();
+	        for(String fileToDelete:liste) {
+	    		Path path=Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/"+fileToDelete);
+	    		try {
+					Files.delete(path);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
+		}
+		else {
+		}
 		return "Utilisateur_ajouterImagePourAnnonce";
 	}
 	
@@ -88,17 +116,51 @@ public class FileUploadController {
 	 * false otherwise
 	 */
 	public boolean writeTheImageInTheTemporaryFolder(MultipartFile[] files) {
-		boolean hasItWorked=true;
-		for(MultipartFile file:files) {
-			Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
-			if(isItAuthorized(file.getContentType())) {
-				try {
-					Files.write(fileNameAndPath,file.getBytes());
-				} catch (IOException e) {
-					e.printStackTrace();
-					hasItWorked=false;
+	    String OS = System.getProperty("os.name").toLowerCase();
+	    boolean hasItWorked=true;
+		if(OS.equals("windows 10")) {
+			String uploadDirectory=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier";
+			for(MultipartFile file:files) {
+				Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
+				if(isItAuthorized(file.getContentType())) {
+					try {
+						Files.write(fileNameAndPath,file.getBytes());
+					} catch (IOException e) {
+						e.printStackTrace();
+						hasItWorked=false;
+					}
 				}
 			}
+		}
+		else if(OS.equals("linux")) {
+			String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier";
+			for(MultipartFile file:files) {
+				Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
+				if(isItAuthorized(file.getContentType())) {
+					try {
+						Files.write(fileNameAndPath,file.getBytes());
+					} catch (IOException e) {
+						e.printStackTrace();
+						hasItWorked=false;
+					}
+				}
+			}
+		}
+		else if(OS.equals("mac os x")) {
+			String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier";
+			for(MultipartFile file:files) {
+				Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
+				if(isItAuthorized(file.getContentType())) {
+					try {
+						Files.write(fileNameAndPath,file.getBytes());
+					} catch (IOException e) {
+						e.printStackTrace();
+						hasItWorked=false;
+					}
+				}
+			}
+		}
+		else {
 		}
 		return hasItWorked;
 	}

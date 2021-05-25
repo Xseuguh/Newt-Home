@@ -175,21 +175,68 @@ public class OffresController {
 	 */
 	public boolean writeImagesPermanently(Long numberElement) {
 		boolean isItSuccess=true;
-        File folder = new File("C:\\Users\\mathi\\eclipse-workspace\\newthome-3\\src\\main\\resources\\static\\images\\photosAnnonces\\"+numberElement);
-        boolean res=folder.mkdir();
-		File folderForReceivedFiles = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
-        String listOfNameOfTheReceivedFiles[] = folderForReceivedFiles.list();
-        
-		for(String element:listOfNameOfTheReceivedFiles) {
-			Path source=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+element);
-			Path destination=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+numberElement+"\\"+element);
-
-			try {
-				Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
-				Files.delete(source);
-			} catch (IOException e) {
-				e.printStackTrace();
-				isItSuccess=false;
+	    String OS = System.getProperty("os.name").toLowerCase();
+		if(OS.equals("windows 10")) {
+			String userDir=System.getProperty("user.dir");
+			String whereForUser=userDir+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+numberElement;
+	        File folder = new File(whereForUser);
+	        boolean res=folder.mkdir();
+			File folderForReceivedFiles = new File(userDir+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
+	        String listOfNameOfTheReceivedFiles[] = folderForReceivedFiles.list();
+	        
+			for(String element:listOfNameOfTheReceivedFiles) {
+				Path source=Paths.get(userDir+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+element);
+				Path destination=Paths.get(whereForUser+"\\"+element);
+	
+				try {
+					Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
+					Files.delete(source);
+				} catch (IOException e) {
+					e.printStackTrace();
+					isItSuccess=false;
+				}
+			}
+		}
+		else if(OS.equals("linux")) {
+			String userDir=System.getProperty("user.dir");
+			String whereForUser=userDir+"/src/main/resources/static/images/photosAnnonces/"+numberElement;
+	        File folder = new File(whereForUser);
+	        boolean res=folder.mkdir();
+			File folderForReceivedFiles = new File(userDir+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/");
+	        String listOfNameOfTheReceivedFiles[] = folderForReceivedFiles.list();
+	        
+			for(String element:listOfNameOfTheReceivedFiles) {
+				Path source=Paths.get(userDir+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/"+element);
+				Path destination=Paths.get(whereForUser+"/"+element);
+	
+				try {
+					Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
+					Files.delete(source);
+				} catch (IOException e) {
+					e.printStackTrace();
+					isItSuccess=false;
+				}
+			}
+		}
+		else if(OS.equals("mac os x")) {
+			String userDir=System.getProperty("user.dir");
+			String whereForUser=userDir+"/src/main/resources/static/images/photosAnnonces/"+numberElement;
+	        File folder = new File(whereForUser);
+	        boolean res=folder.mkdir();
+			File folderForReceivedFiles = new File(userDir+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/");
+	        String listOfNameOfTheReceivedFiles[] = folderForReceivedFiles.list();
+	        
+			for(String element:listOfNameOfTheReceivedFiles) {
+				Path source=Paths.get(userDir+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/"+element);
+				Path destination=Paths.get(whereForUser+"/"+element);
+	
+				try {
+					Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
+					Files.delete(source);
+				} catch (IOException e) {
+					e.printStackTrace();
+					isItSuccess=false;
+				}
 			}
 		}
 		return isItSuccess;

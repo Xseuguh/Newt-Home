@@ -41,7 +41,6 @@
 				      	request.setAttribute( "element", element);
 				    %>
 				    <div>
-				     <img src="<%=request.getContextPath()%>/images/photosAnnonces/ReceptionFichier/${element}"/>
 				      ${element}
 				   	</div>
 				 <%
