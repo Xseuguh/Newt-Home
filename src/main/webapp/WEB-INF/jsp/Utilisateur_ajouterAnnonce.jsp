@@ -33,20 +33,21 @@
 			<div class="col-sm-6">
 			<!-- UPLOAD D IMAGE -->
 				<%
-				String where=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\";
-				File repertoire = new File(where);
-		        String liste[] = repertoire.list();
-		        ArrayList<String> myList=new ArrayList<String>();
-		        for(String elt:liste){
-			        myList.add(elt);
-		        }
-				if(!(myList.isEmpty())){
-			       for(String elt:myList){
-			    	   out.println(elt);
-			    	   out.println("<br>");
+					String whereFolder=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\";
+			        File folder = new File(whereFolder);
+			        String listOfTheNameOfTheFiles[] = folder.list();
+			        if(listOfTheNameOfTheFiles.length==3){
+				       for(String element:listOfTheNameOfTheFiles){
+				      	request.setAttribute( "element", element);
+				    %>
+				    <div>
+				     <img src="<%=request.getContextPath()%>/images/photosAnnonces/ReceptionFichier/${element}"/>
+				      ${element}
+				   	</div>
+				 <%
+				 		}
 			        }
-				}
-				%>
+				 %>
 			  </div>
 			<div class="col-sm-6">
 					<form action="/annonce/ajout" method="post">
@@ -72,10 +73,15 @@
 					<input type="date" name="date_debut_string">
 					<br>
 					<br>
-					<label for="date_limite_string">Date de fin:<label>
+					<label for="date_limite_string">Date de fin:<label></label>
 					<input type="date" id="date_limite_string" name="date_limite_string">
 					<br>
 					<br>
+					<div>
+						Pour que l annonce soit accepte il est demande de mettre:
+							-1 service
+							-1 une contrainte
+					</div>
 					<p id="contraintes">
 						Contraintes:<br>
 						<input type="checkbox" name="deuxEnfantsMax" id="deuxEnfantsMax"/>

@@ -16,38 +16,30 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-	//Path path=Paths.get("folder","receptionServeur")
 	public static String uploadDirectory=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier";
 	//----
-	@RequestMapping("/posterUneAnnonce")
-	public String UploadPage(Model model) {
+	@RequestMapping("/annonce/posterUneAnnonce")
+	public String uploadPage(Model model) {
 		return "Utilisateur_ajouterImagePourAnnonce";
 	}
 	
 	@RequestMapping("/annonce/ajoutImage")
-	public String upload(Model model,@RequestParam("files") MultipartFile[] files) {
-		StringBuilder fileNames=new StringBuilder();
-		for(MultipartFile file:files) {
-			Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
-			if(isItAuthorized(file.getContentType())) {
-				fileNames.append(file.getOriginalFilename());
-				try {
-					Files.write(fileNameAndPath,file.getBytes());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			else {
-				return "Utilisateur_ajouterImagePourAnnonce";
-			}
+	public String uploadImage(Model model,@RequestParam("files") MultipartFile[] files) {
+		int counterImage=countNumberImage(files);
+		if(counterImage!=3) {
+			return "redirect:/annonce/posterUneAnnonce";
 		}
-		model.addAttribute("msg","Successfully uploaded files"+fileNames.toString());
-		return "Utilisateur_ajouterImagePourAnnonce";
+		else {
+			boolean hasItWorked=writeTheImageInTheTemporaryFolder(files);
+			if(hasItWorked==false) {
+				return "redirect:/annonce/posterUneAnnonce";
+			}
+			return "Utilisateur_ajouterImagePourAnnonce";
+		}
 	}
 	
 	
-	@RequestMapping("/updateAll")
+	@RequestMapping("/annonce/modifierImage")
 	public String update() {
         File repertoire = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
         String liste[] = repertoire.list();
@@ -62,6 +54,9 @@ public class FileUploadController {
 		return "Utilisateur_ajouterImagePourAnnonce";
 	}
 	
+	/*
+	 * Allowed format: jpeg & png
+	 */
 	public boolean isItAuthorized(String word) {
 		String[] typeTable=word.split("/");
 		String typeOfTheFile=typeTable[1];
@@ -78,5 +73,33 @@ public class FileUploadController {
 		else {
 			return false;
 		}
+	}
+	
+	public int countNumberImage(MultipartFile[] files) {
+		int counterImage=0;
+		for(MultipartFile file:files) {
+			counterImage++;
+		}
+		return counterImage;
+	}
+	
+	/*
+	 * return true if has written the files in tmp folder
+	 * false otherwise
+	 */
+	public boolean writeTheImageInTheTemporaryFolder(MultipartFile[] files) {
+		boolean hasItWorked=true;
+		for(MultipartFile file:files) {
+			Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
+			if(isItAuthorized(file.getContentType())) {
+				try {
+					Files.write(fileNameAndPath,file.getBytes());
+				} catch (IOException e) {
+					e.printStackTrace();
+					hasItWorked=false;
+				}
+			}
+		}
+		return hasItWorked;
 	}
 }

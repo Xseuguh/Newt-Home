@@ -66,9 +66,23 @@ public class OffresController {
 			@RequestParam(name="garderLesAnimaux",defaultValue="") String garderLesAnimaux,
 			@RequestParam(name="nettoyerLaMaison",defaultValue="") String nettoyerLaMaison){
 		
-
-		//-----Condition importante pour eviter de remplir la table en ayant des null----
-		if (!titreAnnonce.equals("")) {
+		String[] valuesStringInserted= {descriptionAnnonce,titreAnnonce,adresseAnnonce,
+				villeAnnonce,paysAnnonce,date_debut_string,date_limite_string};
+		
+		String[] valuesCheckboxConstraint= {deuxEnfantsMax,animaux,pasDenfantsAutorises,
+				pasDeBruitApres23H,pasDeCigarettes};
+		
+		String[] valuesCheckboxService= {arroserPlante,garderLesAnimaux,
+				nettoyerLaMaison};
+		
+		boolean areTheStringValidated=areTheStringValid(valuesStringInserted);
+		boolean isCorrectForConstraintAndService=isThereConstraintAndService(valuesCheckboxConstraint,valuesCheckboxService);
+		boolean isInsertable=areTheStringValidated && isCorrectForConstraintAndService;
+		/*
+		Warning important to avoid to insert null values
+		we check everything except the codePostal
+		*/
+		if (isInsertable) {
 
 			Date date_debut = Date.valueOf(date_debut_string);
 			Date date_limite = Date.valueOf(date_limite_string);
@@ -78,65 +92,106 @@ public class OffresController {
 			offresDao.save(offresAjoutee);
 			
 			////////////////Liaison Contraintes////////////////
-			List<Offres> listeLastIdOffre=offresDao.findByIdLastOffre("");
+			//
+			//we get the last id inserted in order to add our service and constraint
+			List<Offres> listLastIdOffre=offresDao.findByIdLastOffre("");
+			Long numberElement=listLastIdOffre.get(0).getId_offre();
 			
-			Long nombreElement=listeLastIdOffre.get(0).getId_offre();
 			//2 enfants max par logements
 			if(!deuxEnfantsMax.equals("")) {
-				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)nombreElement,(long)3);
+				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)numberElement,(long)3);
 				liaisonOffreContrainteDao.save(liaisonOffreContrainte);
 			}
 			//pas d animaux
 			if(!animaux.equals("")) {
-				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)nombreElement,(long)5);
+				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)numberElement,(long)5);
 				liaisonOffreContrainteDao.save(liaisonOffreContrainte);
 			}
 			//pas d enfants autorises
 			if(!pasDenfantsAutorises.equals("")) {
-				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)nombreElement,(long)4);
+				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)numberElement,(long)4);
 				liaisonOffreContrainteDao.save(liaisonOffreContrainte);
 			}
 			if(!pasDeBruitApres23H.equals("")) {
-				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)nombreElement,(long)2);
+				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)numberElement,(long)2);
 				liaisonOffreContrainteDao.save(liaisonOffreContrainte);
 			}
 			if(!pasDeCigarettes.equals("")) {
-				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)nombreElement,(long)1);
+				LiaisonOffreContrainte liaisonOffreContrainte=new LiaisonOffreContrainte((long)numberElement,(long)1);
 				liaisonOffreContrainteDao.save(liaisonOffreContrainte);
 			}
 			
 			////////////////Liaison Services////////////////
 			if(!arroserPlante.equals("")) {
-				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)nombreElement,(long) 2);
+				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)numberElement,(long) 2);
 				liaisonOffreServiceDao.save(liaisonOffreService);
 			}
 			if(!garderLesAnimaux.equals("")) {
-				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)nombreElement,(long) 1);
+				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)numberElement,(long) 1);
 				liaisonOffreServiceDao.save(liaisonOffreService);
 			}
 			if(!nettoyerLaMaison.equals("")) {
-				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)nombreElement,(long) 3);
+				LiaisonOffreService liaisonOffreService=new LiaisonOffreService((long)numberElement,(long) 3);
 				liaisonOffreServiceDao.save(liaisonOffreService);
 			}
 			/////////IMAGE UPLOAD/////////////
-	        File repertoire = new File("C:\\Users\\mathi\\eclipse-workspace\\newthome-3\\src\\main\\resources\\static\\images\\photosAnnonces\\"+nombreElement);
-	        boolean res=repertoire.mkdir();
-			File repertoireImageRecu = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
-	        String liste[] = repertoireImageRecu.list();
-
-			for(String element:liste) {
-				Path source=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+element);
-				Path destination=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+nombreElement+"\\"+element);
-
-				try {
-					Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
-					Files.delete(source);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			writeImagesPermanently(numberElement);
 		}
 		return "Utilisateur_ajouterAnnonce";
+	}
+	
+	public boolean areTheStringValid(String[] valuesStringInserted) {
+		boolean isItValidAd=true;
+		for(String value:valuesStringInserted) {
+			if(value.equals("")) {
+				isItValidAd=false;
+			}
+		}
+		return isItValidAd;
+	}
+	
+	public boolean isThereConstraintAndService(String[] valuesCheckboxConstraint,String[] valuesCheckboxService) {
+		boolean isItValidAd=false;
+		boolean isThereAnConstraint=false;
+		boolean isThereAnService=false;
+		for(String value:valuesCheckboxConstraint) {
+			if(!value.equals("")){
+				isThereAnConstraint=true;
+			}
+		}
+		for(String value:valuesCheckboxService) {
+			if(!value.equals("")){
+				isThereAnService=true;
+			}
+		}
+		isItValidAd=isThereAnConstraint && isThereAnService;
+		return isItValidAd;
+	}
+	
+	
+	/*
+	 * if we return true we have written the files
+	 * If not we return false
+	 */
+	public boolean writeImagesPermanently(Long numberElement) {
+		boolean isItSuccess=true;
+        File folder = new File("C:\\Users\\mathi\\eclipse-workspace\\newthome-3\\src\\main\\resources\\static\\images\\photosAnnonces\\"+numberElement);
+        boolean res=folder.mkdir();
+		File folderForReceivedFiles = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\");
+        String listOfNameOfTheReceivedFiles[] = folderForReceivedFiles.list();
+        
+		for(String element:listOfNameOfTheReceivedFiles) {
+			Path source=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\"+element);
+			Path destination=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+numberElement+"\\"+element);
+
+			try {
+				Files.copy(source, destination,StandardCopyOption.REPLACE_EXISTING);
+				Files.delete(source);
+			} catch (IOException e) {
+				e.printStackTrace();
+				isItSuccess=false;
+			}
+		}
+		return isItSuccess;
 	}
 }

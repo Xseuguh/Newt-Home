@@ -25,51 +25,59 @@
 		<h1>Newt'Home</h1>
 	</header>
 	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
+	<script>
+		function raiseConcernWhenDiscard(){
+			event.preventDefault()
+			var questionResult=confirm("Etes vous sur?");
+			if(questionResult==true){
+				window.location.href="/annonce/modifierImage";
+			}
+		}
+	</script>
 	<div class="tout">
 		<h2>Mon annonce 1/2</h2>
-		
 		<div class="container">
-			
-
 			<!-- UPLOAD D IMAGE -->
 				<%
-				String where=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\";
-		        File repertoire = new File(where);
-		        String liste[] = repertoire.list();
-		        ArrayList<String> myList=new ArrayList<String>();
-		        for(String elt:liste){
-			        myList.add(elt);
-		        }
-				if(!(myList.isEmpty())){
-			       for(String elt:myList){
-			    	   request.setAttribute( "tmp", elt );
-			    	%>
-			    	   <div>
-			    	   <img src="<%=request.getContextPath()%>/images/photosAnnonces/ReceptionFichier/${tmp}"/>
-			    	   ${tmp}
-			    	   </div>
-			    	   <%
-			        }
-		    	   %>
-		    	   <br>
-		    	   <div>
-		    	   <form action="/updateAll" method="post">
-		    	   		<input type="submit" value="Modifier les fichiers">
-		    	   </form>
-		    	   </div>
-		    	   <br>
-		    	   <button onclick="window.location.href='/annonce/ajout'">Continuer</button>
-		    	   <%
-			    }
-				else{
-				%>
-				<form action="/annonce/ajoutImage" method="post" enctype="multipart/form-data">		
-			   		<input type="file" name="files" multiple>
-			   		<input type="submit" value="Upload Files">
-		   	   </form>
-			   <%
-			   }
-			   %>
+					String whereFolder=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\";
+			        File folder = new File(whereFolder);
+			        String listOfTheNameOfTheFiles[] = folder.list();
+			        if(listOfTheNameOfTheFiles.length==3){
+				        for(String element:listOfTheNameOfTheFiles){
+				        	request.setAttribute( "element", element);
+				    		%>
+				    	  	 <div>
+				    		   <img src="<%=request.getContextPath()%>/images/photosAnnonces/ReceptionFichier/${element}"/>
+				    	 	  ${element}
+				    	  	 </div>
+				    	<%
+				        }
+				    	%>
+				    	<br>
+				    	<div>
+				    	<form action="/annonce/modifierImage" method="post">
+				    	   	<input type="submit" onclick="raiseConcernWhenDiscard()" value="Modifier les fichiers">
+				    	</form>
+				    	</div>
+				    	<br>				    	
+				    	<button onclick="window.location.href='/annonce/ajout'">Continuer</button>
+				    <%
+			    	}
+					else{
+					%>
+						<!-- upload vide -->
+						<div>
+							ATTENTION VOUS DEVEZ METTRE NECESSAIREMENT 3 IMAGES<br>
+							Format accepte: jpeg, png
+							Tailles maximum: 15Mo
+						</div>
+						<form action="/annonce/ajoutImage" method="post" enctype="multipart/form-data">		
+					   		<input type="file" name="files" multiple>
+					   		<input type="submit" value="Upload Files">
+				   	   </form>
+			  		 <%
+			  	 	}
+			  		%>
 	</div>
 </body>
 </html>
