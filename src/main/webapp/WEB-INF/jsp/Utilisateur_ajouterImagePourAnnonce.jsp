@@ -3,6 +3,12 @@
 <%@ page import="java.io.File" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
+<%@page import = "java.nio.file.Files"%>
+<%@page import = "java.nio.file.Path" %>
+<%@page import = "java.nio.file.Paths" %>
+<%@page import = "java.io.IOException" %>
+ 
+ 
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +45,12 @@
 		<div class="container">
 			<!-- UPLOAD D IMAGE -->
 				<%
-					String whereFolder=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\ReceptionFichier\\";
+				String whereFolder=System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/ReceptionFichier/";
+				 String OS = System.getProperty("os.name").toLowerCase();
+					if(!OS.equals("mac os x") && !OS.equals("linux")) {
+						whereFolder = whereFolder.replace("/","\\");
+					}
+					
 			        File folder = new File(whereFolder);
 			        String listOfTheNameOfTheFiles[] = folder.list();
 			        if(listOfTheNameOfTheFiles.length==3){
