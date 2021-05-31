@@ -25,6 +25,9 @@ public interface OffresRepository extends JpaRepository<Offres, Long> {
 
 	@Query(value = "SELECT * FROM offres WHERE offres.id_user = :userID", nativeQuery = true)
 	public List<Offres> findByUserId(@Param("userID") Long userID);
+
+	@Query(value = "SELECT * FROM offres WHERE offres.id_user = :userID AND offres.id_offre = :id_offre LIMIT 1", nativeQuery = true)
+	public Offres findByIdWithUserVerification(@Param("id_offre") Long idOffre, @Param("userID") Long userID);
 	
 	@Transactional
 	@Modifying
