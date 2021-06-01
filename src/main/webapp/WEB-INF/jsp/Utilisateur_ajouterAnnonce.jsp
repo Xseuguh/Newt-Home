@@ -11,22 +11,21 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>Ajout d'annonce</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+ap.min.css"
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Utilisateur_ajouterAnnonce.css">
 <link href="<%=request.getContextPath()%>/css/generalCSS.css"
 	rel="stylesheet" />
+	
 </head>
 <body>
 	
     <jsp:include page="Header.jsp">
       <jsp:param name="isAuthenticated" value="true" />
     </jsp:include>
-	
-	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
 
 	<div class="tout">
 		<h2>Mon annonce 2/2</h2>
@@ -105,7 +104,12 @@
 			</div>
 		</div>
 	</div>
-
     <%@include file="Footer.jsp" %>
+    
+	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	
 </body>
 </html>

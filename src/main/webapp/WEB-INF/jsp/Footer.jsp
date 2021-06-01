@@ -1,5 +1,5 @@
+
 <footer class="Fin">
-  <a class="MenuP2" href="contacter">Contact</a>
-  <a class="MenuP2" href="cgu">CGU</a>
-  <a class="MenuP2" href="mentionLegale">Mention LÃ©gal</a>
+  <a class="MenuP2" href="cgu">CGU / Mentions Légales</a>
+  <a class="MenuP2" href="aPropos"> A propos</a>
 </footer>

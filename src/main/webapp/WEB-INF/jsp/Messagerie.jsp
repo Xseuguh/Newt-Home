@@ -10,6 +10,10 @@ prefix="c"%> <%@page import = "java.io.File"%>
       content="width=device-width, initial-scale=1, maximum-scale=1"
     />
     <title>Messagerie</title>
+    <link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+ap.min.css"
+	rel="stylesheet" />
 
     <link
       href="<%=request.getContextPath()%>/css/generalCSS.css"
@@ -105,5 +109,7 @@ prefix="c"%> <%@page import = "java.io.File"%>
     <script>
       setDefaultConversationID("${openConversationID}");
     </script>
+	<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
