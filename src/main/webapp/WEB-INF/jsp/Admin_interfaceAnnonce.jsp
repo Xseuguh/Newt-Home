@@ -19,9 +19,11 @@
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js">
 		
 	</script>
-	<header>
-		<h1>Newt'Home</h1>
-	</header>
+	
+    <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
+
 	<content>
 	<div class="container">
 		<form>
@@ -86,8 +88,7 @@
 	</div>
 	</div>
 	</content>
-	<br>
-	<br>
-	<footer> </footer>
+
+	<%@include file="Footer.jsp" %>
 </body>
 </html>

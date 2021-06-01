@@ -29,6 +29,10 @@ prefix="c"%> <%@page import = "java.io.File"%>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </head>
   <body>
+    <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
+
     <div id="profil">
       <div id="navbar">
         <button class="options" value="annonces">Mes annonces</button>
@@ -40,6 +44,9 @@ prefix="c"%> <%@page import = "java.io.File"%>
         <h1>Bienvenue sur votre page de profil</h1>
       </div>
     </div>
+
+    <%@include file="Footer.jsp" %>
+
     <script
       src="<%=request.getContextPath()%>/js/Profil.js"
       type="text/javascript"

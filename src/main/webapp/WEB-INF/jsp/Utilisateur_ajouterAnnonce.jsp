@@ -21,9 +21,11 @@
 <link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 </head>
 <body>
-	<header>
-		<h1>Newt'Home</h1>
-	</header>
+	
+    <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
+	
 	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
 	<div class="tout">
 		<h2>Mon annonce 2/2</h2>
@@ -118,5 +120,7 @@
 		</div>
 		</div>
 	</div>
+
+    <%@include file="Footer.jsp" %>
 </body>
 </html>

@@ -29,6 +29,10 @@ prefix="c"%> <%@page import = "java.io.File"%>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
+    <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
+
     <div id="messagerie">
       <div id="conversations">
         <div class="menu">
@@ -91,6 +95,9 @@ prefix="c"%> <%@page import = "java.io.File"%>
         </form>
       </div>
     </div>
+
+    <%@include file="Footer.jsp" %>
+
     <script
       src="<%=request.getContextPath()%>/js/Messagerie.js"
       type="text/javascript"
