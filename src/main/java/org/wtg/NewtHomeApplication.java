@@ -1,4 +1,4 @@
- package org.wtg;
+package org.wtg;
 
 
 import org.springframework.boot.SpringApplication;
@@ -39,32 +39,8 @@ public class NewtHomeApplication {
 		}
 		else {
 		}
-		 ApplicationContext ctx = SpringApplication.run(NewtHomeApplication.class, args);
-	    
-		OffresRepository offresDao=ctx.getBean(OffresRepository.class);
-		offresDao.save(new Offres((long)1, "Maison secondaire aux pays bas", "Une belle maison","Pays bas",
-				"Rotterdam", 1561, "rue des Hollandais volant", Date.valueOf("2021-05-05"),Date.valueOf("2021-05-05"), false));
-		offresDao.save(new Offres((long)1, "Maison en Suede", "Une maison au pays du pere noel. Bataille de boule de neige en perspective. N oubliez pas de prendre vos echarpes, et vos mitaines!","Suede",
-				"Stockholm", 1561, "avenue du pere noel", Date.valueOf("2021-05-05"),Date.valueOf("2021-05-05"), false));
-		offresDao.save(new Offres((long)1, "Maison en Suede", "Une maison au pays du pere noel. Bataille de boule de neige en perspective. N oubliez pas de prendre vos echarpes, et vos mitaines!","Suede",
-				"Stockholm", 1561, "avenue du pere noel", Date.valueOf("2021-05-05"),Date.valueOf("2021-05-05"), false));
-		offresDao.save(new Offres((long)1, "Maison en INDE", "Une maison pays du the!","Inde",
-				"New Delhi", 1561, "avenue de Gandhi", Date.valueOf("2021-05-05"),Date.valueOf("2021-05-05"), false));
-		
-		
-		LiaisonOffreContrainteRepository liaisonOffreContrainteDao=ctx.getBean(LiaisonOffreContrainteRepository.class);
-		LiaisonOffreServiceRepository liaisonOffreServiceDao=ctx.getBean(LiaisonOffreServiceRepository.class);
-
-		liaisonOffreContrainteDao.save(new LiaisonOffreContrainte((long)1,(long)1));
-		liaisonOffreContrainteDao.save(new LiaisonOffreContrainte((long)1,(long)2));
-		liaisonOffreContrainteDao.save(new LiaisonOffreContrainte((long)1,(long)3));
-		liaisonOffreContrainteDao.save(new LiaisonOffreContrainte((long)1,(long)4));
-		
-		liaisonOffreContrainteDao.save(new LiaisonOffreContrainte((long)2,(long)1));
-		liaisonOffreContrainteDao.save(new LiaisonOffreContrainte((long)2,(long)2));
-		
-		UserInfoRepository userDao=ctx.getBean(UserInfoRepository.class);
-		userDao.save(new UserInfo("Doe", "John", Date.valueOf("1914-05-05"), "john.doe@gmail.com", "johnjohn", false));
+		SpringApplication.run(NewtHomeApplication.class, args);
+	   
 	}
 
 }
