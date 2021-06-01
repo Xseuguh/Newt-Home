@@ -34,8 +34,6 @@
 
 #conversations {
   padding: 0;
-  /*TODO height a modifier une fois qu'on a le header et footer*/
-  height: 100vh;
   background-color: var(--bg_conv);
   display: flex;
   flex-direction: column;
@@ -48,7 +46,6 @@
 .onglet {
   display: flex;
   align-items: center;
-  /*/!\ une modif de la couleur ici doit également faire une modif dans l'autre fichier css (petit ecran) sur le selectionne*/
   background-color: var(--gris-bleu);
   margin: 10px;
   padding: 10px;
@@ -70,8 +67,6 @@
 #focusConversation {
   display: grid;
   grid-template-rows: 5em 8fr 1fr;
-  /*TODO height a modifier une fois qu'on a le header et footer*/
-  height: 100vh;
 }
 
 #titreConversation {

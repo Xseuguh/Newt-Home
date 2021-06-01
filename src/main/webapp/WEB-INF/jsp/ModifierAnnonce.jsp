@@ -8,6 +8,10 @@
 		<link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 	</head>
 	<body>
+		<jsp:include page="Header.jsp">
+		  <jsp:param name="isAuthenticated" value="true" />
+		</jsp:include>
+		
 			<form action="/ads/ValidationDesModifications?ref=${offresZoom.id_offre}" method="post">
 			
 				<label>Id Offre</label>					
@@ -740,5 +744,7 @@
 				
 				<input type="submit">
 				</form>
+
+				<%@include file="Footer.jsp" %>
 	</body>
 </html>
