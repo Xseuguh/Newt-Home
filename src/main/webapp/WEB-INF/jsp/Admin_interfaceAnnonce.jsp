@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Newt'Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gestion d'annonce</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -23,51 +24,48 @@
     <jsp:include page="Header.jsp">
       <jsp:param name="isAuthenticated" value="true" />
     </jsp:include>
-
-	<content>
 	<div class="container">
 		<form>
 			<input type="search" placeholder="Rechercher une annonce...">
 			<input type="submit" value="GO">
 		</form>
-
-		<h2>Resultats</h2>
 		<br> <br>
-		<table>
+		<div class="text-center">
+		<table class="table table-striped table-responsive text-center">
 			<tr>
-				<td>
+				<th scope="col">
 					Id Offre
-				</td>
-				<td>
-					Id Proprietaire
-				</td>
-				<td>
+				</th>
+				<th scope="col">
+					Id Propriétaire
+				</th>
+				<th scope="col">
 					Titre
-				</td>
-				<td>
+				</th>
+				<th scope="col">
 					Description
-				</td>
-				<td>
+				</th>
+				<th scope="col">
 					Adresse
-				</td>
-				<td>
+				</th>
+				<th scope="col">
 					Code Postal
-				</td>
-				<td>
+				</th>
+				<th scope="col">
 					Ville
-				</td>
-				<td>
+				</th>
+				<th scope="col">
 					Pays
-				</td>
-				<td>
+				</th>
+				<th scope="col">
 					Voir plus
-				</td>
-				<td>
-					Corriger
-				</td>
-				<td>
+				</th>
+				<th scope="col">
+					Modifier
+				</th>
+				<th scope="col">
 					Supprimer
-				</td>
+				</th>
 			</tr>
 			<c:forEach items="${offres}" var="offreAffiche">
 				<tr>
@@ -85,9 +83,10 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 	</div>
-	</div>
-	</content>
+	<br>
+	<br>
 
 	<%@include file="Footer.jsp" %>
 </body>
