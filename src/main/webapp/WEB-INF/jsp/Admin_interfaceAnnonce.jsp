@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gestion d'annonce</title>
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
@@ -15,6 +15,7 @@
 	href="<%=request.getContextPath()%>/css/Admin_interface.css">
 <link href="<%=request.getContextPath()%>/css/generalCSS.css"
 	rel="stylesheet" />
+	-->
 </head>
 <body>
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js">
@@ -25,8 +26,8 @@
       <jsp:param name="isAuthenticated" value="true" />
     </jsp:include>
 	<div class="container">
-		<form>
-			<input type="search" placeholder="Rechercher une annonce...">
+		<form method="GET" action="/Admin/Gestion/AnnoncePrecise">
+			<input type="search" placeholder="Rechercher une annonce..." name="recherche">
 			<input type="submit" value="GO">
 		</form>
 		<br> <br>

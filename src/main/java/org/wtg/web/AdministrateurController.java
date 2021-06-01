@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wtg.dao.LiaisonOffreContrainteRepository;
@@ -37,6 +38,14 @@ public class AdministrateurController {
 	
 	
 	/*************ANNONCES****************/
+	@GetMapping(value = "/Admin/Gestion/AnnoncePrecise")
+	public String searchAnnoncePrecise(Model model, @RequestParam(name = "recherche", defaultValue = "") String recherche) {
+		List<Offres> listOffres=offresDao.findByName("%"+recherche+"%");
+		model.addAttribute("offres", listOffres);
+		return "Admin_interfaceAnnonce";
+
+	}
+	
 	@RequestMapping(value = "/Admin/Gestion/Annonce")
 	public String lienAdminGestionAnnonce(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc) {
 		List<Offres> offres = offresDao.findByName("%" + mc + "%");
@@ -273,5 +282,13 @@ public class AdministrateurController {
 			@RequestParam(name = "mc", defaultValue = "") String mc) {
 		utilisateurDao.deleteById(id_user);
 		return "redirect:/Admin/Gestion/Utilisateur?motCle=" + mc;
+	}
+	
+	
+	@RequestMapping(value = "/Admin/Gestion/UtilisateurPrecis")
+	public String searchUserPrecis(Model model, @RequestParam(name = "recherche", defaultValue = "") String recherche) {
+		List<UserInfo> listeUtilisateurs = utilisateurDao.findByName("%"+recherche+"%");
+		model.addAttribute("listeUtilisateurs",listeUtilisateurs);
+		return "Admin_interfaceUtilisateur";
 	}
 }
