@@ -1,6 +1,8 @@
- package org.wtg;
+package org.wtg;
 
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.File;
 
 import org.springframework.boot.SpringApplication;
@@ -16,9 +18,9 @@ public class NewtHomeApplication {
 		if (!OS.equals("mac os x") && !OS.equals("linux")) {
 			path = path.replace("/", "\\");
 		}
-
 		new File(System.getProperty("user.dir") + path).mkdir();
 		SpringApplication.run(NewtHomeApplication.class, args);
+
 	}
 
 }
