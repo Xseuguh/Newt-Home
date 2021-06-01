@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Newt'Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gestion d'utilisateurs</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -20,37 +21,35 @@
 		
 	</script>
 	<header>
-		<h1>Newt'Home</h1>
+		<h1>Newt'Home gestion des utilisateurs</h1>
 	</header>
-	<content>
 	<div class="container">
 		<form>
 			<input type="search" placeholder="Rechercher un utilisateur...">
 			<input type="submit" value="GO">
 		</form>
-
-		<h2>Resultats</h2>
 		<br><br>
-		<table>
+		<div class="text-center">
+		<table class="table table-striped table-responsive text-center">
 			<tr>
-				<td>
+				<th scope="col">
 					Id Utilisateur
-				</td>
-				<td>
+				</th >
+				<th scope="col">
 					Nom
-				</td>
-				<td>
+				</th >
+				<th scope="col">
 					Prenom
-				</td>
-				<td>
+				</th >
+				<th scope="col">
 					mail
-				</td>
-				<td>
+				</th >
+				<th scope="col">
 					Date de naissance
-				</td>
-				<td>
+				</th >
+				<th scope="col">
 					Supprimer
-				</td>
+				</th >
 			</tr>
 			<c:forEach items="${listeUtilisateurs}" var="utilisateurAffiche">
 				<tr>
@@ -63,9 +62,8 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 	</div>
-	</div>
-	</content>
 	<br>
 	<br>
 	<footer> </footer>
