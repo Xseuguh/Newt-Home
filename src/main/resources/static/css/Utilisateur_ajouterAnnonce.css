@@ -8,10 +8,6 @@ h2 {
 	text-align: center;
 }
 
-body {
-	height: 100%;
-	width: 100%;
-}
 
 a {
 	color: black;
@@ -42,12 +38,12 @@ a:hover {
 }*/
 
 #specificationsUpload {
-	border: var(- -gris-pale) 1px solid;
-	border-radius: var(- -arrondi-normal);
+	border: var(--gris-pale) 1px solid;
+	border-radius: var(--arrondi-normal);
 	padding: 1.5em;
 	margin-bottom: 1em;
-	background: var(- -gris-pale);
-	color: var(- -bg_conv);
+	background: var(--gris-pale);
+	color: var(--bg_conv);
 	font-size: large;
 	font-weight: bold;
 }
@@ -82,27 +78,9 @@ textarea {
 	border-radius: var(- -arrondi-normal);
 }
 
-header {
-	position: absolute;
-	top: 0px;
-	height: 10%;
-	width: 100%;
-	background-color: #4c5b61;
-}
-
-footer {
-	height: 10%;
-	position: fixed;
-	bottom: 0%;
-	background-color: #4c5b61;
-	width: 100%;
-}
 
 .tout {
-	position: absolute;
-	top: 15%;
 	width: 100%;
-	height: 100%;
 }
 
 .row {
