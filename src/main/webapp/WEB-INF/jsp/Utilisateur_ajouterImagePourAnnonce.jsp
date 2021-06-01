@@ -27,9 +27,11 @@
 <link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 </head>
 <body>
-	<header>
-		<h1>Newt'Home</h1>
-	</header>
+	
+    <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
+
 	<script src="<%=request.getContextPath()%>/js/Utilisateur_ajouterAnnonce.js"></script>
 	<script>
 		function raiseConcernWhenDiscard(){
@@ -77,10 +79,10 @@
 					else{
 					%>
 						<!-- upload vide -->
-						<div>
+						<div id="specificationsUpload">
 							ATTENTION VOUS DEVEZ METTRE NECESSAIREMENT 3 IMAGES<br>
-							Format accepte: jpeg, png
-							Tailles maximum: 15Mo
+							Formats acceptés: jpeg, png
+							Taille maximum: 15Mo
 						</div>
 						<form action="/annonce/ajoutImage" method="post" enctype="multipart/form-data">		
 					   		<input type="file" name="files" multiple>
@@ -90,5 +92,7 @@
 			  	 	}
 			  		%>
 	</div>
+
+    <%@include file="Footer.jsp" %>
 </body>
 </html>

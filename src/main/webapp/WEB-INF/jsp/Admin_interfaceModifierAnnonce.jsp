@@ -8,6 +8,11 @@
 		<link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 	</head>
 	<body>
+	
+		<jsp:include page="Header.jsp">
+		  <jsp:param name="isAuthenticated" value="true" />
+		</jsp:include>
+	
 		<c:forEach items="${offresZoom}" var="offreAffiche">
 			<form action="/Admin/Modifier/Annonce/ValidationDesModifications?ref=${offreAffiche.id_offre}" method="post">
 			
@@ -744,5 +749,7 @@
 			<a href="/Admin/Zoom/Annonce?ref=${offreAffiche.id_offre}"><img src="<%=request.getContextPath()%>/images/zoom.png" alt="zoom"></a>
 			<br><a href="/Admin/Supprimer/Annonce?ref=${offreAffiche.id_offre}" onclick="return confirm('Please Confirm')"><img src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a>	
 			</c:forEach>
+
+		<%@include file="Footer.jsp" %>
 	</body>
 </html>

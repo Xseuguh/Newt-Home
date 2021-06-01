@@ -18,7 +18,9 @@
 </head>
 <body>
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<header></header>
+	<jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
 	<h1>Gestion des annonces et des utilisateurs</h1>
 	<h2>Cliquez sur ce que vous voulez gérer.</h2>
 	<div class="container">
@@ -33,6 +35,6 @@
 	</div>
 	<br>
 	<br>
-	<footer> </footer>
+	<%@include file="Footer.jsp" %>
 </body>
 </html>

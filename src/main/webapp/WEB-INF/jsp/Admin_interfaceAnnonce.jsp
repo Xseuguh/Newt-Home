@@ -20,9 +20,10 @@
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js">
 		
 	</script>
-	<header>
-		<h1>Newt'Home gestion des annonces</h1>
-	</header>
+	
+    <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
 	<div class="container">
 		<form>
 			<input type="search" placeholder="Rechercher une annonce...">
@@ -86,6 +87,7 @@
 	</div>
 	<br>
 	<br>
-	<footer> </footer>
+
+	<%@include file="Footer.jsp" %>
 </body>
 </html>
