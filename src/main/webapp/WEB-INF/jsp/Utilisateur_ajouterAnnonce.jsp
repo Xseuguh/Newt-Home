@@ -70,9 +70,9 @@ ap.min.css"
 								type="date" id="date_limite_string" name="date_limite_string">
 							<br> <br>
 							</div>
-							<div>Pour que l'annonce soit accepteée il est demandé de
+							<div class="descCS" >Pour que l'annonce soit accepteée il est demandé de
 								mettre: au moins un service et une contrainte</div>
-							<p id="contraintes">
+							<p id="contraintes" class="descCS">
 								Contraintes:<br> <input type="checkbox"
 									name="deuxEnfantsMax" id="deuxEnfantsMax" /> <label
 									for="deuxEnfantsMax">2 enfants maximum par logement</label> <br>
@@ -86,7 +86,7 @@ ap.min.css"
 									id="cigarette" /> <label for="cigarette">Pas de
 									cigarettes</label> <br> <br>
 							</p>
-							<p id="services">
+							<p id="services" class="descCS">
 								Services:<br> <input type="checkbox" name="arroserPlante"
 									id="arroserPlante" /> <label>Arroser les plantes</label> <input
 									type="checkbox" name="garderLesAnimaux" id="garderLesAnimaux" />
@@ -96,7 +96,7 @@ ap.min.css"
 							</p>
 							<br>
 							<div class="text-center">
-								<input type="submit" value="Valider" id="boutonSubmit">
+								<input type="submit" value="Valider" class="boutonSubmit">
 							</div>
 						</form>
 				</div>

@@ -7,17 +7,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gestion administrateur</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+ap.min.css"
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Admin_interface.css">
 <link href="<%=request.getContextPath()%>/css/generalCSS.css"
 	rel="stylesheet" />
 </head>
 <body>
-	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<jsp:include page="Header.jsp">
       <jsp:param name="isAuthenticated" value="true" />
     </jsp:include>
@@ -36,5 +35,8 @@
 	</div>
 	</div>
 	<%@include file="Footer.jsp" %>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

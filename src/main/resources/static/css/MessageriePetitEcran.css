@@ -13,7 +13,7 @@
 }
 
 #selectionne {
-  background-color: var(--gris-bleu);
+  background-color: var(--bg-ppal);
 }
 
 #selectionne:hover {

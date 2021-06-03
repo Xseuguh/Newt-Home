@@ -58,11 +58,11 @@ ap.min.css"
 				    	<br>
 				    	<div>
 				    	<form action="/annonce/modifierImage" method="post">
-				    	   	<input type="submit" onclick="raiseConcernWhenDiscard()" value="Modifier les fichiers">
+				    	   	<input  class="boutonSubmit" type="submit" onclick="raiseConcernWhenDiscard()" value="Modifier les fichiers">
 				    	</form>
 				    	</div>
 				    	<br>				    	
-				    	<button onclick="window.location.href='/annonce/ajout'">Continuer</button>
+				    	<button class="boutonSubmit" onclick="window.location.href='/annonce/ajout'">Continuer</button>
 				    <%
 			    	}
 					else{
@@ -74,8 +74,8 @@ ap.min.css"
 							Taille maximum: 15Mo
 						</div>
 						<form action="/annonce/ajoutImage" method="post" enctype="multipart/form-data">		
-					   		<input type="file" name="files" multiple>
-					   		<input type="submit" value="Upload Files">
+					   		<input type="file" name="files" class="boutonSubmit" multiple>
+					   		<input class="boutonSubmit" type="submit" value="Upload Files" >
 				   	   </form>
 			  		 <%
 			  	 	}
