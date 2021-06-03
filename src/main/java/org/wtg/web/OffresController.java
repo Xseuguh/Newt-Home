@@ -87,7 +87,7 @@ public class OffresController {
 			Date date_debut = Date.valueOf(date_debut_string);
 			Date date_limite = Date.valueOf(date_limite_string);
 
-			Offres offresAjoutee = new Offres((long) 118218, titreAnnonce, descriptionAnnonce, paysAnnonce,
+			Offres offresAjoutee = new Offres((long) 1, titreAnnonce, descriptionAnnonce, paysAnnonce,
 					villeAnnonce, codePostalAnnonce, adresseAnnonce, date_debut, date_limite, false);
 			offresDao.save(offresAjoutee);
 			
@@ -136,7 +136,9 @@ public class OffresController {
 			}
 			/////////IMAGE UPLOAD/////////////
 			writeImagesPermanently(numberElement);
+			return "redirect:/profil/";
 		}
+		
 		return "Utilisateur_ajouterAnnonce";
 	}
 	
