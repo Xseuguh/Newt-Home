@@ -3,7 +3,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 <html>
 	<head>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Modification d'annonces</title>
+		<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+ap.min.css"
+	rel="stylesheet" />
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/Admin_interface.css">
 		<link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 	</head>
@@ -14,7 +20,7 @@
 		</jsp:include>
 	
 		<c:forEach items="${offresZoom}" var="offreAffiche">
-			<form action="/Admin/Modifier/Annonce/ValidationDesModifications?ref=${offreAffiche.id_offre}" method="post">
+			<form id="formModification" class="text-center" action="/Admin/Modifier/Annonce/ValidationDesModifications?ref=${offreAffiche.id_offre}" method="post">
 			
 				<label>Id Offre</label>					
 				<span>${offreAffiche.id_offre}</span>
@@ -25,34 +31,42 @@
 				</br>
 				
 				<label for="titreAnnonce">Titre</label>
+				<br>
 				<input type="text" id="titreAnnonce" name="titreAnnonce" value="${offreAffiche.titre}"/>
 				<br>
 			
 				<label for="descriptionAnnonce">Description</label>
+				<br>
 				<input type="text" id="descriptionAnnonce" name="descriptionAnnonce" value="${offreAffiche.description}"/>
 				<br>
 			
 				<label for="adresseAnnonce">Adresse</label>
+				<br>
 				<input type="text" id="adresseAnnonce" name="adresseAnnonce" value="${offreAffiche.adresse}"/>
 				<br>
 				
 				<label for="codePostalAnnonce">Code postal:</label>
+				<br>
 				<input type="text" id="codePostalAnnonce" name="codePostalAnnonce" value="${offreAffiche.code_postal}"/>
 				<br>
 					
 				<label for="villeAnnonce">Ville</label>
+				<br>
 				<input type="text" id="villeAnnonce" name="villeAnnonce" value="${offreAffiche.ville}"/>
 				<br>
 					
 				<label for="paysAnnonce">Pays</label>
+				<br>
 				<input type="text" id="paysAnonce" name="paysAnnonce" value="${offreAffiche.pays}"/>
 				<br>
 					
 				<label for="dateDebutAnnonce">Date de debut</label>
+				<br>
 				<input type="date" id="dateDebutAnnonce" name="dateDebutAnnonce" value="${offreAffiche.date_debut}"/>
 				<br>
 					
 				<label for="dateFinAnnonce">Date de fin</label>
+				<br>
 				<input type="date" id="dateFinAnnonce" name="dateFinAnnonce" value="${offreAffiche.date_limite}"/>
 				<br>
 				
@@ -744,12 +758,15 @@
 					</c:if>
 				</p>
 				
-				<input type="submit">
+				<input type="submit" class="boutonSubmit">
 				</form>
 			<a href="/Admin/Zoom/Annonce?ref=${offreAffiche.id_offre}"><img src="<%=request.getContextPath()%>/images/zoom.png" alt="zoom"></a>
 			<br><a href="/Admin/Supprimer/Annonce?ref=${offreAffiche.id_offre}" onclick="return confirm('Please Confirm')"><img src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a>	
 			</c:forEach>
 
 		<%@include file="Footer.jsp" %>
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	</body>
 </html>

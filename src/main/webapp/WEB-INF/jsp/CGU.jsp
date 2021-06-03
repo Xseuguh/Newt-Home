@@ -20,9 +20,11 @@ ap.min.css"
 
 </head>
 <body>
-	<header></header>
+	 <jsp:include page="Header.jsp">
+      <jsp:param name="isAuthenticated" value="true" />
+    </jsp:include>
 	<div class="container">
-		<div class="row rechercheSimple" id="rechercheDiv">
+		<div class="textePagesStatiques">
 			<h1>Mentions légales</h1>
 			<div>
 				<p>
@@ -85,6 +87,6 @@ ap.min.css"
 			</div>
 		</div>
 	</div>
-	<footer></footer>
+	<%@include file="Footer.jsp" %>
 </body>
 </html>

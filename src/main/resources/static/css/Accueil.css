@@ -18,6 +18,8 @@ input::placeholder {
 	color: #434544;
 }
 
+
+
 #thumbnail {
 	width: 80%;
 }
@@ -40,10 +42,22 @@ img.resize {
 }
 
 .boutonRecherche {
-	background-color: #c5c5c5;
-	border-radius: var(- -arrondi-normal);
-	margin-top: 1em;
+	border-radius: var(--arrondi-normal);
+	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 0.3em #eee;
+            display: block;
+            margin-top: 1em;
 }
+.boutonRecherche:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         
 
 #titre {
 	margin-bottom: 1em;
@@ -52,8 +66,22 @@ img.resize {
 }
 
 #openButton {
-	background: #c5c5c5;
-	border: 1px black solid;
+	border-radius: var(--arrondi-normal);
+	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 0.3em #eee;
+            display: block;
+
+}
+
+#openButton:hover {
+	
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
 }
 
 #formRedirectionMessage {
@@ -73,6 +101,7 @@ img.resize {
 	border: #c5c5c5 solid;
 	border-radius: 1em;
 	margin: 2em;
+	color: floralwhite;
 }
 
 .listeCS {

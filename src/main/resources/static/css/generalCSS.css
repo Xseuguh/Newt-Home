@@ -5,6 +5,7 @@
   /*Couleurs*/
   --rouge-fonce: #a4243b;
   --gris-bleu: #829191;
+  --bg-ppal : #704A58;
   --beige-fonce: #b6aa84;
   --orange-clair: #eeab4c;
   --orange: #d8973c;
@@ -14,7 +15,7 @@
   --gris-pale: #c5c5c5;
   --gris: #a6a6a6;
   --gris-vert: #4c5b61;
-  --bg_conv: #687878;
+  --bg_conv: #B56D82;
   --noir: #333333;
 
   /*Arrondi*/
@@ -30,7 +31,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background-color: var(--gris-bleu);
+  background-color: var(--bg-ppal);
 }
 
 body {
@@ -74,6 +75,10 @@ textarea {
   cursor: pointer;
 }
 
+.textePagesStatiques{
+	color: floralwhite;
+}
+
 /* HEADER et FOOTER */
 /* Partie Header */
 header {
@@ -109,15 +114,12 @@ header {
   .navbar-brand {
         font-size: 11vw !important;
 }
-.icon-bar{
-	background-color:#9d9d9d !important;
-}
 }
 
 .navbar-brand {
-        font-size: 3vw;
-        text-align: center;
-  color: white;
+  font-size: 3vw;
+  text-align: center;
+  color: white !important;
   margin: 0;
   margin-left: 20px;
 }
@@ -138,7 +140,7 @@ header {
 .MenuP2 {
   font-weight: bold;
   font-size: 100%;
-  color: #555555;
+  color: floralwhite;
   text-decoration: none;
 }
 

@@ -7,32 +7,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gestion d'annonce</title>
-<!-- <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+ <link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+ap.min.css"
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Admin_interface.css">
 <link href="<%=request.getContextPath()%>/css/generalCSS.css"
-	rel="stylesheet" />
-	-->
+	rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	
 </head>
 <body>
-	<script src="https://code.jquery.com/jquery-1.11.2.min.js">
-		
-	</script>
 	
     <jsp:include page="Header.jsp">
       <jsp:param name="isAuthenticated" value="true" />
     </jsp:include>
-	<div class="container">
+    <div class="tout table-responsive barreRechercheAdmin">
 		<form method="GET" action="/Admin/Gestion/AnnoncePrecise">
 			<input type="search" placeholder="Rechercher une annonce..." name="recherche">
 			<input type="submit" value="GO">
 		</form>
 		<br> <br>
-		<div class="text-center">
-		<table class="table table-striped table-responsive text-center">
+		<div class="text-center" >
+		<table class=" table text-center tableAffichage">
 			<tr>
 				<th scope="col">
 					Id Offre
@@ -86,9 +86,6 @@
 		</table>
 		</div>
 	</div>
-	<br>
-	<br>
-
 	<%@include file="Footer.jsp" %>
 </body>
 </html>

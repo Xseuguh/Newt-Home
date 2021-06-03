@@ -4,7 +4,7 @@ h1 {
 }
 
 h2 {
-	background-color: var(- -gris-pale);
+	color: floralwhite;
 	text-align: center;
 }
 
@@ -18,24 +18,22 @@ a:hover {
 	text-decoration: none
 }
 
-/*#form2 {
-	background-color: var(- -gris-pale);
-	border: 2px solid var(- -gris);
-	border-radius: var(- -arrondi-normal);
-	padding: 0.6em;
-}*/
-
-#boutonSubmit{
-	background-color: #c5c5c5;
-	border-radius: var(- -arrondi-normal);
+.boutonSubmit {
+	border-radius: var(--arrondi-normal);
 	margin-top: 1em;
+	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 0.3em #eee;
+            margin-top: 1em;
 }
-/*label {
-	width: 5em;
-	display: inline-block;
-	vertical-align: top;
-	margin: 6px;
-}*/
+.boutonSubmit:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
 
 #specificationsUpload {
 	border: var(--gris-pale) 1px solid;
@@ -50,13 +48,18 @@ a:hover {
 
 #uploadImages{
 	margin-bottom: 1.5em;
+	color:floralwhite;
 }
 
 #formAjout > input, #formAjout > textarea{
 	border-radius: var(--arrondi-normal);
     padding: 0.4em;
-    background: var(--gris-bleu);
+    background: var(--bg-ppal);
     border: var(--gris-pale) 0.2em solid;
+}
+
+#formAjout  label, .descCS{
+	color: floralwhite;
 }
 
 #formAjout{
@@ -74,9 +77,6 @@ textarea {
 	margin-left: 6px;
 }
 
-#boutonSubmit {
-	border-radius: var(- -arrondi-normal);
-}
 
 
 .tout {
