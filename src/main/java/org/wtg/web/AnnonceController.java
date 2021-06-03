@@ -262,7 +262,7 @@ public class AnnonceController {
 	@GetMapping(path = "/ads/editing")
 	public String editing(Model model, @RequestParam(name = "id", defaultValue = "") Long id_offre) {
 
-		Offres offreToEdit = offresDao.findByIdWithUserVerification(USER_ID, id_offre);
+		Offres offreToEdit = offresDao.findByIdWithUserVerification(id_offre, USER_ID);
 		if (offreToEdit == null) {
 			return "Error";
 		}
@@ -352,7 +352,21 @@ public class AnnonceController {
 			@RequestParam(name = "arroserPlante", defaultValue = "") String arroserPlante,
 			@RequestParam(name = "garderLesAnimaux", defaultValue = "") String garderLesAnimaux,
 			@RequestParam(name = "nettoyerLaMaison", defaultValue = "") String nettoyerLaMaison) {
-		if (!(titreAnnonce.equals(""))) {
+		
+		String[] valuesStringInserted= {descriptionAnnonce,titreAnnonce,adresseAnnonce,
+				villeAnnonce,paysAnnonce,dateDebutAnnonce,dateFinAnnonce};
+		
+		String[] valuesCheckboxConstraint= {deuxEnfantsMax,animaux,pasDenfantsAutorises,
+				pasDeBruitApres23H,pasDeCigarettes};
+		
+		String[] valuesCheckboxService= {arroserPlante,garderLesAnimaux,
+				nettoyerLaMaison};
+		
+		boolean areTheStringValidated=areTheStringValid(valuesStringInserted);
+		boolean isCorrectForConstraintAndService=isThereConstraintAndService(valuesCheckboxConstraint,valuesCheckboxService);
+		boolean isInsertable=areTheStringValidated && isCorrectForConstraintAndService;
+		
+		if (isInsertable) {
 			System.out.println(pourvuAnnonce);
 			List<Offres> listeDesOffresMisesAJour = offresDao.findByIdOffre(id_offre);
 			Offres offreMiseAJour = listeDesOffresMisesAJour.get(0);
@@ -458,8 +472,39 @@ public class AnnonceController {
 				}
 				offresDao.save(offreMiseAJour);
 			}
+			return "redirect:/profil/";
 		}
-		return "redirect:/profil/";
+		else {
+			return "redirect:/ads/editing?id="+id_offre;
+		}
+	}
+	
+	public boolean areTheStringValid(String[] valuesStringInserted) {
+		boolean isItValidAd=true;
+		for(String value:valuesStringInserted) {
+			if(value.equals("")) {
+				isItValidAd=false;
+			}
+		}
+		return isItValidAd;
+	}
+	
+	public boolean isThereConstraintAndService(String[] valuesCheckboxConstraint,String[] valuesCheckboxService) {
+		boolean isItValidAd=false;
+		boolean isThereAnConstraint=false;
+		boolean isThereAnService=false;
+		for(String value:valuesCheckboxConstraint) {
+			if(!value.equals("")){
+				isThereAnConstraint=true;
+			}
+		}
+		for(String value:valuesCheckboxService) {
+			if(!value.equals("")){
+				isThereAnService=true;
+			}
+		}
+		isItValidAd=isThereAnConstraint && isThereAnService;
+		return isItValidAd;
 	}
 
 }
