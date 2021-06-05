@@ -38,35 +38,43 @@ content {
   margin-left: 5px;
 }
 
-#boutonAdminD, #boutonAdminG, .boutonSubmit {
-	border-radius: var(--arrondi-normal) !important;
-	margin-top: 1em;
-	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
-            text-align: center;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 0.3em #eee;
-            margin-top: 1em;
-
+#boutonAdminD,
+#boutonAdminG,
+.boutonSubmit {
+  border-radius: var(--arrondi-normal) !important;
+  margin-top: 1em;
+  background-image: linear-gradient(
+    to right,
+    var(--noir) 0%,
+    #704a58 51%,
+    var(--noir) 100%
+  );
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 0.3em #eee;
+  margin-top: 1em;
 }
 
-#boutonAdminD:hover,  #boutonAdminG:hover, .boutonSubmit:hover{
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
-
-#boutonAdminG{
-	margin-right: 20vw !important;
+#boutonAdminD:hover,
+#boutonAdminG:hover,
+.boutonSubmit:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
 
-.barreRechercheAdmin{
-	margin-top:3vw;
+#boutonAdminG {
+  margin-right: 20vw !important;
 }
 
-.tableAffichage{
-	color: floralwhite;
+.barreRechercheAdmin {
+  margin-top: 3vw;
+}
+
+.tableAffichage {
+  color: var(--white);
 }
 
 img {
@@ -74,27 +82,26 @@ img {
 }
 
 .tout {
-	width: 100%;
+  width: 100%;
 }
-#formModification  label, #formModification  span {
-	color: floralwhite;
-}
-
-#formModification{
-	padding: 2em 0.5em;
-	border: var(--gris-pale) solid;
-	border-radius: var(--arrondi-normal);
-	margin-top: 3vw;
-	
+#formModification label,
+#formModification span {
+  color: var(--white);
 }
 
-.table{
-   display: block !important;
-   overflow-x: auto !important;
-   width: 100% !important;
- }
- 
- .table-responsive{
- border:none !important;
- 
- }
+#formModification {
+  padding: 2em 0.5em;
+  border: var(--gris-pale) solid;
+  border-radius: var(--arrondi-normal);
+  margin-top: 3vw;
+}
+
+.table {
+  display: block !important;
+  overflow-x: auto !important;
+  width: 100% !important;
+}
+
+.table-responsive {
+  border: none !important;
+}

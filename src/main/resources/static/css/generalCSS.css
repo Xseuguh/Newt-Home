@@ -130,18 +130,16 @@ header {
   border: none;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .navbar-brand {
-    font-size: 11vw !important;
-  }
-}
-
 .navbar-brand {
-  font-size: 3vw;
+  font-size: 2em;
   text-align: center;
   color: white !important;
   margin: 0;
   margin-left: 20px;
+}
+
+.headerOptions {
+  color: var(--white);
 }
 
 /* Fin Header */
@@ -158,7 +156,7 @@ header {
 .MenuP2 {
   font-weight: bold;
   font-size: 100%;
-  color: floralwhite;
+  color: var(--white);
   text-decoration: none;
 }
 
