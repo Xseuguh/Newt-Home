@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: floralwhite;
+  color: var(--white);
 }
 
 #navbar {
@@ -76,12 +76,25 @@
   background-color: var(--bg_conv);
 }
 
-.annonces:hover {
+/* .annonces:hover {
   cursor: pointer;
+} */
+
+.adTitleAndState {
+  line-height: 2em;
+}
+
+.state {
+  border-radius: var(--arrondi-normal);
+  padding: 10px;
 }
 
 .listUserApplying td {
   width: 20%;
+}
+
+.modalApplicant {
+  color: var(--noir);
 }
 
 /*Pour l'affichage des paramètres*/
@@ -102,13 +115,10 @@
   flex-direction: column;
   width: 100%;
   text-align: center;
-  
 }
 
-
 #modificationInfo legend {
-  color: floralwhite;
-  
+  color: var(--white);
 }
 
 #modificationInfo input {

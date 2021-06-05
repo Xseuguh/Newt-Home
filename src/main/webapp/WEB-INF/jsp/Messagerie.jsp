@@ -11,9 +11,10 @@ prefix="c"%> <%@page import = "java.io.File"%>
     />
     <title>Messagerie</title>
     <link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
 ap.min.css"
-	rel="stylesheet" />
+      rel="stylesheet"
+    />
 
     <link
       href="<%=request.getContextPath()%>/css/generalCSS.css"
@@ -43,13 +44,8 @@ ap.min.css"
           <h1>Messagerie</h1>
         </div>
         <ul id="correspondants">
-          <!-- 
-              Chaque li sera généré au rechargement de la page, en se basant sur les conversations en bdd
-              value = ID dans la bdd, dont on aura besoin pour faire des requêtes ajax si on ouvre la conversation
-              On affiche le nom du correspondant
-            -->
           <c:forEach items="${conversations}" var="conv">
-            <li class="onglet" value="${conv.id_conversation}">
+            <li class="onglet clickable" value="${conv.id_conversation}">
               <img
                 class="rond"
                 src="<%=request.getContextPath()%>/images/user/${conv.receiverID}.png"
@@ -63,7 +59,7 @@ ap.min.css"
       </div>
       <div id="focusConversation">
         <div id="menuConversation">
-          <div id="retourMenu">
+          <div id="retourMenu" class="clickable">
             <img
               src="<%=request.getContextPath()%>/images/messagerie/flecheGauche.png"
               width="40em"
@@ -92,6 +88,7 @@ ap.min.css"
             ></textarea>
             <input
               id="boutonEnvoi"
+              class="clickable"
               type="image"
               src="<%=request.getContextPath()%>/images/messagerie/envoiMessage.png"
             />
@@ -109,7 +106,9 @@ ap.min.css"
     <script>
       setDefaultConversationID("${openConversationID}");
     </script>
-	<script id="scriptBTS"
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script
+      id="scriptBTS"
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"
+    ></script>
   </body>
 </html>
