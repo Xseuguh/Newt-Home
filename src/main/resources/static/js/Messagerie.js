@@ -34,7 +34,7 @@ async function updateConversations() {
     for (let i = currentNumberOfConversations; i < conversations.length; i++) {
       const conversation = conversations[i];
       conversationsList.prepend(`
-          <li class="onglet" value="${conversation.id_conversation}">
+          <li class="onglet clickable" value="${conversation.id_conversation}">
             <img
               class="rond"
               src="../images/user/${conversation.receiverID}.png"
@@ -47,21 +47,28 @@ async function updateConversations() {
     }
   });
 
+  $(".onglet").off();
+
   $(".onglet").click(async (e) => {
     isOnConversationMenu = false;
     switchSiEcranPlusPetitQue(TAILLE_PETIT_ECRAN);
     supprimeChampDestinataire();
 
     retireIDSelectionne();
-    e.target.id = "selectionne";
+    e.currentTarget.id = "selectionne";
 
-    conversationID = parseInt(e.target.value);
+    conversationID = parseInt(e.currentTarget.value);
     await afficheConversation(conversationID, true);
 
-    const expediteurName = e.target.textContent;
+    const expediteurName = e.currentTarget.textContent
+      ? e.currentTarget.textContent
+      : e.target.textContent;
     $("#titreConversation").html(expediteurName);
 
-    const srcImg = e.target.children[0].src.split("/");
+    const src = e.currentTarget.children[0].src
+      ? e.currentTarget.children[0].src
+      : e.target.children[0].src;
+    const srcImg = src.split("/");
     //Mettre le lien de l'image du profil de l'expéditeur
     $("#imageTitreConversation").attr({
       src: `../images/user/${srcImg[srcImg.length - 1]}`,

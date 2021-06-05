@@ -94,7 +94,9 @@ async function affichageOption(choix) {
     </form>`;
   }
 
-  const elements = ['<ul id="liste">', ...generationHtml(data, choix), "</ul>"];
+  const htmlList = await generationHtml(data, choix);
+
+  const elements = ['<ul id="liste">', ...htmlList, "</ul>"];
   if (choix === "annonces") {
     //TODO CHANGER L'URL PAR LA BONNE
     elements.unshift(
@@ -105,37 +107,71 @@ async function affichageOption(choix) {
 }
 
 //Fonction qui va générer l'html pour les annonces/reservations (sous forme de liste)
-function generationHtml(tableauElements, choix) {
-  return tableauElements.map(
-    (element) =>
-      `<li class="${choix}" 
+async function generationHtml(tableauElements, choix) {
+  return await Promise.all(
+    tableauElements.map(async (element) => {
+      let users = [];
+      if (choix === "annonces" && !element.pourvu) {
+        users = await $.getJSON(
+          `getUserWhoApply?offreID=${element.id_offre}`,
+          (users) => users
+        );
+      }
+
+      // console.log(users);
+
+      return `<li 
+        class="${choix} ${users.length > 0 ? "clickable" : ""}" 
         id="${element.id_offre}" 
         data-toggle="modal" 
         data-target="#modalOffre${element.id_offre}">
-        <p>
+        <p class="adTitleAndState">
           ${element.titre}
-          <span>
-            ${
-              element.pourvu || element.accepte
-                ? "L'offre est pourvue"
-                : "L'offre n'est pas pourvue"
-            }
-          </span>
-          <a href="/ads/editing?id=${element.id_offre}">Edit</a>
-          <a onclick="removeElement('${choix}',${element.id_offre})">Delete</a>
+          ${addOptionsForTheAdd(choix, element)}
+          ${imageForStateOf(element, choix, users.length)}
         </p>
         <p>${element.description}</p>
         <p>${element.adresse}, ${element.ville} (${element.code_postal} ${
         element.pays
       })</p>
       </li>
-      ${
-        choix === "annonces" && !element.pourvu
-          ? createModal(element.id_offre)
-          : ""
-      }
-      `
+      ${createModal(users, element.id_offre)}
+      `;
+    })
   );
+}
+
+function addOptionsForTheAdd(choix, element) {
+  if (choix === "annonces") {
+    return `<a href="/ads/editing?id=${element.id_offre}" title="Éditer l'offre">
+        <img class="clickable smallIcon" src="../images/icones/edit.png" />
+      </a>
+      <a onclick="removeElement('${choix}',${element.id_offre})" title="Supprimer l'offre">
+        <img class="clickable smallIcon" src="../images/icones/trash.png" />
+      </a>`;
+  }
+  return `<a onclick="removeElement('${choix}',${element.id_offre})" title="Supprimer la demande">
+      <img class="clickable smallIcon" src="../images/icones/trash.png" />
+    </a>`;
+}
+
+function imageForStateOf(element, choix, numberOfApplicant) {
+  if (choix === "annonces") {
+    if (element.pourvu) {
+      return '<div class="green state">Cette offre est pourvu</div>';
+    }
+    if (numberOfApplicant > 0) {
+      return '<div class="orange state">Des gens ont postulé à cette offre</div>';
+    }
+    return '<div class="red state">Pour le moment personne ne postule à cette offre</div>';
+  }
+  if (parseInt(element.accepte) === 1) {
+    return '<div class="green state">Votre demande a été accepté</div>';
+  }
+  if (parseInt(element.accepte) === 2) {
+    return '<div class="red state">Votre demande a été refusé</div>';
+  }
+  return '<div class="orange state">En attente</div>';
 }
 
 function attachActionTo(choix) {
@@ -205,8 +241,6 @@ function attachActionTo(choix) {
           data["newPassword"] = $("#nouveauMotDePasse").val();
         }
 
-        console.log(data);
-
         $.post("/profil/updateInfo", data, "json")
           .done(() => {
             $(`.options[value="parametres"]`).click();
@@ -269,71 +303,69 @@ function displayError(errors, inputID) {
   $(`#${inputID}`).prev(".error").html(errors.join("<br/>"));
 }
 
-function createModal(annonceID) {
-  $.getJSON(`getUserWhoApply?offreID=${annonceID}`, (users) => {
-    if (users.length > 0) {
-      console.log(users);
-      $(`#${annonceID}`).after(`
-      <div class="modal" id="modalOffre${annonceID}" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Liste des utilisateurs postulant à cette annonce :</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table class="listUserApplying">
-                  ${users
-                    .map(
-                      (user) =>
-                        `<tr>
-                          <td>
-                            ${user.prenom} ${user.nom}
-                          </td>
-                          <td>
-                            <form action="/messagerie/" method="post">
-															<input type="hidden" id="userID" name="receiverID" value="${user.id_user}">
-															<input
-                                class="smallImage"
-                                type="image"
-																src="../images/Messagerie/envoiMessage.png"
-																alt="Envoyer un message"
-                                width="30%">
-														</form>
-                          </td>
-                          <td>
-                            
-															<input
-                                onclick="adUserManager('approve',${user.id_user},${annonceID})"
-                                value="${user.id_user}"
-                                class="smallImage" 
-                                type="image"
-																src="../images/icones/valider.png"
-																alt="Accepter cet utilisateur"
-                                width="30%"/>
-                          </td>
-                          <td>
-                              <input
-                                onclick="adUserManager('refuse',${user.id_user},${annonceID})"
-                                value="${user.id_user}"
-                                class="smallImage" 
-                                type="image"
-                                src="../images/icones/croix.png"
-                                alt="Refuser cet utilisateur"
-                                width="30%"/>
-                          </td>
-                        </tr>`
-                    )
-                    .join("")}
+function createModal(users, annonceID) {
+  if (users.length > 0) {
+    return `<div class="modal modalApplicant" id="modalOffre${annonceID}" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Liste des utilisateurs postulant à cette annonce :
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h5>
+          
+        </div>
+        <div class="modal-body">
+          <table class="listUserApplying">
+              ${users
+                .map(
+                  (user) =>
+                    `<tr>
+                      <td>
+                        ${user.prenom} ${user.nom}
+                      </td>
+                      <td>
+                        <form action="/messagerie/" method="post">
+                          <input type="hidden" id="userID" name="receiverID" value="${user.id_user}">
+                          <input
+                            class="mediumIcon clickable"
+                            type="image"
+                            title="Envoyer un message"
+                            src="../images/Messagerie/envoiMessage.png"
+                            alt="Envoyer un message">
+                        </form>
+                      </td>
+                      <td>
+                        
+                          <input
+                            onclick="adUserManager('approve',${user.id_user},${annonceID})"
+                            value="${user.id_user}"
+                            class="mediumIcon clickable" 
+                            type="image"
+                            title="Accepter cet utilisateur pour l'offre"
+                            src="../images/icones/valider.png"
+                            alt="Accepter cet utilisateur"/>
+                      </td>
+                      <td>
+                          <input
+                            onclick="adUserManager('refuse',${user.id_user},${annonceID})"
+                            value="${user.id_user}"
+                            class="mediumIcon clickable" 
+                            type="image"
+                            title="Refuser cet utilisateur pour l'offre"
+                            src="../images/icones/croix.png"
+                            alt="Refuser cet utilisateur"/>
+                      </td>
+                    </tr>`
+                )
+                .join("")}
               </table>
             </div>
           </div>
         </div>
-    </div>`);
-    }
-  });
+    </div>`;
+  }
 
   return "";
 }
