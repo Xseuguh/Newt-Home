@@ -26,8 +26,6 @@ import org.wtg.services.CustomUserDetailsService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-    private DataSource dataSource;
      
     @Bean
     public UserDetailsService userDetailsService() {
@@ -77,9 +75,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
             	.loginPage("/register")
             	.loginProcessingUrl("/login")
-                .usernameParameter("email")
+                .usernameParameter("mail")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/test")
+                .defaultSuccessUrl("/profil/")
                 .permitAll()
             .and()
             .logout().logoutSuccessUrl("/Accueil").permitAll();

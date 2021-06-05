@@ -2,11 +2,11 @@ package org.wtg.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.wtg.entities.User;
+import org.wtg.entities.UserInfo;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-
-	@Query("SELECT u FROM User u WHERE u.email = ?1")
-    public User findByEmail(String email);
+public interface UserRepository extends JpaRepository<UserInfo, Long> {
+	
+	@Query("SELECT u FROM UserInfo u WHERE u.mail = ?1")
+    public UserInfo findByMail(String email);
 
 }

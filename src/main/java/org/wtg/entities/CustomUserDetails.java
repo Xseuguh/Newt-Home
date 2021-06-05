@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetails implements UserDetails {
 
-	private User user;
+	private UserInfo user;
     
-    public CustomUserDetails(User user) {
+    public CustomUserDetails(UserInfo user) {
         this.user = user;
     }
  
@@ -37,7 +37,7 @@ public class CustomUserDetails implements UserDetails {
  
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getMail();
     }
  
     @Override

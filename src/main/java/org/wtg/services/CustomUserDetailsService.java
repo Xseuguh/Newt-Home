@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.wtg.dao.UserRepository;
 import org.wtg.entities.CustomUserDetails;
-import org.wtg.entities.User;
+import org.wtg.entities.UserInfo;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -15,7 +15,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(username);
+        UserInfo user = userRepo.findByMail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

@@ -1,11 +1,14 @@
 package org.wtg.entities;
 
+import java.sql.Date;
+
 public class SignUpForm {
 
 	private String nom;
     private String prenom;
     private String email;
     private String password;
+    private Date birthday;
     
     
     
@@ -35,4 +38,12 @@ public class SignUpForm {
     public void setPassword(String password) {
         this.password = password;
     }
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+    
+    
 }

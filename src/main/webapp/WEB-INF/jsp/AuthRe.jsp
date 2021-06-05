@@ -38,14 +38,14 @@ ap.min.css"
 	<form action="login" id="login"  method="post">
 	      <h1>Login</h1>
 	      <div class="input-field">
-	        <label for="email">Email</label>
-	        <input type="email" name="email" required />
+	        <label for="mail">Email</label>
+	        <input type="email" name="mail" required />
 	        <label for="password">Password</label> 
 	        <input type="password" name="password" required/>
 	        <input type="submit" value="Login" class="button"/>
-<!-- 	        <p class="text-p"> <a href="#">Forgot password?</a> </p> -->
 	      </div>
 	  </form>
+	  
 	<form action="saveSignUpForm" id="signup" 
 		method="post" modelAttribute="signUpForm">
 		<h1>Sign Up </h1>
@@ -57,9 +57,9 @@ ap.min.css"
 	        	<label>Prenom</label> 
 	        	<input type="text" path="prenom" name="prenom"  required/>
 	        	<label>Password</label> 
-	        	<input type="password" path="password" name="password"  required/>
-	        	<label>Date de naissance</label> 
-	        	<input type="Date" required/>
+	        	<input type="password" path="password" name="password" minlength="8" required/>
+	        	<label>Date de naissance(vous devez être majeur !)</label> 
+	        	<input type="Date" path="birthday" name="birthday" required/>
 	        
 	        <input type="submit" value="Sign up" class="button" />
 	      </div>
