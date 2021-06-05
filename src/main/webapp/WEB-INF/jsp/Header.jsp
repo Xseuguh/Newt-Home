@@ -45,7 +45,7 @@
             </a>
           </li>
           <li>
-            <a class="clickable" href="/logout/">
+            <a class="clickable" href="/logout">
               <img
                 alt="logout"
                 src="<%=request.getContextPath()%>/images/icones/logout.png"

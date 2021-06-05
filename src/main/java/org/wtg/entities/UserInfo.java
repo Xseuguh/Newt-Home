@@ -2,27 +2,62 @@ package org.wtg.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 
 @Entity
-
+@Table(name = "user_info")
 public class UserInfo implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_user;
+	
+	@Column(name = "nom")
 	private String nom;
+	
+	@Column(name = "prenom")
 	private String prenom;
+	
+	@Column(name = "birthday")
 	private Date birthday;
+	
+	@Column(name = "mail")
 	private String mail;
+	
+	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "admin")
 	private Boolean admin;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+ 
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+    
 	public Long getId_user() {
 		return id_user;
 	}
@@ -75,8 +110,17 @@ public class UserInfo implements Serializable{
 		this.admin = admin;
 	}
 	public UserInfo() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
 	
 }
