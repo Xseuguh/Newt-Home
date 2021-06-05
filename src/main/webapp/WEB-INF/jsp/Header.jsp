@@ -27,7 +27,7 @@
 							src="<%=request.getContextPath()%>/images/icones/profil.png"
 							width="40vw" /> Mon profil
 					</a></li>
-					<li><a href="/logout/"> <img alt="logout"
+					<li><a href="/logout"> <img alt="logout"
 							src="<%=request.getContextPath()%>/images/icones/logout.png"
 							width="40vw" /> Me déconnecter
 					</a></li>
