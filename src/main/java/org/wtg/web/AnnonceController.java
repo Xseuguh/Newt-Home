@@ -374,7 +374,7 @@ public class AnnonceController {
 		
 		offresPostuleesDao.applyToAnOffer(idOffre,idUserConnecte); 
 		
-		System.out.println(idOffre);
+		
 		return "Accueil";
 		
 	}

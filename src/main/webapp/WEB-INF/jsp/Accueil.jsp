@@ -257,31 +257,39 @@ ap.min.css"
 											</div>
 											<br>
 											<c:if test="${connected}">
-												<div class="row">
+											<c:if test="${!idUserConnecte.equals(i.id_user)}">
+												<div class="row text-center">
 													<div class=" col-md-6">
-														<form class="text-left formPostuler"
-															id="formFormPostuler_${i.id_offre}">
+														<form class="text-center formPostuler"
+															id="formFormPostuler_${i.id_offre}" method="post" action="/Accueil/Postuler"> 
 															<input type="hidden" id="idOffre" name="idOffre"
-																value="${i.id_offre}"> <input type="hidden"
+																value="${i.id_offre}">
+																 <input type="hidden"
 																id="idUserConnecte" name="idUserConnecte"
-																value="${idUserConnecte}"> <input type="submit"
-																form="formFormPostuler_${i.id_offre}" id="formPostuler"
+																value="${idUserConnecte}"> 
+																 <input type="submit"
+																form="formFormPostuler_${i.id_offre}" class="boutonContact"
 																value="Postuler">
 														</form>
 													</div>
-													<div class=" col-md-6">
+													</div>
+													<div class="row text-center">
+													<div class="col-md-6">
 														<form action="/messagerie/" method="post"
-															class="text-right" id="formMessagerie_${i.id_user}">
+															class="text-center" id="formMessagerie_${i.id_user}">
 															<input type="hidden" id="idProprio" name="receiverID"
-																value="${i.id_user}"> <input type="image"
+																value="${i.id_user}"> 
+																<input type="submit" class="boutonContact" value="Contacter le propriétaire">
+																<!--  <input type="image"
 																id="formRedirectionMessage"
 																src="<%=request.getContextPath()%>/images/Messagerie/envoiMessage.png"
 																alt="Envoyer un message au propriétaire"
-																form="formMessagerie_${i.id_user}">
+																form="formMessagerie_${i.id_user}"> -->
 														</form>
 													</div>
 												</div>
 											</c:if>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</div>

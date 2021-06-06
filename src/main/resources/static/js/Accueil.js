@@ -19,7 +19,6 @@ $(function() {
 		const dataPostuler = {idOffre:ev.target.elements["idOffre"].value, idUserConnecte: ev.target.elements["idUserConnecte"].value};
 		console.log(dataPostuler);
 		$.post("/Accueil/Postuler",dataPostuler,()=>alert("Votre demande a bien été envoyée."));
-		
 		});
 
 	});
