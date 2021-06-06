@@ -24,20 +24,21 @@
 }
 
 /*Animation des divers boutons*/
-#nouvelleConversation:hover,
+/* #nouvelleConversation:hover,
 #boutonEnvoi:hover,
 #retourMenu:hover,
 .onglet:hover {
   cursor: pointer;
   opacity: 50%;
-}
+} */
 
 #conversations {
   padding: 0;
   background-color: var(--bg_conv);
   display: flex;
   flex-direction: column;
-  color: floralwhite;
+  color: var(--white);
+  height: 100%;
 }
 
 #correspondants {
@@ -68,11 +69,12 @@
 #focusConversation {
   display: grid;
   grid-template-rows: 5em 8fr 1fr;
+  height: calc(100vh - var(--header-height) - 2em);
 }
 
 #titreConversation {
   margin: 0 10px;
-  color: floralwhite;
+  color: var(--white);
 }
 
 #menuConversation {

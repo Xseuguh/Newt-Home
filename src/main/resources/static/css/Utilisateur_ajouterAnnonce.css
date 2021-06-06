@@ -1,106 +1,109 @@
 h1 {
-	font-size: 250%;
-	text-align: center;
+  font-size: 250%;
+  text-align: center;
 }
 
 h2 {
-	color: floralwhite;
-	text-align: center;
+  color: var(--white);
+  text-align: center;
 }
 
-
 a {
-	color: black;
+  color: black;
 }
 
 a:hover {
-	color: red;
-	text-decoration: none
+  color: red;
+  text-decoration: none;
 }
 
 .boutonSubmit {
-	border-radius: var(--arrondi-normal);
-	margin-top: 1em;
-	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
-            text-align: center;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 0.3em #eee;
-            margin-top: 1em;
+  border-radius: var(--arrondi-normal);
+  margin-top: 1em;
+  background-image: linear-gradient(
+    to right,
+    var(--noir) 0%,
+    #704a58 51%,
+    var(--noir) 100%
+  );
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 0.3em #eee;
+  margin-top: 1em;
 }
 .boutonSubmit:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
 
 #specificationsUpload {
-	border: var(--gris-pale) 1px solid;
-	border-radius: var(--arrondi-normal);
-	padding: 1.5em;
-	margin-bottom: 1em;
-	background: var(--gris-pale);
-	color: var(--bg_conv);
-	font-size: large;
-	font-weight: bold;
+  border: var(--gris-pale) 1px solid;
+  border-radius: var(--arrondi-normal);
+  padding: 1.5em;
+  margin-bottom: 1em;
+  background: var(--gris-pale);
+  color: var(--bg_conv);
+  font-size: large;
+  font-weight: bold;
 }
 
-#uploadImages{
-	margin-bottom: 1.5em;
-	color:floralwhite;
+#uploadImages {
+  margin-bottom: 1.5em;
+  color: var(--white);
 }
 
-#formAjout > input, #formAjout > textarea{
-	border-radius: var(--arrondi-normal);
-    padding: 0.4em;
-    background: var(--bg-ppal);
-    border: var(--gris-pale) 0.2em solid;
+#formAjout > input,
+#formAjout > textarea {
+  border-radius: var(--arrondi-normal);
+  padding: 0.4em;
+  background: var(--bg-ppal);
+  border: var(--gris-pale) 0.2em solid;
 }
 
-#formAjout  label, .descCS{
-	color: floralwhite;
+#formAjout label,
+.descCS {
+  color: var(--white);
 }
 
-#formAjout{
-	padding: 2em 0.5em;
-	border: var(--gris-pale) solid;
-	border-radius: var(--arrondi-normal);
-	
+#formAjout {
+  padding: 2em 0.5em;
+  border: var(--gris-pale) solid;
+  border-radius: var(--arrondi-normal);
 }
-input[type=submit]:hover {
-	background-color: red;
-	color: white;
+input[type="submit"]:hover {
+  background-color: red;
+  color: white;
 }
 
 textarea {
-	margin-left: 6px;
+  margin-left: 6px;
 }
 
-
-
 .tout {
-	width: 100%;
+  width: 100%;
 }
 
 .row {
-	margin-left: 5px;
+  margin-left: 5px;
 }
 
 .fleches {
-	height: 50px;
-	width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 #flecheG {
-	margin-left: 7em;
+  margin-left: 7em;
 }
 
 #galerieImage {
-	width: 80%;
+  width: 80%;
 }
 
 .descriptionAnnonce {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
