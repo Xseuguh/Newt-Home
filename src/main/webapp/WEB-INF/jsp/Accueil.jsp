@@ -7,6 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <%@page import="java.io.File"%>
+<%@page import="org.wtg.entities.Offres"%>
 <title>Bienvenue chez Newt'Home</title>
 
 <link
@@ -26,10 +27,8 @@ ap.min.css"
 
 </head>
 <body>
-	
-    
-    <jsp:include page="Header.jsp" />
 
+    <jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row rechercheSimple" id="rechercheDiv">
 			<form action="/Accueil" method="post" class="form-inline">
@@ -38,6 +37,13 @@ ap.min.css"
 					class="boutonRecherche" type="submit" name="action"
 					value="Rechercher">
 			</form>
+			<br>
+			<c:if test="${connected}">
+			<form class="form-inline" action="/Accueil/Mes_Annonces" method="post">
+			<input type="hidden" id="idUserConnecte" name="idUserConnecte" value="${idUserConnecte}">
+			 <input class="boutonRecherche" type="submit" value="Mes annonces">
+			</form>
+			</c:if>
 			<br>
 			<button class="boutonRecherche" onclick="showRechercheAvancee()">
 				Plus de choix de recherche</button>
@@ -94,54 +100,39 @@ ap.min.css"
 								<div id="carouselSlides" class="carousel slide"
 									data-ride="carousel" data-interval="4500">
 									<div class="carousel-inner">
-										<c:forEach var="i" begin="1" end="${listPaths.size()}">
-											<c:if test="${imagesPaths.size()==1}">
-												<c:if test="${i==1}">
-													<div class="item active imageDiv">
+										<%
+											Offres o = (Offres) pageContext.getAttribute("o");
+												String dossierImages = System.getProperty("user.dir")
+														+ "\\src\\main\\resources\\static\\images\\photosAnnonces\\" + o.getId_offre();
 
-														<img id="thumbnail"
-															class="d-block w-100 center-block img-responsive"
-															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
-													</div>
-												</c:if>
+												File folder = new File(dossierImages);
+												String listeDesNomsImages[] = folder.list();
 
+												/*for(String fileName : listeDesNomsImages){
+													String pathAndFile = request.getContextPath()+"/images/photosAnnonces/"+o.getId_offre()+fileName;
+													out.println("<div class= \"item imageDiv\"> <img id=\"thumbnail\" class=\"d-block w-100 center-block img-responsive\" src=\""+pathAndFile+"\" /></div>");
+												}*/
 
-												<c:if test="${i>1}">
-													<div class="item imageDiv">
-														<img id="thumbnail"
-															class="d-block w-100 center-block img-responsive"
-															src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
-													</div>
-												</c:if>
-											</c:if>
-										</c:forEach>
-										<c:if test="${imagesPaths.size()>1}">
-											<c:forEach items="${listPaths.keySet()}" var="key">
-												<c:if test="${key.equals(o.id_offre)}">
-													<c:forEach var="i" begin="1" end="${listPaths.size()}">
+												for (int indexListeImages = 0; indexListeImages < listeDesNomsImages.length; indexListeImages++) {
+													String pathAndFile = "";
+													if (listeDesNomsImages.length > indexListeImages) {
+														pathAndFile = request.getContextPath() + "/images/photosAnnonces/" + o.getId_offre() + "/"
+																+ listeDesNomsImages[indexListeImages];
+													}
+													if (indexListeImages == 0) {
+														out.println(
+																"<div class= \"item active imageDiv\"> <img id=\"thumbnail\" class=\"d-block w-100 center-block img-responsive\" src=\""
+																		+ pathAndFile + "\" /></div>");
+													}
 
-														<c:if test="${i==1}">
-															<div class="item active imageDiv">
+													else {
+														out.println(
+																"<div class= \"item imageDiv\"> <img id=\"thumbnail\" class=\"d-block w-100 center-block img-responsive\" src=\""
+																		+ pathAndFile + "\" /></div>");
+													}
+												}
+										%>
 
-																<img id="thumbnail"
-																	class="d-block w-100 center-block img-responsive"
-																	src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
-															</div>
-														</c:if>
-
-
-														<c:if test="${i>1}">
-															<div class="item imageDiv">
-																<img id="thumbnail"
-																	class="d-block w-100 center-block img-responsive"
-																	src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
-															</div>
-														</c:if>
-
-													</c:forEach>
-												</c:if>
-											</c:forEach>
-										</c:if>
 									</div>
 								</div>
 							</div>
@@ -197,52 +188,26 @@ ap.min.css"
 									<div id="carouselSlides" class="carousel slide"
 										data-ride="carousel">
 										<div class="carousel-inner">
-											<c:forEach var="i" begin="1" end="${listPaths.size()}">
-												<c:if test="${imagesPaths.size()==1}">
-													<c:if test="${i==1}">
-														<div class="item active imageDiv">
+											<%
+												for (int indexListeImages = 0; indexListeImages < listeDesNomsImages.length; indexListeImages++) {
+														String pathAndFile = "";
+														if (listeDesNomsImages.length > indexListeImages) {
+															pathAndFile = request.getContextPath() + "/images/photosAnnonces/" + o.getId_offre() + "/"
+																	+ listeDesNomsImages[indexListeImages];
+														}
+														if (indexListeImages == 0) {
+															out.println(
+																	"<div class= \"item active imageDiv\"> <img id=\"thumbnail\" class=\"d-block w-100 center-block img-responsive\" src=\""
+																			+ pathAndFile + "\" /></div>");
+														}
 
-															<img id="thumbnail"
-																class="d-block w-100 center-block img-responsive"
-																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
-														</div>
-													</c:if>
-
-
-													<c:if test="${i>1}">
-														<div class="item imageDiv">
-															<img id="thumbnail"
-																class="d-block w-100 center-block img-responsive"
-																src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(i-1)}" />
-														</div>
-													</c:if>
-												</c:if>
-											</c:forEach>
-											<c:if test="${imagesPaths.size()>1}">
-												<c:forEach items="${listPaths.keySet()}" var="key">
-													<c:if test="${key.equals(o.id_offre)}">
-														<c:forEach var="i" begin="1" end="${listPaths.size()}">
-
-															<c:if test="${i==1}">
-																<div class="item active imageDiv">
-
-																	<img id="thumbnail"
-																		class="d-block w-100 center-block img-responsive"
-																		src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
-																</div>
-															</c:if>
-															<c:if test="${i>1}">
-																<div class="item imageDiv">
-																	<img id="thumbnail"
-																		class="d-block w-100 center-block img-responsive"
-																		src="<%=request.getContextPath()%>/images/photosAnnonces/${o.id_offre}/${listPaths.get(key).get(i-1)}" />
-																</div>
-															</c:if>
-
-														</c:forEach>
-													</c:if>
-												</c:forEach>
-											</c:if>
+														else {
+															out.println(
+																	"<div class= \"item imageDiv\"> <img id=\"thumbnail\" class=\"d-block w-100 center-block img-responsive\" src=\""
+																			+ pathAndFile + "\" /></div>");
+														}
+													}
+											%>
 										</div>
 									</div>
 									<br>
@@ -289,30 +254,39 @@ ap.min.css"
 											</div>
 											<br>
 											<c:if test="${connected}">
-												<div class="row">
+											<c:if test="${!idUserConnecte.equals(i.id_user)}">
+												<div class="row text-center">
 													<div class=" col-md-6">
-														<form action="/Accueil/Postuler" method="post"
-															class="text-left">
+														<form class="text-center formPostuler"
+															id="formFormPostuler_${i.id_offre}" method="post" action="/Accueil/Postuler"> 
 															<input type="hidden" id="idOffre" name="idOffre"
-																value="${o.id_offre}"> <input type="hidden"
-																id="idUserConnecte" name="idUserConnecte" value="">
-															<!--  TODO: changer la valeur de idUserConnecte une fois qu'on aura établi les connexions -->
-															<input type="submit" id="formPostuler" name="action"
+																value="${i.id_offre}">
+																 <input type="hidden"
+																id="idUserConnecte" name="idUserConnecte"
+																value="${idUserConnecte}"> 
+																 <input type="submit"
+																form="formFormPostuler_${i.id_offre}" class="boutonContact"
 																value="Postuler">
 														</form>
 													</div>
-													<div class=" col-md-6">
+													</div>
+													<div class="row text-center">
+													<div class="col-md-6">
 														<form action="/messagerie/" method="post"
-															class="text-right">
+															class="text-center" id="formMessagerie_${i.id_user}">
 															<input type="hidden" id="idProprio" name="receiverID"
-																value="${i.id_user}"> <input type="image"
+																value="${i.id_user}"> 
+																<input type="submit" class="boutonContact" value="Contacter le propriétaire">
+																<!--  <input type="image"
 																id="formRedirectionMessage"
 																src="<%=request.getContextPath()%>/images/Messagerie/envoiMessage.png"
-																alt="Envoyer un message au propriétaire">
+																alt="Envoyer un message au propriétaire"
+																form="formMessagerie_${i.id_user}"> -->
 														</form>
 													</div>
 												</div>
 											</c:if>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</div>
@@ -326,6 +300,7 @@ ap.min.css"
 			</c:forEach>
 		</div>
 	</div>
+
 
 	<jsp:include page="Footer.jsp" />
 </body>

@@ -119,42 +119,36 @@ img.resize {
 }
 
 .rechercheAvancee {
-  display: none;
+	display: none;
+	color:var(--white);
 }
 
 .nonModale {
   cursor: pointer;
 }
 
-#formPostuler {
-  background-image: linear-gradient(
-    to right,
-    #136a8a 0%,
-    #267871 51%,
-    #136a8a 100%
-  );
-  margin: 10px;
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-  display: block;
-  font-size: 1.2 em;
+.boutonContact {
+	margin: 10px;
+	padding: 15px 45px;
+	box-shadow: 0 0 20px #eee;
+	font-size: 1.2 em;
+	border-radius: var(--arrondi-normal);
+	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            display: block;
 }
 
 .display-flex-center {
   display: flex;
   align-items: center;
 }
-
-#formPostuler:hover {
-  background-position: right center;
-  color: #fff;
-  text-decoration: none;
+.boutonContact:hover {
+	background-position: right center;
+	color: #fff;
+	text-decoration: none;
 }
 
 .imageDiv {

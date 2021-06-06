@@ -13,20 +13,39 @@ function hideRechercheAvancee() {
 }
 
 $(function() {
-	var frm = $('.modal form');
+	var frm = $('.modal .formPostuler');
 	frm.submit(function(ev) {
+		ev.preventDefault();
+		const dataPostuler = {idOffre:ev.target.elements["idOffre"].value, idUserConnecte: ev.target.elements["idUserConnecte"].value};
+		console.log(dataPostuler);
+		$.post("/Accueil/Postuler",dataPostuler,()=>alert("Votre demande a bien été envoyée."));
+		});
+
+	});
+
+$(function() {
+	var frm = $('#rechercheUserConnecte');
+	frm.submit(function(ev) {
+		ev.preventDefault();
+		const data = ev.target.elements["idUserConnecte"].value;
 		ev.preventDefault();
 		$.ajax({
 			type : frm.attr('method'),
 			url : frm.attr('action'),
 			data : frm.serializeArray(),
-			success : function(data) {
-				alert("Votre demande a bien été envoyée.");
+
+			success : function(html) {
+				$("#offres").load(
+						"/Accueil/Mes_Annonces #offres",
+						{
+							idUserConnecte : $("#idUserConnecte").val(),
+						});
 			}
 		});
 
 	});
 });
+
 
 $(function() {
 	var frm = $('#formAvancee');
