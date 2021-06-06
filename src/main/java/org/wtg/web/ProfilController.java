@@ -62,13 +62,14 @@ public class ProfilController {
 	@PostMapping(path = "/approveUser")
 	public ResponseEntity<String> approveUser(long offreID, long userID) {
 		offreDao.setPourvuToTrue(offreID);
-		postulaDAO.setAccepteToTrue(offreID, userID);
+		postulaDAO.acceptUserForOffer(offreID, userID);
+		postulaDAO.refuseAllUserExceptOneForOffer(offreID, userID);
 		return ResponseEntity.ok("Tout s'est bien passé");
 	}
 
 	@PostMapping(path = "/refuseUser")
 	public ResponseEntity<String> refuseUser(long offreID, long userID) {
-		postulaDAO.removeUserFromOffer(offreID, userID);
+		postulaDAO.refuseUserForOffer(offreID, userID);
 		return ResponseEntity.ok("Tout s'est bien passé");
 	}
 
