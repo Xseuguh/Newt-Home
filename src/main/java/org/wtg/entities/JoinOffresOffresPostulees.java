@@ -28,6 +28,6 @@ public interface JoinOffresOffresPostulees {
 
 	public Long getId_postula();
 
-	public boolean getAccepte();
+	public int getAccepte();
 
 }

@@ -3,17 +3,17 @@ h2 {
   background-color: var(--gris);
 }
 h1 {
-  font-size: 250%;
+/*   font-size: 150%; */
   text-align: center;
 }
 h2 {
   width: 100%;
   text-align: center;
 }
-body {
-  height: 100%;
-  width: 100%;
-}
+/* body { */
+/*   height: 100%; */
+/*   width: 100%; */
+/* } */
 a {
   color: black;
 }
@@ -77,13 +77,13 @@ content {
   color: var(--white);
 }
 
-img {
+.image {
   width: 50px;
 }
 
-.tout {
-  width: 100%;
-}
+/* .tout { */
+/*   width: 100%; */
+/* } */
 #formModification label,
 #formModification span {
   color: var(--white);

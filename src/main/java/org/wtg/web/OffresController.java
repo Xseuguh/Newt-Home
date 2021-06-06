@@ -45,14 +45,7 @@ public class OffresController {
 	private UserInfoRepository userDao;
 	
 	private Long getId() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal == "anonymousUser") {
-			return null;
-
-		}
-		String username = ((UserDetails) principal).getUsername();
-		UserInfo user = userDao.findByMail(username);
-		return user.getId_user();
+		return AuthReController.getId();
 	}
 
 	//************For User*******************/

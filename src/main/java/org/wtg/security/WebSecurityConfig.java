@@ -66,11 +66,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	
         http.authorizeRequests()
-            .antMatchers("/profil/*").authenticated()
-            .antMatchers("/messagerie/*").authenticated()
-            .antMatchers("/ads/*").authenticated()
-            .antMatchers("/Admin/*").hasAuthority("Admin")
-            .antMatchers("/annonce/posterUneAnnonce").authenticated()
+            .antMatchers("/profil/**").authenticated()
+            .antMatchers("/messagerie/**").authenticated()
+            .antMatchers("/ads/**").authenticated()
+            .antMatchers("/Admin/**").hasAuthority("Admin")
+            .antMatchers("/annonce/**").authenticated()
             .and()
             .formLogin()
             	.loginPage("/register")

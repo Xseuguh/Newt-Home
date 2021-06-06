@@ -59,9 +59,6 @@ ap.min.css"
 					Pays
 				</th>
 				<th scope="col">
-					Voir plus
-				</th>
-				<th scope="col">
 					Modifier
 				</th>
 				<th scope="col">
@@ -78,8 +75,8 @@ ap.min.css"
 					<td>${offreAffiche.code_postal}</td>
 					<td>${offreAffiche.ville}</td>
 					<td>${offreAffiche.pays}</td>
-					<td><a href="/Admin/Modifier/Annonce?ref=${offreAffiche.id_offre}"><img src="<%=request.getContextPath()%>/images/editer.png" alt="editer"></a></td>
-					<td><a href="/Admin/Supprimer/Annonce?ref=${offreAffiche.id_offre}" onclick="return confirm('Please Confirm')"><img src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a></td>
+					<td><a href="/Admin/Modifier/Annonce?ref=${offreAffiche.id_offre}"><img class="image" src="<%=request.getContextPath()%>/images/editer.png" alt="editer"></a></td>
+					<td><a href="/Admin/Supprimer/Annonce?ref=${offreAffiche.id_offre}" onclick="return confirm('Please Confirm')"><img class="image" src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

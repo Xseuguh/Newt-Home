@@ -58,7 +58,7 @@ ap.min.css"
 					<td>${utilisateurAffiche.prenom}</td>
 					<td>${utilisateurAffiche.mail}</td>
 					<td>${utilisateurAffiche.birthday}</td>
-					<td><a href="/Admin/Supprimer/Utilisateur?ref=${utilisateurAffiche.id_user}" onclick="return confirm('Attention cette action sera irreversible!')"><img src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a></td>
+					<td><a href="/Admin/Supprimer/Utilisateur?ref=${utilisateurAffiche.id_user}" onclick="return confirm('Attention cette action sera irreversible!')"><img class="image" src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a></td>
 				</tr>
 			</c:forEach>
 			</tbody>
