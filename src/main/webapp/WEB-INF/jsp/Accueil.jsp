@@ -42,12 +42,10 @@ ap.min.css"
 			</form>
 			<br>
 			<c:if test="${connected}">
-			<div class="row rechercheMesAnnonces" id="rechercheUserConnecte">
 			<form class="form-inline" action="/Accueil/Mes_Annonces" method="post">
 			<input type="hidden" id="idUserConnecte" name="idUserConnecte" value="${idUserConnecte}">
 			 <input class="boutonRecherche" type="submit" value="Mes annonces">
 			</form>
-			</div>
 			</c:if>
 			<br>
 			<button class="boutonRecherche" onclick="showRechercheAvancee()">
