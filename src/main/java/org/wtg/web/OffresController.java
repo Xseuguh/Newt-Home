@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +22,12 @@ import org.wtg.dao.ContraintesRepository;
 import org.wtg.dao.LiaisonOffreContrainteRepository;
 import org.wtg.dao.LiaisonOffreServiceRepository;
 import org.wtg.dao.OffresRepository;
+import org.wtg.dao.UserInfoRepository;
 import org.wtg.entities.Contraintes;
 import org.wtg.entities.LiaisonOffreContrainte;
 import org.wtg.entities.LiaisonOffreService;
 import org.wtg.entities.Offres;
+import org.wtg.entities.UserInfo;
 
 /****Partie 1 afficher les utilisateurs: lie aux administrateurs***/
 @Controller
@@ -37,6 +41,19 @@ public class OffresController {
 	private LiaisonOffreContrainteRepository liaisonOffreContrainteDao;
 	@Autowired
 	private LiaisonOffreServiceRepository liaisonOffreServiceDao;
+	@Autowired
+	private UserInfoRepository userDao;
+	
+	private Long getId() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == "anonymousUser") {
+			return null;
+
+		}
+		String username = ((UserDetails) principal).getUsername();
+		UserInfo user = userDao.findByMail(username);
+		return user.getId_user();
+	}
 
 	//************For User*******************/
 	@RequestMapping(value = "/offres/search")
@@ -66,6 +83,8 @@ public class OffresController {
 			@RequestParam(name="garderLesAnimaux",defaultValue="") String garderLesAnimaux,
 			@RequestParam(name="nettoyerLaMaison",defaultValue="") String nettoyerLaMaison){
 		
+		Long idUser=getId();
+		
 		String[] valuesStringInserted= {descriptionAnnonce,titreAnnonce,adresseAnnonce,
 				villeAnnonce,paysAnnonce,date_debut_string,date_limite_string};
 		
@@ -87,7 +106,7 @@ public class OffresController {
 			Date date_debut = Date.valueOf(date_debut_string);
 			Date date_limite = Date.valueOf(date_limite_string);
 
-			Offres offresAjoutee = new Offres((long) 1, titreAnnonce, descriptionAnnonce, paysAnnonce,
+			Offres offresAjoutee = new Offres(idUser, titreAnnonce, descriptionAnnonce, paysAnnonce,
 					villeAnnonce, codePostalAnnonce, adresseAnnonce, date_debut, date_limite, false);
 			offresDao.save(offresAjoutee);
 			
