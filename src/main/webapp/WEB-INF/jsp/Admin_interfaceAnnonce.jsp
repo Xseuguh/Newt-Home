@@ -22,9 +22,9 @@ ap.min.css"
 </head>
 <body>
 	
-    <jsp:include page="Header.jsp">
-      <jsp:param name="isAuthenticated" value="true" />
-    </jsp:include>
+    
+    <jsp:include page="Header.jsp" />
+
     <div class="tout table-responsive barreRechercheAdmin">
 		<form method="GET" action="/Admin/Gestion/AnnoncePrecise">
 			<input type="search" placeholder="Rechercher une annonce..." name="recherche">
@@ -86,6 +86,6 @@ ap.min.css"
 		</table>
 		</div>
 	</div>
-	<%@include file="Footer.jsp" %>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>
