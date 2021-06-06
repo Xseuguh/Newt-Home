@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+<%@ page import="java.io.File"%> 
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.wtg.entities.Offres"%>
 <html>
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -8,8 +12,28 @@
 		<link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 	</head>
 	<body>
-		
 		<jsp:include page="Header.jsp" />
+			<p>
+				Vos images sont actuellements:
+				<c:set value="${offresZoom}" var="oz"/>
+				<%
+				Offres o = (Offres) pageContext.getAttribute("oz");
+				String whereFolder = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+o.getId_offre();;
+	            File folder = new File(whereFolder); 
+	            String listOfTheNameOfTheFiles[] = folder.list();
+				for(String fileName : listOfTheNameOfTheFiles){
+					out.println(fileName);
+				}
+
+				%>
+			</p>
+			<form action="/annonce/modifierMesImages/?ref=${offresZoom.id_offre}" method="post">
+				<input type="submit" value="Modifier mes offre" onclick="alert('Attention vous devrez poster necessairement 3 images!')">
+			</form>
+			<form action="/annonce/uploaderDeNouvellesImages/?ref=${offresZoom.id_offre}" method="post" enctype="multipart/form-data">
+				<input type="file" name="files" class="boutonSubmit" multiple />
+				<input type="submit" value="Uploader des images" onclick="alert('Attention vous pouvez poster au maximum 3 images!')">
+			</form>
 		
 			<form action="/ads/ValidationDesModifications?ref=${offresZoom.id_offre}" method="post">
 			
@@ -62,15 +86,6 @@
 				  <input type="radio" name="pourvuAnnonce" value="non" id="pourvuAnnonceNon"><label for="pourvuAnnonceNon">Non</label>
 				</c:if>
 				<br>
-				
-				<!-- -
-						 * INSERT INTO `contraintes` (`id_contrainte`, `nom_contrainte`) VALUES
-			(3, '2 enfants maximum par logement'),
-			(5, 'Pas d\'animaux autorisé'),
-			(4, 'Pas d\'enfants autorisé'),
-			(2, 'Pas de bruit après 23h'),
-			(1, 'Pas de cigarette');
-		 */ -->
 				<p id="contraintes">
 				
 					<!--<c:forEach items="contraintesEnvoyees" var="contraintes">-->
