@@ -10,6 +10,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.wtg.dao.LiaisonOffreServiceRepository;
 import org.wtg.dao.OffresPostuleesRepository;
 import org.wtg.dao.OffresRepository;
 import org.wtg.dao.ServicesRepository;
+import org.wtg.dao.UserRepository;
 import org.wtg.entities.Annonce;
 import org.wtg.entities.Contraintes;
 import org.wtg.entities.JoinOffresUsers;
@@ -28,6 +30,8 @@ import org.wtg.entities.LiaisonOffreContrainte;
 import org.wtg.entities.LiaisonOffreService;
 import org.wtg.entities.Offres;
 import org.wtg.entities.Services;
+import org.wtg.entities.UserInfo;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Controller
 public class AnnonceController {
@@ -43,8 +47,11 @@ public class AnnonceController {
 	ServicesRepository listeServiceRechercheDao;
 	@Autowired
 	OffresPostuleesRepository offresPostuleesDao;
-	private long USER_ID = 1l;
-
+	@Autowired
+	UserRepository userDao;
+	
+	
+	
 	private List<String> getImagesPath(File[] repertoires, List<String> listOfImages) {
 
 		for (File imagePaths : repertoires) {
@@ -55,7 +62,20 @@ public class AnnonceController {
 	}
 	@RequestMapping(value = "/Accueil")
 	public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc) {
-
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Boolean connected = false;
+		Long USER_ID=0L;
+		
+		if(principal  != "anonymousUser") {
+			connected = true;
+			String username = ((UserDetails)principal).getUsername();
+			UserInfo user = userDao.findByMail(username);
+			USER_ID = user.getId_user();
+		}
+		
+		
 		List<Contraintes> listeContrainteRecherche = listeContrainteRechercheDao.findAll();
 		List<Services> listeServiceRecherche = listeServiceRechercheDao.findAll();
 		List<Offres> offres = offresDao.findOffreByNameOrDescription("%" + mc + "%");
@@ -71,9 +91,17 @@ public class AnnonceController {
 			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
 			services.addAll(serviceDao.findServicesByIdOffre(value.getId_offre()));
 			infosProprio.addAll(offresDao.findUserByIdOffre(value.getId_offre()));
-
+			
+			String OS = System.getProperty("os.name").toLowerCase();
+			
+			if(OS.equals("windows 10")) {
 			repertoires.add(new File(System.getProperty("user.dir")
 					+ "\\src\\main\\resources\\static\\images\\photosAnnonces\\" + value.getId_offre()));
+			}
+			else {
+				repertoires.add(new File(System.getProperty("user.dir")+
+				"/src/main/resources/static/images/photosAnnonces/"+value.getId_offre()));
+			}
 
 			for (File repertoire : repertoires) {
 
@@ -82,6 +110,7 @@ public class AnnonceController {
 			}
 
 		}
+		
 		
 		Object listPaths;
 		
@@ -97,9 +126,9 @@ public class AnnonceController {
 				listPaths = imagesPaths;
 			}
 			
+		
 
-		Boolean connected = true; // TODO : changer la valeur de "connected" une fois qu'on aura géré la connexion
-									// (session et/ou cookie)
+		
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offres);
@@ -110,16 +139,110 @@ public class AnnonceController {
 		model.addAttribute("infosProprio", infosProprio);
 		model.addAttribute("motC", mc);
 		model.addAttribute("connected", connected);
+		model.addAttribute("idUserConnecte", USER_ID);
 		return "Accueil";
 	}
-
 	
+	@RequestMapping(value = "/Accueil/Mes_Annonces")
+	public String getMesAnnonces(Model model, @RequestParam(name = "idUserConnecte", defaultValue = "") Long idUserConnecte) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Boolean connected = false;
+		Long USER_ID=0L;
+		
+		if(principal  != "anonymousUser") {
+			connected = true;
+			String username = ((UserDetails)principal).getUsername();
+			UserInfo user = userDao.findByMail(username);
+			USER_ID = user.getId_user();
+		}
+		
+		
+		List<Contraintes> listeContrainteRecherche = listeContrainteRechercheDao.findAll();
+		List<Services> listeServiceRecherche = listeServiceRechercheDao.findAll();
+		List<Offres> offres = offresDao.findByUserId(idUserConnecte);
+		List<Annonce> contraintes = new ArrayList<Annonce>();
+		List<Annonce> services = new ArrayList<Annonce>();
+		List<JoinOffresUsers> infosProprio = new ArrayList<JoinOffresUsers>();
+		
+		List<File> repertoires = new ArrayList<File>();
+
+		Map<Long, List<String>> imagesPaths = new HashMap<Long, List<String>>();
+
+		for (Offres value : offres) {
+			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
+			services.addAll(serviceDao.findServicesByIdOffre(value.getId_offre()));
+			infosProprio.addAll(offresDao.findUserByIdOffre(value.getId_offre()));
+			
+			String OS = System.getProperty("os.name").toLowerCase();
+			
+			if(OS.equals("windows 10")) {
+			repertoires.add(new File(System.getProperty("user.dir")
+					+ "\\src\\main\\resources\\static\\images\\photosAnnonces\\" + value.getId_offre()));
+			}
+			else {
+				repertoires.add(new File(System.getProperty("user.dir")+
+				"/src/main/resources/static/images/photosAnnonces/"+value.getId_offre()));
+			}
+
+			for (File repertoire : repertoires) {
+
+				imagesPaths.put(value.getId_offre(), getImagesPath(repertoire.listFiles(), new ArrayList<String>()));
+				
+			}
+
+		}
+		
+		
+		Object listPaths;
+		
+		if(imagesPaths.values().size() == 1) {
+			
+			listPaths = imagesPaths.values().stream()
+			        .flatMap(List::stream)
+			        .collect(Collectors.toList());
+			
+			}
+			
+			else {
+				listPaths = imagesPaths;
+			}
+			
+		
+
+		
+		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
+		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
+		model.addAttribute("offres", offres);
+		model.addAttribute("listPaths", listPaths);
+		model.addAttribute("imagesPaths", imagesPaths);
+		model.addAttribute("contraintes", contraintes);
+		model.addAttribute("services", services);
+		model.addAttribute("infosProprio", infosProprio);
+		model.addAttribute("connected", connected);
+		model.addAttribute("idUserConnecte", USER_ID);
+		
+		return "Accueil";
+	}
 
 	@RequestMapping(value = "/Accueil/Recherche_Avancee")
 	public String rechercheAvancee(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc,
 			@RequestParam(value = "listeContraintes", defaultValue = "") long[] listeContraintes,
 			@RequestParam(value = "listeServices", defaultValue = "") long[] listeServices,
 			@RequestParam(name = "lieu", defaultValue = "") String lieu) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Boolean connected = false;
+		Long USER_ID=0L;
+		
+		if(principal  != "anonymousUser") {
+			connected = true;
+			String username = ((UserDetails)principal).getUsername();
+			UserInfo user = userDao.findByMail(username);
+			USER_ID = user.getId_user();
+		}
 
 		List<Contraintes> listeContrainteRecherche = listeContrainteRechercheDao.findAll();
 		List<Services> listeServiceRecherche = listeServiceRechercheDao.findAll();
@@ -229,11 +352,6 @@ public class AnnonceController {
 			listPaths = imagesPaths;
 		}
 		
-		
-		
-		
-		Boolean connected = true; // TODO : changer la valeur de "connected" une fois qu'on aura géré la connexion
-		// (session et/ou cookie)
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offresAvancees);
@@ -247,21 +365,28 @@ public class AnnonceController {
 		model.addAttribute("listeC", listeContraintes);
 		model.addAttribute("listeS", listeServices);
 		model.addAttribute("connected", connected);
+		model.addAttribute("idUserConnecte", USER_ID);
 		return "Accueil";
 	}
 	
 	@RequestMapping(value="/Accueil/Postuler")
 	public String postulerAnnonce(Model model, @RequestParam(name = "idUserConnecte", defaultValue = "") Long idUserConnecte, @RequestParam(name = "idOffre", defaultValue = "") Long idOffre) {
 		
-		offresPostuleesDao.applyToAnOffer(idOffre, USER_ID); //TODO: modifier l'id du user connecté une fois la connexon faite
+		offresPostuleesDao.applyToAnOffer(idOffre,idUserConnecte); 
 		
+		System.out.println(idOffre);
 		return "Accueil";
 		
 	}
 	
 	@GetMapping(path = "/ads/editing")
 	public String editing(Model model, @RequestParam(name = "id", defaultValue = "") Long id_offre) {
-
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		String username = ((UserDetails)principal).getUsername();
+		UserInfo user = userDao.findByMail(username);
+		long USER_ID = user.getId_user();
+		
 		Offres offreToEdit = offresDao.findByIdWithUserVerification(USER_ID, id_offre);
 		if (offreToEdit == null) {
 			return "Error";

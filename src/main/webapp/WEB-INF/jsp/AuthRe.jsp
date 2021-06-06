@@ -32,15 +32,15 @@ ap.min.css"
 <body>
 <div class="forms">
 	<ul class="tab-group">
-		<li class="tab active"><a href="#login">Log In</a></li>
-		<li class="tab"><a href="#signup">Sign Up</a></li>
+		<li class="tab active"><a href="#login">Connexion</a></li>
+		<li class="tab"><a href="#signup">Inscription</a></li>
 	</ul>
 	<form action="login" id="login"  method="post">
-	      <h1>Login</h1>
-	      <div class="input-field">
+	      <h1>Connexion</h1>
+	       <div class="form-group">
 	        <label for="mail">Email</label>
 	        <input type="email" name="mail" required />
-	        <label for="password">Password</label> 
+	        <label for="password">Mot de passe</label> 
 	        <input type="password" name="password" required/>
 	        <input type="submit" value="Login" class="button"/>
 	      </div>
@@ -48,15 +48,15 @@ ap.min.css"
 	  
 	<form action="saveSignUpForm" id="signup" 
 		method="post" modelAttribute="signUpForm">
-		<h1>Sign Up </h1>
-	    	<div class="input-field">
+		<h1> Inscription </h1>
+	    	 <div class="form-group">
 	        	<label>Email</label> 
 	        	<input type="email" path="email" name="email"  required/>
 	        	<label>Nom</label> 
 	        	<input type="text" path="nom" name="nom"  required/>
 	        	<label>Prenom</label> 
 	        	<input type="text" path="prenom" name="prenom"  required/>
-	        	<label>Password</label> 
+	        	<label>Mot de passe</label> 
 	        	<input type="password" path="password" name="password" minlength="8" required/>
 	        	<label>Date de naissance(vous devez être majeur !)</label> 
 	        	<input type="Date" path="birthday" name="birthday" required/>
