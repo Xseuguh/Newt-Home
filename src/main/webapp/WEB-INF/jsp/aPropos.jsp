@@ -32,7 +32,7 @@ ap.min.css"
     </jsp:include>
 	<div >
       <div>
-        <h1>A PROPOS DE NOUS...</h1>
+        <h1>A PROPOS</h1>
       </div>
       <h2>Newt'Home: Pourquoi? Pour qui?</h2>
       <p>
@@ -42,7 +42,7 @@ ap.min.css"
       	Newt'Home est une application de couch surfing sur laquelle vous pouvez
       	louer à l'emplacement de vos rêves la maison de vos rêves.
       	A quel prix? Aucun!  En effet en participant à Newt'Home vous vous engagez
-      	à louer votre maison pendant la durée de votre séjour.
+      	à échanger avec quelqu'un d'autre votre maison pendant la durée de votre séjour.
       </p>
       <h2>Comment devenir membre de la communauté Newt'Home?</h2>
       <p>
@@ -54,7 +54,7 @@ ap.min.css"
       <p>
       		Vous vous êtes décidé à partir dans un endroit précis mais vous ne savez pas comment faire?
       		Ne vous inquiétez surtout pas.
-      		Cliquer sur postuler et entre un message.
+      		Cliquer sur postuler!
       </p>
     </div>
 

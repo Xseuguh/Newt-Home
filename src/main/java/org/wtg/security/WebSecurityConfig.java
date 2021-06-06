@@ -66,11 +66,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	
         http.authorizeRequests()
-            .antMatchers("/test").authenticated()
-            .antMatchers("/profil/").authenticated()
-            .antMatchers("/messagerie/").authenticated()
-            .antMatchers("/ads/**").authenticated()
-            .antMatchers("/Admin/**").hasRole("Admin")
+            .antMatchers("/profil/*").authenticated()
+            .antMatchers("/messagerie/*").authenticated()
+            .antMatchers("/ads/*").authenticated()
+            .antMatchers("/Admin/*").hasAuthority("Admin")
+            .antMatchers("/annonce/posterUneAnnonce").authenticated()
             .and()
             .formLogin()
             	.loginPage("/register")
@@ -84,3 +84,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+
+
+
