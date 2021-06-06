@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,14 +30,24 @@ import org.wtg.entities.UserInfoLight;
 @Controller
 @RequestMapping(path = "/profil")
 public class ProfilController {
-	private long USER_ID = 1l; // A MODIFIER UNE FOIS QUE LES SESSIONS DES UTILISATEURS SERONT EN PLACE: ON
-								// DOIT RÉCUPÉRER L'ID DE L'USER
+//	private long USER_ID = 1l;
 	@Autowired
 	private UserInfoRepository userDao;
 	@Autowired
 	private OffresRepository offreDao;
 	@Autowired
 	private OffresPostuleesRepository postulaDAO;
+
+	private Long getId() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == "anonymousUser") {
+			return null;
+
+		}
+		String username = ((UserDetails) principal).getUsername();
+		UserInfo user = userDao.findByMail(username);
+		return user.getId_user();
+	}
 
 	@GetMapping(path = "/")
 	public String profil() {
@@ -44,7 +56,7 @@ public class ProfilController {
 
 	@GetMapping(path = "/getAnnonces")
 	public ResponseEntity<List<Offres>> getAnnonces() {
-		return ResponseEntity.ok(offreDao.findByUserId(USER_ID));
+		return ResponseEntity.ok(offreDao.findByUserId(getId()));
 	}
 
 	@PostMapping(path = "/approveUser")
@@ -67,13 +79,13 @@ public class ProfilController {
 
 	@GetMapping(path = "/getReservations")
 	public ResponseEntity<List<JoinOffresOffresPostulees>> getReservations() {
-		return ResponseEntity.ok(postulaDAO.findByUserId(USER_ID));
+		return ResponseEntity.ok(postulaDAO.findByUserId(getId()));
 	}
 
 
 	@GetMapping(path = "/getInfo")
 	public ResponseEntity<UserInfo> getUserInfo() {
-		return ResponseEntity.ok(userDao.findById(USER_ID).get());
+		return ResponseEntity.ok(userDao.findById(getId()).get());
 	}
 
 	@PostMapping(path = "/updateInfo")
@@ -82,19 +94,19 @@ public class ProfilController {
 		if (!isEmailValid(email)) {
 			return ResponseEntity.status(500).body("L'email est invalide !");
 		}
-		userDao.updateEmail(email, USER_ID);
+		userDao.updateEmail(email, getId());
 
 		String newPassword = newSettings.getNewPassword();
 		if (newPassword != null) {
 			if (!isPasswordValid(newPassword)) {
 				return ResponseEntity.status(500).body("Le nouveau mot de passe n'est pas valide !");
 			}
-			String passwordInDBB = userDao.getPassword(USER_ID);
+			String passwordInDBB = userDao.getPassword(getId());
 			// TODO Hasher le mot de passe pour tester
 			if (!newSettings.getOldPassword().equals(passwordInDBB)) {
 				return ResponseEntity.status(500).body("L'ancien mot de passe ne correspond pas !");
 			}
-			userDao.updatePassword(newPassword, USER_ID);
+			userDao.updatePassword(newPassword, getId());
 		}
 
 		return ResponseEntity.ok("Tout s'est bien passé");
@@ -119,13 +131,13 @@ public class ProfilController {
 
 	@PostMapping(path = "remove/annonces")
 	public ResponseEntity<String> removeAnnonce(long offreID) {
-		offreDao.removeOffer(offreID, USER_ID);
+		offreDao.removeOffer(offreID, getId());
 		return ResponseEntity.ok("Tout s'est bien passé");
 	}
 
 	@PostMapping(path = "remove/reservations")
 	public ResponseEntity<String> removeApply(long offreID) {
-		postulaDAO.removeUserFromOffer(offreID, USER_ID);
+		postulaDAO.removeUserFromOffer(offreID, getId());
 		return ResponseEntity.ok("Tout s'est bien passé");
 	}
 
@@ -144,7 +156,7 @@ public class ProfilController {
 				return ResponseEntity.status(500).body("L'image est trop grande !");
 			}
 			Path destinationFile = Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/images/user",
-					USER_ID + ".png");
+					getId() + ".png");
 			try {
 				Files.write(destinationFile, decodedImg);
 			} catch (IOException e) {

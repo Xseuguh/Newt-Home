@@ -13,6 +13,9 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 	@Query("select u from UserInfo u  where u.nom like :x")
 	public List<UserInfo> findByName(@Param("x") String mc);
 
+	@Query("SELECT u FROM UserInfo u WHERE u.mail = ?1")
+	public UserInfo findByMail(String email);
+
 	@Transactional
 	@Modifying
 	@Query("UPDATE UserInfo u set u.mail = :email where u.id_user = :userID")
