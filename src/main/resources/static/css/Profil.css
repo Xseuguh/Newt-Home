@@ -110,6 +110,10 @@
   border-radius: var(--arrondi-normal);
 }
 
+#modalUpdateAvatar {
+  color : var(--noir);
+}
+
 #modificationInfo {
   display: flex;
   flex-direction: column;

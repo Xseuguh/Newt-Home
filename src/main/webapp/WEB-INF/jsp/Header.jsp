@@ -24,6 +24,19 @@
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="nav navbar-nav navbar-right">
           <security:authorize access="isAuthenticated()">
+          	<security:authorize access="hasAuthority('Admin')"> 
+          		<li>
+              <a class="clickable" href="/Admin/Gestion">
+                <img
+                  alt="AdminYolo"
+                  src="<%=request.getContextPath()%>/images/icones/backoffice.png"
+                  width="40vw"
+                />
+                <span class="headerOptions">BackOffice</span>
+              </a>
+            </li>
+          	
+          	</security:authorize>
             <li>
               <a class="clickable" href="/messagerie/">
                 <img

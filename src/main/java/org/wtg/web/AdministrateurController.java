@@ -2,7 +2,11 @@ package org.wtg.web;
 
 import java.util.List;
 import java.util.TreeSet;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -60,6 +64,27 @@ public class AdministrateurController {
 		liaisonOffreServiceDao.deleteByIdOffre(id_offre);
 		liaisonOffreContrainteDao.deleteByIdOffre(id_offre);
 		offresDao.deleteById(id_offre);
+		
+		String path = "/src/main/resources/static/images/photosAnnonces/";
+	    String OS = System.getProperty("os.name").toLowerCase();
+
+		if (!OS.equals("mac os x") && !OS.equals("linux")) {
+			path = path.replace("/", "\\");
+		}
+		
+		String userDir=System.getProperty("user.dir");
+		String whereForUser = userDir + path + id_offre;
+		File folder = new File(whereForUser);
+		try {
+			FileUtils.deleteDirectory(folder);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        
+        
+        
 		return "redirect:/Admin/Gestion/Annonce?motCle=" + mc;
 	}	
 	

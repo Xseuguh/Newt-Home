@@ -16,7 +16,7 @@ public class OffresPostulees implements Serializable{
 	private Long id_postula;
 	private Long id_offre;
 	private Long id_user;
-	private Boolean accepte;
+	private int accepte;
 	public Long getId_postula() {
 		return id_postula;
 	}
@@ -35,13 +35,13 @@ public class OffresPostulees implements Serializable{
 	public void setId_user(Long id_user) {
 		this.id_user = id_user;
 	}
-	public Boolean getAccepte() {
+	public int getAccepte() {
 		return accepte;
 	}
-	public void setAccepte(Boolean accepte) {
+	public void setAccepte(int accepte) {
 		this.accepte = accepte;
 	}
-	public OffresPostulees(Long id_offre, Long id_user, Boolean accepte) {
+	public OffresPostulees(Long id_offre, Long id_user, int accepte) {
 		super();
 		this.id_offre = id_offre;
 		this.id_user = id_user;

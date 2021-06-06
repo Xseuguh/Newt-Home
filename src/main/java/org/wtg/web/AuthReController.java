@@ -3,6 +3,9 @@ package org.wtg.web;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.wtg.dao.RoleRepository;
 import org.wtg.dao.UserRepository;
 import org.wtg.entities.Role;
+import org.wtg.entities.CustomUserDetails;
 import org.wtg.entities.SignUpForm;
 import org.wtg.entities.UserInfo;
 
@@ -34,7 +38,13 @@ public class AuthReController {
 	
 	@GetMapping("/register")
 	public String showRegistrationForm() {
-	    
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+			/* The user is logged in :) */
+			return "redirect:/Accueil";
+		}
 	    return "AuthRe";
 	}
 	
@@ -69,5 +79,14 @@ public class AuthReController {
     	return user;
     }
 	
+	public static Long getId() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == "anonymousUser") {
+			return null;
+
+		}
+		CustomUserDetails CUD = (CustomUserDetails) principal;
+		return CUD.getId();
+	}
 	
 }

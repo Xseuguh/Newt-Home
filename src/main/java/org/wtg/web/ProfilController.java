@@ -1,5 +1,6 @@
 package org.wtg.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -9,10 +10,12 @@ import java.util.Base64;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.wtg.dao.OffresPostuleesRepository;
 import org.wtg.dao.OffresRepository;
 import org.wtg.dao.UserInfoRepository;
+import org.wtg.entities.CustomUserDetails;
 import org.wtg.entities.JoinOffresOffresPostulees;
 import org.wtg.entities.Offres;
 import org.wtg.entities.Settings;
@@ -39,14 +43,7 @@ public class ProfilController {
 	private OffresPostuleesRepository postulaDAO;
 
 	private Long getId() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal == "anonymousUser") {
-			return null;
-
-		}
-		String username = ((UserDetails) principal).getUsername();
-		UserInfo user = userDao.findByMail(username);
-		return user.getId_user();
+		return AuthReController.getId();
 	}
 
 	@GetMapping(path = "/")
@@ -132,7 +129,28 @@ public class ProfilController {
 
 	@PostMapping(path = "remove/annonces")
 	public ResponseEntity<String> removeAnnonce(long offreID) {
+		
+		
 		offreDao.removeOffer(offreID, getId());
+		
+		String path = "/src/main/resources/static/images/photosAnnonces/";
+	    String OS = System.getProperty("os.name").toLowerCase();
+
+		if (!OS.equals("mac os x") && !OS.equals("linux")) {
+			path = path.replace("/", "\\");
+		}
+		
+		String userDir=System.getProperty("user.dir");
+		String whereForUser = userDir+ path +offreID;
+		File folder = new File(whereForUser);
+		try {
+			FileUtils.deleteDirectory(folder);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        
 		return ResponseEntity.ok("Tout s'est bien passé");
 	}
 

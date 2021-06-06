@@ -20,6 +20,7 @@ import org.wtg.dao.MessageRepository;
 import org.wtg.dao.UserRepository;
 import org.wtg.entities.ConversationInfo;
 import org.wtg.entities.ConversationInfoAdd;
+import org.wtg.entities.CustomUserDetails;
 import org.wtg.entities.Message;
 import org.wtg.entities.MessageInfoAdd;
 import org.wtg.entities.MessageInfoGet;
@@ -36,17 +37,9 @@ public class MessagerieController {
 	@Autowired
 	private MessageRepository messageDao;
 
-	@Autowired
-	private UserRepository userDao;
+	
 	private Long getId(){
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-		if (principal == "anonymousUser") {
-			return null;
-
-		}
-		String username = ((UserDetails) principal).getUsername();
-		UserInfo user = userDao.findByMail(username);
-		return user.getId_user();
+		return AuthReController.getId();
 	}
 
 	@GetMapping(path = "/")

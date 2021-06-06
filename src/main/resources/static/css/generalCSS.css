@@ -4,6 +4,7 @@
 :root {
   /*Couleurs*/
   --rouge-fonce: #a4243b;
+  --yellow: #ffff00;
   --gris-bleu: #829191;
   --bg-ppal: #704a58;
   --beige-fonce: #b6aa84;
@@ -68,7 +69,7 @@ textarea {
 }
 
 .error {
-  color: var(--rouge-fonce);
+  color: var(--yellow);
 }
 
 .clickable:hover {

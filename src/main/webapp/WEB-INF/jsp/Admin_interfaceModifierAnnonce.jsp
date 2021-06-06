@@ -759,8 +759,8 @@ ap.min.css"
 				
 				<input type="submit" class="boutonSubmit">
 				</form>
-			<a href="/Admin/Zoom/Annonce?ref=${offreAffiche.id_offre}"><img src="<%=request.getContextPath()%>/images/zoom.png" alt="zoom"></a>
-			<br><a href="/Admin/Supprimer/Annonce?ref=${offreAffiche.id_offre}" onclick="return confirm('Please Confirm')"><img src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a>	
+			<a href="/Admin/Zoom/Annonce?ref=${offreAffiche.id_offre}"><img class="image" src="<%=request.getContextPath()%>/images/zoom.png" alt="zoom"></a>
+			<br><a href="/Admin/Supprimer/Annonce?ref=${offreAffiche.id_offre}" onclick="return confirm('Please Confirm')"><img class="image" src="<%=request.getContextPath()%>/images/suppression.png" alt="supprimer"></a>	
 			</c:forEach>
 
 		<jsp:include page="Footer.jsp" />

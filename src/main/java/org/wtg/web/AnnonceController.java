@@ -76,9 +76,8 @@ public class AnnonceController {
 		
 		if(principal  != "anonymousUser") {
 			connected = true;
-			String username = ((UserDetails)principal).getUsername();
-			UserInfo user = userDao.findByMail(username);
-			USER_ID = user.getId_user();
+			USER_ID = AuthReController.getId();
+
 		}
 		
 		
@@ -159,9 +158,7 @@ public class AnnonceController {
 		
 		if(principal  != "anonymousUser") {
 			connected = true;
-			String username = ((UserDetails)principal).getUsername();
-			UserInfo user = userDao.findByMail(username);
-			USER_ID = user.getId_user();
+			USER_ID = AuthReController.getId();
 		}
 		
 		
@@ -245,9 +242,7 @@ public class AnnonceController {
 		
 		if(principal  != "anonymousUser") {
 			connected = true;
-			String username = ((UserDetails)principal).getUsername();
-			UserInfo user = userDao.findByMail(username);
-			USER_ID = user.getId_user();
+			USER_ID = AuthReController.getId();
 		}
 
 		List<Contraintes> listeContrainteRecherche = listeContrainteRechercheDao.findAll();
@@ -387,11 +382,7 @@ public class AnnonceController {
 	
 	@GetMapping(path = "/ads/editing")
 	public String editing(Model model, @RequestParam(name = "id", defaultValue = "") Long id_offre) {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		String username = ((UserDetails)principal).getUsername();
-		UserInfo user = userDao.findByMail(username);
-		long USER_ID = user.getId_user();
+		Long USER_ID = AuthReController.getId();
 	
 		Offres offreToEdit = offresDao.findByIdWithUserVerification(id_offre, USER_ID);
 		if (offreToEdit == null) {
