@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/profil/").authenticated()
             .antMatchers("/messagerie/").authenticated()
             .antMatchers("/ads/**").authenticated()
-            .antMatchers("/Admin/**").authenticated()
+            .antMatchers("/Admin/**").hasAuthority("Admin")
             .antMatchers("/annonce/posterUneAnnonce").authenticated()
             .and()
             .formLogin()
@@ -85,4 +85,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-
