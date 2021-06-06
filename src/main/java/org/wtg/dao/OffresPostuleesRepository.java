@@ -24,8 +24,18 @@ public interface OffresPostuleesRepository extends JpaRepository<OffresPostulees
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE OffresPostulees op SET op.accepte = true WHERE op.id_user = :userID AND op.id_offre = :offreID")
-	public void setAccepteToTrue(@Param("offreID") long offreID, @Param("userID") long userID);
+	@Query("UPDATE OffresPostulees op SET op.accepte = 1 WHERE op.id_user = :userID AND op.id_offre = :offreID")
+	public void acceptUserForOffer(@Param("offreID") long offreID, @Param("userID") long userID);
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE OffresPostulees op SET op.accepte = 2 WHERE op.id_user = :userID AND op.id_offre = :offreID")
+	public void refuseUserForOffer(@Param("offreID") long offreID, @Param("userID") long userID);
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE OffresPostulees op SET op.accepte = 2 WHERE NOT op.id_user = :userID AND op.id_offre = :offreID")
+	public void refuseAllUserExceptOneForOffer(@Param("offreID") long offreID, @Param("userID") long userID);
 
 	@Transactional
 	@Modifying
