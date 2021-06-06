@@ -85,7 +85,7 @@ img {
   width: 100%;
 }
 #formModification label,
-#formModification span {
+#formModification span, #formModification p {
   color: var(--white);
 }
 
@@ -94,6 +94,10 @@ img {
   border: var(--gris-pale) solid;
   border-radius: var(--arrondi-normal);
   margin-top: 3vw;
+}
+
+input[type="text"], input[type="date"] {
+	width: 28em;
 }
 
 .table {
