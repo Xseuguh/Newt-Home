@@ -17,9 +17,9 @@ ap.min.css"
 	rel="stylesheet" />
 </head>
 <body>
-    <jsp:include page="Header.jsp">
-      <jsp:param name="isAuthenticated" value="true" />
-    </jsp:include>
+    
+    <jsp:include page="Header.jsp" />
+
     <div class="tout table-responsive barreRechercheAdmin">
 		<form method="GET" action="/Admin/Gestion/UtilisateurPrecis">
 			<input type="search" placeholder="Rechercher un utilisateur..." name="recherche">
@@ -66,7 +66,7 @@ ap.min.css"
 		</div>
 	</div>
 
-	<%@include file="Footer.jsp" %>
+	<jsp:include page="Footer.jsp" />
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script id="scriptBTS"
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>

@@ -34,9 +34,7 @@ ap.min.css"
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
-    <jsp:include page="Header.jsp">
-      <jsp:param name="isAuthenticated" value="true" />
-    </jsp:include>
+    <jsp:include page="Header.jsp" />
 
     <div id="messagerie">
       <div id="conversations">
@@ -97,7 +95,7 @@ ap.min.css"
       </div>
     </div>
 
-    <%@include file="Footer.jsp" %>
+    <jsp:include page="Footer.jsp" />
 
     <script
       src="<%=request.getContextPath()%>/js/Messagerie.js"
