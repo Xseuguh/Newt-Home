@@ -28,10 +28,7 @@ ap.min.css"
 </head>
 <body>
 
-	<jsp:include page="Header.jsp">
-		<jsp:param name="isAuthenticated" value="true" />
-	</jsp:include>
-
+    <jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row rechercheSimple" id="rechercheDiv">
 			<form action="/Accueil" method="post" class="form-inline">
@@ -304,6 +301,7 @@ ap.min.css"
 		</div>
 	</div>
 
-	<%@include file="Footer.jsp"%>
+
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>

@@ -20,61 +20,61 @@ ap.min.css"
 
 </head>
 <body>
-	 <jsp:include page="Header.jsp">
-      <jsp:param name="isAuthenticated" value="true" />
-    </jsp:include>
+	 
+    <jsp:include page="Header.jsp" />
+
 	<div class="container">
 		<div class="textePagesStatiques">
-			<h1>Mentions légales</h1>
+			<h1>Mentions lï¿½gales</h1>
 			<div>
 				<p>
 				En tant que consommateur, vous avez des droits que vous pouvez faire valoir.
 				</p>
 				
 				
-				<h2>1-Louer un hébergement.</h2><br>
+				<h2>1-Louer un hï¿½bergement.</h2><br>
 				
 				<p>
-				Un hôte se réserve le droit d annuler une réservation jusqu à 24heures en avance.
-				Si vous restez après l'heure de départ, l'Hôte peut se réserve le droit de vous faire partir de manière conforme au droit applicable.
-				Vous vous engagez à tenir des contraintes imposées par la location: respecter le nombre maximum de voyageurs, arroser les plantes...
+				Un hï¿½te se rï¿½serve le droit d annuler une rï¿½servation jusqu ï¿½ 24heures en avance.
+				Si vous restez aprï¿½s l'heure de dï¿½part, l'Hï¿½te peut se rï¿½serve le droit de vous faire partir de maniï¿½re conforme au droit applicable.
+				Vous vous engagez ï¿½ tenir des contraintes imposï¿½es par la location: respecter le nombre maximum de voyageurs, arroser les plantes...
 				</p>
 				
-				<h2>2-Chèque de caution</h2>
+				<h2>2-Chï¿½que de caution</h2>
 				
 				<p>				
-				L'hôte se réserve le droit en cas de degradation des lieux d encaisser le cheque de caution.
+				L'hï¿½te se rï¿½serve le droit en cas de degradation des lieux d encaisser le cheque de caution.
 				</p>
 				
-				<h2>3-Responsabilité</h2>
+				<h2>3-Responsabilitï¿½</h2>
 				
 				<p>
-				Vous  êtes responsables de vos actes. Vous êtes responsables des personnes que vous invitez sur les lieux.
-				En tant que locataire nous vous demandons de respecter les lieux: vous vous devez de les rendre dans le même état que vous les avez trouvé.
+				Vous  ï¿½tes responsables de vos actes. Vous ï¿½tes responsables des personnes que vous invitez sur les lieux.
+				En tant que locataire nous vous demandons de respecter les lieux: vous vous devez de les rendre dans le mï¿½me ï¿½tat que vous les avez trouvï¿½.
 				</p>
 				
-				<h2>4-Règles</h2>
+				<h2>4-Rï¿½gles</h2>
 				
 				<p>
-				Nous vous incitons à adopter les comportements suivants:
+				Nous vous incitons ï¿½ adopter les comportements suivants:
 					<ul>
-						<li>Agissez avec integrité</li>
+						<li>Agissez avec integritï¿½</li>
 						<li>Soyez bienveillant</li>
-						<li>Respectez le matériel</li>
+						<li>Respectez le matï¿½riel</li>
 					</ul>
 				</p>
 				
-				<h2>5-Problèmes</h2>
+				<h2>5-Problï¿½mes</h2>
 				
 				<p>
-				En cas de problèmes, de descriptif erroné, Newt'Home ne pourra être tenu en tant que responsable.
+				En cas de problï¿½mes, de descriptif erronï¿½, Newt'Home ne pourra ï¿½tre tenu en tant que responsable.
 				</p>
 				
 				<h2>6-Gestion de votre Annonce.</h2>
 				
 				<p>
-				Newt'Home fournit des outils qui permettent de configurer et de gérer facilement une Annonce.
-				L'Annonce doit inclure des informations complètes : sur le nombre de chambre, l'emplacement...
+				Newt'Home fournit des outils qui permettent de configurer et de gï¿½rer facilement une Annonce.
+				L'Annonce doit inclure des informations complï¿½tes : sur le nombre de chambre, l'emplacement...
 				</p>
 				
 				<h2>Cookies</h2>
@@ -87,6 +87,6 @@ ap.min.css"
 			</div>
 		</div>
 	</div>
-	<%@include file="Footer.jsp" %>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>

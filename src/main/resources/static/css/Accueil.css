@@ -1,115 +1,121 @@
-@media only screen and (min-device-width : 320px) and (max-device-width
-	: 480px) {
-	.imageDiv {
-		height: 35vw !important;
-	}
-	.display-flex-center {
-		display: block !important;
-	}
-	#rechercheDiv {
-		margin-left: 2em;
-	}
-	
-	#carouselSlides{
-	margin-bottom: 8vw;}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .imageDiv {
+    height: 35vw !important;
+  }
+  .display-flex-center {
+    display: block !important;
+  }
+  #rechercheDiv {
+    margin-left: 2em;
+  }
+
+  #carouselSlides {
+    margin-bottom: 8vw;
+  }
 }
 
 input::placeholder {
-	color: #434544;
+  color: #434544;
 }
 
-
-
 #thumbnail {
-	width: 80%;
+  width: 80%;
 }
 
 img.resize {
-	width: 80%;
-	height: auto;
+  width: 80%;
+  height: auto;
 }
 
 .recherche {
-	width: 80%;
-	background-color: #c5c5c5;
-	margin-right: 5em;
-	margin-top: 1em;
+  width: 80%;
+  background-color: #c5c5c5;
+  margin-right: 5em;
+  margin-top: 1em;
 }
 
-#rechercheDiv, #rechercheAvanceeDiv {
-	margin-bottom: 3em;
-	margin-top: 3em;
+#rechercheDiv,
+#rechercheAvanceeDiv {
+  margin-bottom: 3em;
+  margin-top: 3em;
 }
 
 .boutonRecherche {
-	border-radius: var(--arrondi-normal);
-	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
-            text-align: center;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 0.3em #eee;
-            display: block;
-            margin-top: 1em;
+  border-radius: var(--arrondi-normal);
+  background-image: linear-gradient(
+    to right,
+    var(--noir) 0%,
+    #704a58 51%,
+    var(--noir) 100%
+  );
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 0.3em #eee;
+  display: block;
+  margin-top: 1em;
 }
 .boutonRecherche:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
-         
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
 
 #titre {
-	margin-bottom: 1em;
-	font-weight: bold;
-	font-size: large;
+  margin-bottom: 1em;
+  font-weight: bold;
+  font-size: large;
 }
 
 #openButton {
-	border-radius: var(--arrondi-normal);
-	background-image: linear-gradient(to right, var(--noir)  0%,  #704a58 51%, var(--noir)  100%);
-            text-align: center;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 0.3em #eee;
-            display: block;
-
+  border-radius: var(--arrondi-normal);
+  background-image: linear-gradient(
+    to right,
+    var(--noir) 0%,
+    #704a58 51%,
+    var(--noir) 100%
+  );
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 0.3em #eee;
+  display: block;
 }
 
 #openButton:hover {
-	
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
 
 #formRedirectionMessage {
-	width: 3em;
+  width: 3em;
 }
 
 .icones {
-	width: 2em;
+  width: 2em;
 }
 
 .row {
-	margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 .annonce {
-	padding: 3em 0.5em;
-	border: #c5c5c5 solid;
-	border-radius: 1em;
-	margin: 2em;
-	color: floralwhite;
+  padding: 3em 0.5em;
+  border: #c5c5c5 solid;
+  border-radius: 1em;
+  margin: 2em;
+  color: var(--white);
 }
 
 .listeCS {
-	list-style: disc inside;
+  list-style: disc inside;
 }
 
 .titreCat {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .rechercheAvancee {
@@ -118,7 +124,7 @@ img.resize {
 }
 
 .nonModale {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .boutonContact {
@@ -136,10 +142,9 @@ img.resize {
 }
 
 .display-flex-center {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
-
 .boutonContact:hover {
 	background-position: right center;
 	color: #fff;
@@ -147,14 +152,15 @@ img.resize {
 }
 
 .imageDiv {
-	height: 20vw;
-	width: auto;
+  height: 20vw;
+  width: auto;
 }
 
-body.modal-open .nonModale, body.modal-open #rechercheDiv {
-	-webkit-filter: blur(0.3em);
-	-moz-filter: blur(0.3em);
-	-o-filter: blur(0.3em);
-	-ms-filter: blur(0.3em);
-	filter: blur(0.3em);
+body.modal-open .nonModale,
+body.modal-open #rechercheDiv {
+  -webkit-filter: blur(0.3em);
+  -moz-filter: blur(0.3em);
+  -o-filter: blur(0.3em);
+  -ms-filter: blur(0.3em);
+  filter: blur(0.3em);
 }

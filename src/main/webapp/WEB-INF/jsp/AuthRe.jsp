@@ -1,35 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+pageEncoding="UTF-8"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<%@page import="java.io.File"%>
-<title>Bienvenue chez Newt'Home</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <%@page import="java.io.File"%>
+    <title>Bienvenue chez Newt'Home</title>
 
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstr
 ap.min.css"
-	rel="stylesheet" />
-<link type="text/css"
-	href="<%=request.getContextPath()%>/css/generalCSS.css"
-	rel="stylesheet" />
-<link type="text/css"
-	href="<%=request.getContextPath()%>/css/AuthRe.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script id="scriptBTS"
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      href="<%=request.getContextPath()%>/css/generalCSS.css"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      href="<%=request.getContextPath()%>/css/AuthRe.css"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      id="scriptBTS"
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"
+    ></script>
 
-<script src="<%=request.getContextPath()%>/js/AuthRe.js"></script>
-</head>
-
-<body>
+    <script src="<%=request.getContextPath()%>/js/AuthRe.js"></script>
+  </head>
+  <body>
+    <jsp:include page="Header.jsp" />
 <div class="forms">
 	<ul class="tab-group">
 		<li class="tab active"><a href="#login">Connexion</a></li>
@@ -64,7 +73,8 @@ ap.min.css"
 	        <input type="submit" value="Sign up" class="button" />
 	      </div>
 	  </form>
-</div>
+    </div>
 
-</body>
+    <jsp:include page="Footer.jsp" />
+  </body>
 </html>
