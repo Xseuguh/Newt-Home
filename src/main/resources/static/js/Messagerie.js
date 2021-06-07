@@ -129,7 +129,7 @@ async function afficheConversation(conversationID, isNewConversation) {
 function generateMessage(message) {
   return `<li class="${message.origine}">
     <p class="corps">${message.message}</p>
-    <p class="horodatage">${message.date_message}</p>
+    <p class="horodatage">${message.horodatage}</p>
   </li>`;
 }
 
