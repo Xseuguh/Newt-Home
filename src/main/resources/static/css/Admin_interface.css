@@ -90,11 +90,16 @@ content {
   border: var(--gris-pale) solid;
   border-radius: var(--arrondi-normal);
   margin-top: 5vw;
+  
+}
+
+#formInformation{
+	display : flex;
+  flex-direction : column; 
 }
 
 input[type="text"] {
-	padding-left: 5em;
-    padding-right: 5em;
+
 }
 
 .table {

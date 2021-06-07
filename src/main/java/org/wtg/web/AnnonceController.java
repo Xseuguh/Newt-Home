@@ -643,8 +643,51 @@ public class AnnonceController {
 		return isItValidAd;
 	}
 	
-	@RequestMapping(value = "/annonce/modifierMesImages/")
-	public String modifyMyFilesPart1(Model model,@RequestParam(name = "ref", defaultValue = "") Long id_offre) {
+//	@RequestMapping(value = "/annonce/modifierMesImages/")
+//	public String modifyMyFilesPart1(Model model,@RequestParam(name = "ref", defaultValue = "") Long id_offre) {
+//		String OS = System.getProperty("os.name").toLowerCase();
+//		if(OS.equals("windows 10")) {
+//	        File repertoire = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+id_offre+"\\");
+//	        String liste[] = repertoire.list();
+//	        for(String fileToDelete:liste) {
+//	    		Path path=Paths.get(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+id_offre+"\\"+fileToDelete);
+//	    		try {
+//					Files.delete(path);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//	        }
+//		}
+//		else if(OS.equals("linux")) {
+//	        File repertoire = new File(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/"+id_offre);
+//	        String liste[] = repertoire.list();
+//	        for(String fileToDelete:liste) {
+//	    		Path path=Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/"+id_offre+"/"+fileToDelete);
+//	    		try {
+//					Files.delete(path);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//	        }
+//		}
+//		else if(OS.equals("mac os x")) {
+//	        File repertoire = new File(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/"+id_offre);
+//	        String liste[] = repertoire.list();
+//	        for(String fileToDelete:liste) {
+//	    		Path path=Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/images/photosAnnonces/"+id_offre+"/"+fileToDelete);
+//	    		try {
+//					Files.delete(path);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//	        }
+//		}
+//		return "redirect:/ads/editing?id="+id_offre;
+//	}
+//	
+	@RequestMapping(value="/annonce/uploaderDeNouvellesImages/")
+	public String uploaderDeNouvellesImages(Model model,@RequestParam(name = "ref", defaultValue = "") Long id_offre,
+			@RequestParam("files") MultipartFile[] files) {
 		String OS = System.getProperty("os.name").toLowerCase();
 		if(OS.equals("windows 10")) {
 	        File repertoire = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\photosAnnonces\\"+id_offre+"\\");
@@ -682,14 +725,6 @@ public class AnnonceController {
 				}
 	        }
 		}
-		else {
-		}
-		return "redirect:/ads/editing?id="+id_offre;
-	}
-	
-	@RequestMapping(value="/annonce/uploaderDeNouvellesImages/")
-	public String uploaderDeNouvellesImages(Model model,@RequestParam(name = "ref", defaultValue = "") Long id_offre,
-			@RequestParam("files") MultipartFile[] files) {
 		ecrireNouveauForNouvellesImages(files,id_offre);
 		return "redirect:/ads/editing?id="+id_offre;
 	}
