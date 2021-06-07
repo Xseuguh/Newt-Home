@@ -9,20 +9,20 @@ public class MessageInfoGet implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String message, origine;
-	private Date hotrodatage;
+	private Date horodatage;
 
 	public MessageInfoGet(String message, String origine, Date horodatage) {
 		this.setMessage(message);
 		this.setOrigine(origine);
-		this.setHotrodatage(horodatage);
+		this.setHorodatage(horodatage);
 	}
 
-	public Date getHotrodatage() {
-		return hotrodatage;
+	public Date getHorodatage() {
+		return horodatage;
 	}
 
-	public void setHotrodatage(Date hotrodatage) {
-		this.hotrodatage = hotrodatage;
+	public void setHorodatage(Date horodatage) {
+		this.horodatage = horodatage;
 	}
 
 	public String getOrigine() {
