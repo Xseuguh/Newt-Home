@@ -76,6 +76,8 @@ public class OffresController {
 			@RequestParam(name="garderLesAnimaux",defaultValue="") String garderLesAnimaux,
 			@RequestParam(name="nettoyerLaMaison",defaultValue="") String nettoyerLaMaison){
 		
+		
+		
 		Long idUser=getId();
 		
 		String[] valuesStringInserted= {descriptionAnnonce,titreAnnonce,adresseAnnonce,

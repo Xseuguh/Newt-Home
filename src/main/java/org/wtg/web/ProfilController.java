@@ -101,10 +101,12 @@ public class ProfilController {
 			}
 			String passwordInDBB = userDao.getPassword(getId());
 			// TODO Hasher le mot de passe pour tester
-			if (!newSettings.getOldPassword().equals(passwordInDBB)) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			
+			if (!encoder.matches(newSettings.getOldPassword(), passwordInDBB)) {
 				return ResponseEntity.status(500).body("L'ancien mot de passe ne correspond pas !");
 			}
-			userDao.updatePassword(newPassword, getId());
+			userDao.updatePassword(encoder.encode(newPassword), getId());
 		}
 
 		return ResponseEntity.ok("Tout s'est bien passé");

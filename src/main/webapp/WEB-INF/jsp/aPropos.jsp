@@ -36,7 +36,7 @@ ap.min.css"
       
       <h2>Newt'Home: Pourquoi? Pour qui?</h2>
       <p>
-      	Vous rêvez de passer des vacances à la mer? A la montage? 
+      	Vous rêvez de passer des vacances à la mer? A la montagne? 
       	Mais vous craignez pour votre budget. 
       	Rassurez-vous avec Newt'Home, la solution est toute trouvée.
       	Newt'Home est une application de couch surfing sur laquelle vous pouvez

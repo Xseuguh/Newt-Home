@@ -30,15 +30,15 @@
 
 				%>
 			</p>
-			<form action="/annonce/modifierMesImages/?ref=${offresZoom.id_offre}" method="post">
-				<input type="submit" class="boutonSubmit"  value="Modifier mon offre" onclick="alert('Attention vous devrez poster necessairement 3 images!')">
-			</form>
+<%-- 			<form action="/annonce/modifierMesImages/?ref=${offresZoom.id_offre}" method="post"> --%>
+<!-- 				<input type="submit" class="boutonSubmit"  value="Supprimer les images :(" onclick="alert('Attention vous devrez poster necessairement 3 images!')"> -->
+<!-- 			</form> -->
 			<form action="/annonce/uploaderDeNouvellesImages/?ref=${offresZoom.id_offre}" method="post" enctype="multipart/form-data">
 				<input type="file" name="files" class="boutonSubmit" multiple />
 				<input type="submit" class="boutonSubmit" value="Uploader des images" onclick="alert('Attention vous pouvez poster au moins 3 images!')">
 			</form>
 		
-			<form  class="text-center" action="/ads/ValidationDesModifications?ref=${offresZoom.id_offre}" method="post">
+			<form  class="text-center" id="formInformation" action="/ads/ValidationDesModifications?ref=${offresZoom.id_offre}" method="post">
 			
 				<!--  <label>Id Offre</label>					
 				<span>${offreAffiche.id_offre}</span>
@@ -56,7 +56,7 @@
 			
 				<label for="descriptionAnnonce">Description</label>
 				<br>
-				<input type="text" id="descriptionAnnonce" name="descriptionAnnonce" value="${offresZoom.description}"/>
+				<textarea id="descriptionAnnonce" name="descriptionAnnonce">${offresZoom.description}</textarea>
 				<br>
 			
 				<label for="adresseAnnonce">Adresse</label>
