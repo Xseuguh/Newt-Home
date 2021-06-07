@@ -64,8 +64,9 @@ a:hover {
   border: var(--gris-pale) 0.2em solid;
 }
 
- input[type="text"], input[type="date"], #formAjout textarea {
-	width:30em;
+ input[type="text"], #formAjout textarea {
+	padding-left: 5em;
+    padding-right: 5em;
 }
 
 #formAjout label,

@@ -10,10 +10,6 @@ h2 {
   width: 100%;
   text-align: center;
 }
-/* body { */
-/*   height: 100%; */
-/*   width: 100%; */
-/* } */
 a {
   color: black;
 }
@@ -93,11 +89,12 @@ content {
   padding: 2em 0.5em;
   border: var(--gris-pale) solid;
   border-radius: var(--arrondi-normal);
-  margin-top: 3vw;
+  margin-top: 5vw;
 }
 
-input[type="text"], input[type="date"] {
-	width: 28em;
+input[type="text"] {
+	padding-left: 5em;
+    padding-right: 5em;
 }
 
 .table {
