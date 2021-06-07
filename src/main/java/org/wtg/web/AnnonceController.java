@@ -35,6 +35,7 @@ import org.wtg.entities.JoinOffresUsers;
 import org.wtg.entities.LiaisonOffreContrainte;
 import org.wtg.entities.LiaisonOffreService;
 import org.wtg.entities.Offres;
+import org.wtg.entities.OffresPostulees;
 import org.wtg.entities.Services;
 import org.wtg.entities.UserInfo;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -91,6 +92,8 @@ public class AnnonceController {
 		List<File> repertoires = new ArrayList<File>();
 
 		Map<Long, List<String>> imagesPaths = new HashMap<Long, List<String>>();
+		List<Boolean> alreadyPostuler = new ArrayList<Boolean>();
+		List<OffresPostulees> offresPostulees = new ArrayList<OffresPostulees>();
 
 		for (Offres value : offres) {
 			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
@@ -113,7 +116,6 @@ public class AnnonceController {
 				imagesPaths.put(value.getId_offre(), getImagesPath(repertoire.listFiles(), new ArrayList<String>()));
 				
 			}
-
 		}
 		
 		
@@ -145,6 +147,7 @@ public class AnnonceController {
 		model.addAttribute("motC", mc);
 		model.addAttribute("connected", connected);
 		model.addAttribute("idUserConnecte", USER_ID);
+		model.addAttribute("alreadyPostuler", alreadyPostuler);
 		return "Accueil";
 	}
 	
@@ -172,6 +175,7 @@ public class AnnonceController {
 		List<File> repertoires = new ArrayList<File>();
 
 		Map<Long, List<String>> imagesPaths = new HashMap<Long, List<String>>();
+		boolean alreadyPostuler = false;
 
 		for (Offres value : offres) {
 			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
@@ -213,8 +217,6 @@ public class AnnonceController {
 			}
 			
 		
-
-		
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offres);
@@ -225,6 +227,7 @@ public class AnnonceController {
 		model.addAttribute("infosProprio", infosProprio);
 		model.addAttribute("connected", connected);
 		model.addAttribute("idUserConnecte", USER_ID);
+		model.addAttribute("alreadyPostuler", alreadyPostuler);
 		
 		return "Accueil";
 	}
@@ -321,6 +324,7 @@ public class AnnonceController {
 		List<Annonce> services = new ArrayList<Annonce>();
 
 		List<JoinOffresUsers> infosProprio = new ArrayList<JoinOffresUsers>();
+		boolean alreadyPostuler = false;
 
 		for (Offres value : offresAvancees) {
 			contraintes.addAll(contrainteDao.findContraintesByIdOffre(value.getId_offre()));
@@ -335,6 +339,7 @@ public class AnnonceController {
 				imagesPaths.put(value.getId_offre(), getImagesPath(repertoire.listFiles(), new ArrayList<String>()));
 
 			}
+			
 
 		}
 		
@@ -353,6 +358,7 @@ public class AnnonceController {
 			listPaths = imagesPaths;
 		}
 		
+		
 		model.addAttribute("listeContrainteRecherche", listeContrainteRecherche);
 		model.addAttribute("listeServiceRecherche", listeServiceRecherche);
 		model.addAttribute("offres", offresAvancees);
@@ -367,14 +373,22 @@ public class AnnonceController {
 		model.addAttribute("listeS", listeServices);
 		model.addAttribute("connected", connected);
 		model.addAttribute("idUserConnecte", USER_ID);
+		model.addAttribute("alreadyPostuler", alreadyPostuler);
 		return "Accueil";
 	}
 	
 	@RequestMapping(value="/Accueil/Postuler")
 	public String postulerAnnonce(Model model, @RequestParam(name = "idUserConnecte", defaultValue = "") Long idUserConnecte, @RequestParam(name = "idOffre", defaultValue = "") Long idOffre) {
 		
+		if(offresPostuleesDao.findByUserId(idUserConnecte).size()==0) {
+		
 		offresPostuleesDao.applyToAnOffer(idOffre,idUserConnecte); 
 		
+		}
+		
+		else { 
+			return "redirect:/Accueil";
+		}
 		
 		return "Accueil";
 		

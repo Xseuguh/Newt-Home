@@ -257,6 +257,7 @@ ap.min.css"
 											<c:if test="${!idUserConnecte.equals(i.id_user)}">
 												<div class="row text-center">
 													<div class=" col-md-6">
+													
 														<form class="text-center formPostuler"
 															id="formFormPostuler_${i.id_offre}" method="post" action="/Accueil/Postuler"> 
 															<input type="hidden" id="idOffre" name="idOffre"
@@ -268,6 +269,7 @@ ap.min.css"
 																form="formFormPostuler_${i.id_offre}" class="boutonContact"
 																value="Postuler">
 														</form>
+														
 													</div>
 													</div>
 													<div class="row text-center">

@@ -7,14 +7,17 @@
 <%@page import="org.wtg.entities.Offres"%>
 <html>
 	<head>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Modifier mon annonce</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/Admin_interface.css">
 		<link href="<%=request.getContextPath()%>/css/generalCSS.css" rel="stylesheet" />
 	</head>
 	<body>
 		<jsp:include page="Header.jsp" />
+		<div class="container" id="formModification">
 			<p>
-				Vos images sont actuellements:
+				Vos images sont actuellement:
 				<c:set value="${offresZoom}" var="oz"/>
 				<%
 				Offres o = (Offres) pageContext.getAttribute("oz");
@@ -28,54 +31,65 @@
 				%>
 			</p>
 			<form action="/annonce/modifierMesImages/?ref=${offresZoom.id_offre}" method="post">
-				<input type="submit" value="Modifier mes offre" onclick="alert('Attention vous devrez poster necessairement 3 images!')">
+				<input type="submit" class="boutonSubmit"  value="Modifier mon offre" onclick="alert('Attention vous devrez poster necessairement 3 images!')">
 			</form>
 			<form action="/annonce/uploaderDeNouvellesImages/?ref=${offresZoom.id_offre}" method="post" enctype="multipart/form-data">
 				<input type="file" name="files" class="boutonSubmit" multiple />
-				<input type="submit" value="Uploader des images" onclick="alert('Attention vous pouvez poster au maximum 3 images!')">
+				<input type="submit" class="boutonSubmit" value="Uploader des images" onclick="alert('Attention vous pouvez poster au moins 3 images!')">
 			</form>
 		
-			<form action="/ads/ValidationDesModifications?ref=${offresZoom.id_offre}" method="post">
+			<form  class="text-center" action="/ads/ValidationDesModifications?ref=${offresZoom.id_offre}" method="post">
 			
-				<label>Id Offre</label>					
+				<!--  <label>Id Offre</label>					
 				<span>${offreAffiche.id_offre}</span>
 				<br>
 				
 				<label>Id user</label>
 				<span>${offresZoom.id_user}</span>
-				</br>
+				<br>
+				-->
 				
 				<label for="titreAnnonce">Titre</label>
+				<br>
 				<input type="text" id="titreAnnonce" name="titreAnnonce" value="${offresZoom.titre}"/>
 				<br>
 			
 				<label for="descriptionAnnonce">Description</label>
+				<br>
 				<input type="text" id="descriptionAnnonce" name="descriptionAnnonce" value="${offresZoom.description}"/>
 				<br>
 			
 				<label for="adresseAnnonce">Adresse</label>
+				<br>
 				<input type="text" id="adresseAnnonce" name="adresseAnnonce" value="${offresZoom.adresse}"/>
 				<br>
 				
 				<label for="codePostalAnnonce">Code postal:</label>
+				<br>
 				<input type="text" id="codePostalAnnonce" name="codePostalAnnonce" value="${offresZoom.code_postal}"/>
 				<br>
 					
 				<label for="villeAnnonce">Ville</label>
+				<br>
 				<input type="text" id="villeAnnonce" name="villeAnnonce" value="${offresZoom.ville}"/>
 				<br>
 					
 				<label for="paysAnnonce">Pays</label>
+				<br>
 				<input type="text" id="paysAnonce" name="paysAnnonce" value="${offresZoom.pays}"/>
 				<br>
 					
 				<label for="dateDebutAnnonce">Date de debut</label>
+				<br>
 				<input type="date" id="dateDebutAnnonce" name="dateDebutAnnonce" value="${offresZoom.date_debut}"/>
 				<br>
 					
 				<label for="dateFinAnnonce">Date de fin</label>
+				<br>
 				<input type="date" id="dateFinAnnonce" name="dateFinAnnonce" value="${offresZoom.date_limite}"/>
 				<br>
+				
+				<p>L'offre est-elle pourvue ? <p>
 				
 				<c:if test="${offresZoom.pourvu eq false}">
 				  <input type="radio" name="pourvuAnnonce" value="oui" id="pourvuAnnonceOui" ><label for="pourvuAnnonceOui">Oui</label>
@@ -756,9 +770,13 @@
 					</c:if>
 				</p>
 				
-				<input type="submit">
+				<input type="submit" class="boutonSubmit">
 				</form>
-
+				</div>
+				
 				<jsp:include page="Footer.jsp" />
+				<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script id="scriptBTS"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	</body>
 </html>

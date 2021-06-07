@@ -68,7 +68,7 @@ ap.min.css"
 				<br>
 				<input type="date" id="dateFinAnnonce" name="dateFinAnnonce" value="${offreAffiche.date_limite}"/>
 				<br>
-				
+				<p>L'offre est-elle pourvue ? <p>
 				<c:if test="${offreAffiche.pourvu eq false}">
 				  <input type="radio" name="pourvuAnnonce" value="oui" id="pourvuAnnonceOui" ><label for="pourvuAnnonceOui">Oui</label>
 				  <input type="radio" name="pourvuAnnonce" value="non" id="pourvuAnnonceNon" checked><label for="pourvuAnnonceNon">Non</label>
