@@ -79,8 +79,8 @@ ap.min.css"
           method="post"
           enctype="multipart/form-data"
         >
-          <input type="file" name="files" class="boutonSubmit" multiple />
-          <input class="boutonSubmit" type="submit" value="Upload Files" />
+          <input type="file" name="files" id="myFile" class="boutonSubmit" multiple />
+          <input class="boutonSubmit" type="submit" value="Upload Files" onclick="isItTheSizeCorrect()"/>
         </form>
         <% } %>
       </div>
@@ -103,5 +103,21 @@ ap.min.css"
       id="scriptBTS"
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"
     ></script>
+    <script>
+    	function isItTheSizeCorrect(){
+    		var filesInput=document.getElementById('myFile');
+    		
+    		if(document.getElementById('myFile').files[0].size!=null && document.getElementById('myFile').files[1].size!=null && document.getElementById('myFile').files[2].size!=null){
+	    		var a=document.getElementById('myFile').files[0].size;
+		    	var b=document.getElementById('myFile').files[1].size;
+		    	var c=document.getElementById('myFile').files[2].size;
+		    	var result=a+b+c;
+		    	alert("Taille des fichiers "+result+" Bytes");
+		    	
+				var a=confirm("Continuer");
+    		}
+    	}
+    </script>
   </body>
 </html>
+
