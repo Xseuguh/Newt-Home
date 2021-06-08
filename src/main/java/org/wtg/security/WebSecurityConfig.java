@@ -2,8 +2,6 @@ package org.wtg.security;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,14 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
  
-//    public void authWithAuthManager(HttpServletRequest request, String username, String password) {
-//        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
-//        authToken.setDetails(new WebAuthenticationDetails(request));
-//        
-//        Authentication authentication = authenticationManager.authenticate(authToken);
-//        
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//    }
+
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

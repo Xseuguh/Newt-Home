@@ -68,7 +68,7 @@ ap.min.css"
 	        	<label>Mot de passe</label> 
 	        	<input type="password" path="password" name="password" minlength="8" required/>
 	        	<label>Date de naissance(vous devez être majeur !)</label> 
-	        	<input type="Date" path="birthday" name="birthday" required/>
+	        	<input type="date" path="birthday" name="birthday" required/>
 	        
 	        <input type="submit" value="Sign up" class="button" />
 	      </div>

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -57,11 +58,24 @@ public class AuthReController {
     		return "redirect:/register";
     	}
     	else {
-    		userRepo.save(createNormalUser(signUpForm));
+    		UserInfo user = createNormalUser(signUpForm);
+    		userRepo.save(user);
+    		authWithoutPassword(user);
             return "redirect:/Accueil";
     	}
         
     }
+    
+    public void authWithoutPassword(UserInfo user){
+        
+        CustomUserDetails CUD = new CustomUserDetails(user);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, CUD.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+    
+    
+
     
     public UserInfo createNormalUser(SignUpForm signUpForm) {
     	
@@ -84,6 +98,11 @@ public class AuthReController {
 		if (principal == "anonymousUser") {
 			return null;
 
+		}
+		else if(principal instanceof UserInfo) {
+			CustomUserDetails CUD = new CustomUserDetails((UserInfo) principal);
+			
+			return CUD.getId();
 		}
 		CustomUserDetails CUD = (CustomUserDetails) principal;
 		return CUD.getId();
